@@ -13,6 +13,9 @@ class PageSettingController extends Controller
     private const FILE_KEYS = [
         'home' => ['home_hero_video'],
         'project' => [],
+        'about' => [],
+        'services' => [],
+        'contact' => [],
     ];
 
     private const RULES = [
@@ -29,6 +32,27 @@ class PageSettingController extends Controller
             'project_cta_title' => 'nullable|string|max:255',
             'project_cta_desc' => 'nullable|string|max:5000',
         ],
+        'about' => [
+            'about_hero_title' => 'nullable|string|max:255',
+            'about_hero_desc' => 'nullable|string|max:5000',
+            'about_story_title' => 'nullable|string|max:255',
+            'about_story_desc' => 'nullable|string|max:8000',
+            'about_vision' => 'nullable|string|max:5000',
+            'about_mission' => 'nullable|string|max:8000',
+        ],
+        'services' => [
+            'services_hero_title' => 'nullable|string|max:255',
+            'services_hero_desc' => 'nullable|string|max:5000',
+            'services_cta_title' => 'nullable|string|max:255',
+            'services_cta_desc' => 'nullable|string|max:5000',
+        ],
+        'contact' => [
+            'contact_email' => 'nullable|email|max:255',
+            'contact_phone' => 'nullable|string|max:255',
+            'contact_whatsapp' => 'nullable|string|max:255',
+            'contact_address' => 'nullable|string|max:5000',
+            'contact_hours' => 'nullable|string|max:255',
+        ],
     ];
 
     public function home()
@@ -41,6 +65,24 @@ class PageSettingController extends Controller
     {
         $settings = PageSetting::where('page', 'project')->pluck('value', 'key')->toArray();
         return view('admin.pages.project', compact('settings'));
+    }
+
+    public function about()
+    {
+        $settings = PageSetting::where('page', 'about')->pluck('value', 'key')->toArray();
+        return view('admin.pages.about', compact('settings'));
+    }
+
+    public function services()
+    {
+        $settings = PageSetting::where('page', 'services')->pluck('value', 'key')->toArray();
+        return view('admin.pages.services', compact('settings'));
+    }
+
+    public function contact()
+    {
+        $settings = PageSetting::where('page', 'contact')->pluck('value', 'key')->toArray();
+        return view('admin.pages.contact', compact('settings'));
     }
 
     public function store(Request $request, $page)

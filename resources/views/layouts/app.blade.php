@@ -25,6 +25,14 @@
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:title" content="{{ $metaTitle }}"/>
     <meta name="twitter:description" content="{{ $metaDescription }}"/>
+    @php
+        $siteImage = trim($__env->yieldContent('og_image')) ?: asset('dap.png');
+    @endphp
+    <meta property="og:image" content="{{ $siteImage }}"/>
+    <meta name="twitter:image" content="{{ $siteImage }}"/>
+
+    <link rel="icon" type="image/png" href="{{ asset('dap.png') }}"/>
+    <link rel="apple-touch-icon" href="{{ asset('dap.png') }}"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -43,6 +51,7 @@
             '@type' => 'Organization',
             'name' => 'PT Dwi Artha Prima',
             'url' => config('app.url'),
+            'logo' => asset('dap.png'),
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
     </script>
 

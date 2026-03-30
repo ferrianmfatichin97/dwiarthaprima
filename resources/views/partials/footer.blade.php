@@ -1,7 +1,10 @@
 <footer class="bg-surface-container-low w-full py-12 px-8 mt-24">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto">
         <div class="md:col-span-1">
-            <div class="text-lg font-bold text-on-surface mb-4 uppercase tracking-tighter font-headline">PT Dwi Artha Prima</div>
+            <div class="flex items-center gap-3 mb-4">
+                <img src="{{ asset('dap.png') }}" alt="PT Dwi Artha Prima" class="h-9 w-auto" loading="lazy" decoding="async">
+                <div class="text-lg font-bold text-on-surface uppercase tracking-tighter font-headline">PT Dwi Artha Prima</div>
+            </div>
             <p class="text-sm leading-relaxed text-on-surface-variant mb-6">
                 Solusi terpercaya untuk pembangunan infrastruktur berkelanjutan dan jasa engineering berkualitas tinggi di Indonesia.
             </p>

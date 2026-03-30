@@ -20,7 +20,10 @@ Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
 */
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+    Route::get('/about', 'about')->name('about');
+    Route::get('/services', 'services')->name('services');
     Route::get('/projects', 'projects')->name('projects');
+    Route::get('/projects/{project:slug}', 'projectShow')->name('projects.show');
     Route::get('/contact', 'contact')->name('contact');
 });
 Route::post('/contact', [MessageController::class, 'store'])->middleware('throttle:contact')->name('contact.store');
@@ -55,6 +58,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::controller(\App\Http\Controllers\Admin\PageSettingController::class)->group(function () {
         Route::get('pages/home', 'home')->name('pages.home');
         Route::get('pages/project', 'project')->name('pages.project');
-        Route::post('pages/{page}', 'store')->where('page', 'home|project')->name('pages.store');
+        Route::get('pages/about', 'about')->name('pages.about');
+        Route::get('pages/services', 'services')->name('pages.services');
+        Route::get('pages/contact', 'contact')->name('pages.contact');
+        Route::post('pages/{page}', 'store')->where('page', 'home|project|about|services|contact')->name('pages.store');
     });
 });

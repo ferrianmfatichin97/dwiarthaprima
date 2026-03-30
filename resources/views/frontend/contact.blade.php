@@ -87,21 +87,21 @@
                         <span class="material-symbols-outlined text-primary">mail</span>
                         <div>
                             <div class="text-sm font-semibold text-on-surface">Email</div>
-                            <div class="text-sm">admin@dwiarthaprima.com</div>
+                            <div class="text-sm">{{ setting('contact', 'contact_email', 'info@dwiarthaprima.com') }}</div>
                         </div>
                     </div>
                     <div class="flex gap-3">
                         <span class="material-symbols-outlined text-primary">call</span>
                         <div>
                             <div class="text-sm font-semibold text-on-surface">Telepon</div>
-                            <div class="text-sm">+62 21 555 123</div>
+                            <div class="text-sm">{{ setting('contact', 'contact_phone', '+62 (21) 555-0123') }}</div>
                         </div>
                     </div>
                     <div class="flex gap-3">
                         <span class="material-symbols-outlined text-primary">schedule</span>
                         <div>
                             <div class="text-sm font-semibold text-on-surface">Jam Operasional</div>
-                            <div class="text-sm">Senin–Jumat, 08:00–17:00 WIB</div>
+                            <div class="text-sm">{{ setting('contact', 'contact_hours', 'Senin–Jumat, 08:00–17:00 WIB') }}</div>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
             <div class="bg-surface-container-highest rounded-2xl border border-outline-variant/20 p-8">
                 <h3 class="font-headline font-extrabold text-xl text-on-surface tracking-tight">Butuh respons cepat?</h3>
                 <p class="mt-2 text-on-surface-variant">Silakan chat via WhatsApp untuk pertanyaan awal.</p>
-                <a href="https://wa.me/6221555123" target="_blank" rel="noopener"
+                <a href="{{ setting('contact', 'contact_whatsapp', 'https://wa.me/6221555123') }}" target="_blank" rel="noopener"
                    class="mt-5 inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-3 rounded-lg font-headline font-extrabold text-sm uppercase tracking-widest shadow-lg hover:brightness-95 transition">
                     WhatsApp
                     <span class="material-symbols-outlined">chat</span>
@@ -120,4 +120,3 @@
     </div>
 </section>
 @endsection
-

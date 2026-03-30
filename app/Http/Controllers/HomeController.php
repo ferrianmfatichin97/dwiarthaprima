@@ -15,7 +15,7 @@ class HomeController extends Controller
             return Project::query()
                 ->latest()
                 ->take(6)
-                ->get(['id', 'title', 'category', 'description', 'image', 'is_featured', 'created_at']);
+                ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at']);
         });
 
         $services = Cache::remember('home:services:all', now()->addMinutes(30), function () {
@@ -29,11 +29,25 @@ class HomeController extends Controller
         return view('frontend.home', compact('projects', 'services', 'clients'));
     }
 
+    public function about()
+    {
+        return view('frontend.about');
+    }
+
+    public function services()
+    {
+        $services = Cache::remember('home:services:all', now()->addMinutes(30), function () {
+            return Service::query()->orderBy('name')->get(['id', 'name', 'description', 'icon']);
+        });
+
+        return view('frontend.services', compact('services'));
+    }
+
     public function projects()
     {
         $projects = Project::query()
             ->latest()
-            ->select(['id', 'title', 'category', 'description', 'image', 'is_featured', 'created_at'])
+            ->select(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at'])
             ->paginate(9);
 
         $categories = Cache::remember('projects:categories', now()->addHours(6), function () {
@@ -50,5 +64,19 @@ class HomeController extends Controller
     public function contact()
     {
         return view('frontend.contact');
+    }
+
+    public function projectShow(Project $project)
+    {
+        $related = Cache::remember("project:related:{$project->id}", now()->addMinutes(10), function () use ($project) {
+            return Project::query()
+                ->where('id', '!=', $project->id)
+                ->where('category', $project->category)
+                ->latest()
+                ->take(6)
+                ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'created_at']);
+        });
+
+        return view('frontend.project-show', compact('project', 'related'));
     }
 }

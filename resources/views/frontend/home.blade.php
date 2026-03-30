@@ -128,7 +128,7 @@
     {{-- Consistent 3-col grid with 16:9 images --}}
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @forelse($projects as $project)
-        <div class="group relative overflow-hidden rounded-xl shadow-sm bg-surface-container cursor-pointer">
+        <a href="{{ route('projects.show', $project->slug) }}" class="group relative overflow-hidden rounded-xl shadow-sm bg-surface-container cursor-pointer block">
             {{-- 16:9 container --}}
             <div class="aspect-video overflow-hidden">
                 @if($project->image)
@@ -153,7 +153,7 @@
             <div class="absolute top-4 left-4">
                 <span class="bg-red-700 text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wide">{{ $project->category }}</span>
             </div>
-        </div>
+        </a>
         @empty
         <div class="col-span-3 text-center text-on-surface-variant py-16">
             <span class="material-symbols-outlined text-5xl mb-4 block opacity-30">apartment</span>
@@ -204,15 +204,15 @@
             <div class="space-y-6">
                 <div class="flex items-start gap-4">
                     <span class="material-symbols-outlined text-red-700">location_on</span>
-                    <div><h4 class="font-bold text-on-surface">Alamat Kantor</h4><p class="text-on-surface-variant text-sm">Gedung Artha Prima Lt. 5, Jl. Gatot Subroto No. 12, Jakarta Selatan, 12190</p></div>
+                    <div><h4 class="font-bold text-on-surface">Alamat Kantor</h4><p class="text-on-surface-variant text-sm">{{ setting('contact', 'contact_address', 'Gedung Artha Prima Lt. 5, Jl. Gatot Subroto No. 12, Jakarta Selatan, 12190') }}</p></div>
                 </div>
                 <div class="flex items-start gap-4">
                     <span class="material-symbols-outlined text-red-700">call</span>
-                    <div><h4 class="font-bold text-on-surface">Telepon</h4><p class="text-on-surface-variant text-sm">+62 (21) 555-0123</p></div>
+                    <div><h4 class="font-bold text-on-surface">Telepon</h4><p class="text-on-surface-variant text-sm">{{ setting('contact', 'contact_phone', '+62 (21) 555-0123') }}</p></div>
                 </div>
                 <div class="flex items-start gap-4">
                     <span class="material-symbols-outlined text-red-700">mail</span>
-                    <div><h4 class="font-bold text-on-surface">Email</h4><p class="text-on-surface-variant text-sm">info@dwiarthaprima.com</p></div>
+                    <div><h4 class="font-bold text-on-surface">Email</h4><p class="text-on-surface-variant text-sm">{{ setting('contact', 'contact_email', 'info@dwiarthaprima.com') }}</p></div>
                 </div>
             </div>
         </div>

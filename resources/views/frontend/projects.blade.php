@@ -80,7 +80,7 @@
                             {{ $project->description }}
                         </p>
                         
-                        <a class="inline-flex items-center text-white font-headline font-bold {{ $index === 0 ? 'group/link' : 'text-sm' }}" href="#">
+                        <a class="inline-flex items-center text-white font-headline font-bold {{ $index === 0 ? 'group/link' : 'text-sm' }}" href="{{ route('projects.show', $project->slug) }}">
                             LIHAT DETAIL
                             @if($index === 0)
                             <span class="material-symbols-outlined ml-2 group-hover/link:translate-x-2 transition-transform">arrow_forward</span>

@@ -7,6 +7,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -33,6 +34,7 @@ class ProjectController extends Controller
 
         $data = $request->only('title', 'category', 'description');
         $data['is_featured'] = $request->has('is_featured');
+        $data['slug'] = $this->makeUniqueSlug((string) $data['title']);
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('projects', 'public');
@@ -41,6 +43,7 @@ class ProjectController extends Controller
         Project::create($data);
         Cache::forget('home:projects:latest6');
         Cache::forget('projects:categories');
+        Cache::forget('seo:sitemap');
         return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil ditambahkan.');
     }
 
@@ -62,6 +65,10 @@ class ProjectController extends Controller
         $data = $request->only('title', 'category', 'description');
         $data['is_featured'] = $request->has('is_featured');
 
+        if ((string) $project->title !== (string) $data['title']) {
+            $data['slug'] = $this->makeUniqueSlug((string) $data['title'], $project->id);
+        }
+
         if ($request->hasFile('image')) {
             if ($project->image) Storage::disk('public')->delete($project->image);
             $data['image'] = $request->file('image')->store('projects', 'public');
@@ -70,6 +77,8 @@ class ProjectController extends Controller
         $project->update($data);
         Cache::forget('home:projects:latest6');
         Cache::forget('projects:categories');
+        Cache::forget('seo:sitemap');
+        Cache::forget("project:related:{$project->id}");
         return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil diperbarui.');
     }
 
@@ -79,6 +88,30 @@ class ProjectController extends Controller
         $project->delete();
         Cache::forget('home:projects:latest6');
         Cache::forget('projects:categories');
+        Cache::forget('seo:sitemap');
+        Cache::forget("project:related:{$project->id}");
         return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil dihapus.');
+    }
+
+    private function makeUniqueSlug(string $title, ?int $ignoreId = null): string
+    {
+        $base = Str::slug($title);
+        if ($base === '') {
+            $base = 'project';
+        }
+
+        $slug = $base;
+        $i = 2;
+        while (
+            Project::query()
+                ->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))
+                ->where('slug', $slug)
+                ->exists()
+        ) {
+            $slug = "{$base}-{$i}";
+            $i++;
+        }
+
+        return $slug;
     }
 }

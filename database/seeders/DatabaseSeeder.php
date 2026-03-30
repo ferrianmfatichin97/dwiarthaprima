@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\PageSetting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -43,6 +44,24 @@ class DatabaseSeeder extends Seeder
             ['page' => 'project', 'key' => 'project_hero_desc', 'value' => 'Contoh pekerjaan yang merepresentasikan kapabilitas kami di bidang konstruksi, infrastruktur, dan engineering—dengan fokus pada kualitas, keselamatan, dan delivery.' ],
             ['page' => 'project', 'key' => 'project_cta_title', 'value' => 'Siap memulai proyek Anda?' ],
             ['page' => 'project', 'key' => 'project_cta_desc', 'value' => "Diskusikan kebutuhan proyek Anda bersama tim kami. Kami siap memberikan masukan teknis, estimasi, dan rencana kerja yang realistis." ],
+
+            ['page' => 'about', 'key' => 'about_hero_title', 'value' => 'Mitra Konstruksi & Engineering yang Terukur'],
+            ['page' => 'about', 'key' => 'about_hero_desc', 'value' => 'Kami membantu mewujudkan pekerjaan konstruksi dan infrastruktur dengan standar K3, QA/QC, dan manajemen proyek yang disiplin.'],
+            ['page' => 'about', 'key' => 'about_story_title', 'value' => 'Cerita Perusahaan'],
+            ['page' => 'about', 'key' => 'about_story_desc', 'value' => "PT Dwi Artha Prima berfokus pada pekerjaan konstruksi, infrastruktur, dan jasa engineering. Kami mengutamakan perencanaan yang rapi, kontrol mutu yang konsisten, serta komunikasi progres yang transparan.\n\nPendekatan kami menekankan keselamatan kerja, ketertelusuran material, dan dokumentasi yang baik agar pekerjaan dapat dipertanggungjawabkan."],
+            ['page' => 'about', 'key' => 'about_vision', 'value' => 'Menjadi mitra konstruksi yang dipercaya untuk proyek bernilai strategis di Indonesia.'],
+            ['page' => 'about', 'key' => 'about_mission', 'value' => "Menerapkan K3 dan QA/QC secara konsisten di setiap pekerjaan.\nMenjaga ketepatan waktu melalui perencanaan dan kontrol progres.\nMemberikan solusi teknis yang efisien dan terukur."],
+
+            ['page' => 'services', 'key' => 'services_hero_title', 'value' => 'Layanan Terintegrasi untuk Proyek Konstruksi'],
+            ['page' => 'services', 'key' => 'services_hero_desc', 'value' => 'Dari perencanaan hingga pelaksanaan—kami menyediakan layanan konstruksi dan engineering dengan fokus pada mutu, keselamatan, dan ketepatan waktu.'],
+            ['page' => 'services', 'key' => 'services_cta_title', 'value' => 'Butuh estimasi dan masukan teknis?'],
+            ['page' => 'services', 'key' => 'services_cta_desc', 'value' => 'Kirim kebutuhan proyek Anda, kami bantu susun rencana kerja awal dan estimasi yang realistis.'],
+
+            ['page' => 'contact', 'key' => 'contact_email', 'value' => 'info@dwiarthaprima.com'],
+            ['page' => 'contact', 'key' => 'contact_phone', 'value' => '+62 (21) 555-0123'],
+            ['page' => 'contact', 'key' => 'contact_whatsapp', 'value' => 'https://wa.me/6221555123'],
+            ['page' => 'contact', 'key' => 'contact_address', 'value' => 'Gedung Artha Prima Lt. 5, Jl. Gatot Subroto No. 12, Jakarta Selatan, 12190'],
+            ['page' => 'contact', 'key' => 'contact_hours', 'value' => 'Senin–Jumat, 08:00–17:00 WIB'],
         ];
 
         foreach ($pageSettings as $s) {
@@ -82,8 +101,31 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Pekerjaan Utilitas Dasar', 'category' => 'Utilitas', 'description' => 'Pekerjaan utilitas sipil pendukung: ducting, manhole, dan pekerjaan pelengkap untuk area proyek.', 'is_featured' => false],
         ];
 
+        $hasSlug = Schema::hasColumn('projects', 'slug');
+        $usedSlugs = [];
+        if ($hasSlug) {
+            $usedSlugs = Project::query()->pluck('slug')->filter()->values()->all();
+        }
+
         foreach ($projects as $p) {
-            Project::firstOrCreate(['title' => $p['title']], $p);
+            if ($hasSlug) {
+                $base = Str::slug($p['title']);
+                if ($base === '') {
+                    $base = 'project';
+                }
+
+                $slug = $base;
+                $i = 2;
+                while (in_array($slug, $usedSlugs, true) || Project::query()->where('slug', $slug)->exists()) {
+                    $slug = "{$base}-{$i}";
+                    $i++;
+                }
+                $usedSlugs[] = $slug;
+
+                $p['slug'] = $slug;
+            }
+
+            Project::updateOrCreate(['title' => $p['title']], $p);
         }
 
         // Sample clients
