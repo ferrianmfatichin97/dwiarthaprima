@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class PageSettingController extends Controller
 {
     private const FILE_KEYS = [
-        'home' => ['home_hero_video'],
+        'home' => ['home_hero_video', 'home_hero_video_poster'],
         'project' => [],
         'about' => [],
         'services' => [],
@@ -20,7 +20,8 @@ class PageSettingController extends Controller
 
     private const RULES = [
         'home' => [
-            'home_hero_video' => 'nullable|file|mimes:mp4,webm|max:10240',
+            'home_hero_video' => 'nullable|file|mimes:mp4,webm|max:20480',
+            'home_hero_video_poster' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'home_hero_title' => 'nullable|string|max:255',
             'home_hero_subtitle' => 'nullable|string|max:255',
             'home_about_title' => 'nullable|string|max:255',

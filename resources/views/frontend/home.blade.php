@@ -11,15 +11,21 @@
 <section class="relative h-screen w-full flex items-center justify-center overflow-hidden" id="home">
     {{-- Hero Background Video/Image --}}
     <div class="absolute inset-0 w-full h-full overflow-hidden">
-        @if(setting('home', 'home_hero_video'))
-        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-            <source src="{{ Storage::url(setting('home', 'home_hero_video')) }}" type="video/mp4" />
+        @php
+            $heroVideo = setting('home', 'home_hero_video');
+            $heroPoster = setting('home', 'home_hero_video_poster');
+            $defaultPoster = file_exists(public_path('og.png')) ? asset('og.png') : asset('dap.png');
+            $posterUrl = $heroPoster ? Storage::url($heroPoster) : $defaultPoster;
+            $heroVideoType = $heroVideo && \Illuminate\Support\Str::endsWith($heroVideo, '.webm') ? 'video/webm' : 'video/mp4';
+        @endphp
+        <video autoplay loop muted playsinline preload="metadata" poster="{{ $posterUrl }}"
+               class="w-full h-full object-cover" aria-hidden="true" tabindex="-1">
+            @if($heroVideo)
+                <source src="{{ Storage::url($heroVideo) }}" type="{{ $heroVideoType }}" />
+            @else
+                <source src="{{ asset('video/hero.mp4') }}" type="video/mp4" />
+            @endif
         </video>
-        @else
-        <video autoplay loop muted playsinline class="w-full h-full object-cover">
-            <source src="{{ asset('video/hero.mp4') }}" type="video/mp4" />
-        </video>
-        @endif
         <div class="absolute inset-0 bg-black/60 backdrop-brightness-75 mix-blend-multiply"></div>
     </div>
 

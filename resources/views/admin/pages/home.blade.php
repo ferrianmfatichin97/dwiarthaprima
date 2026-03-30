@@ -23,7 +23,19 @@
                         @endif
                         <input type="file" name="home_hero_video" accept="video/mp4,video/webm"
                                class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent"/>
-                        <p class="text-xs text-slate-500 mt-2">Format: MP4, WebM. Direkomendasikan tanpa suara (muted) dan file berukuran kecil max 10MB.</p>
+                        <p class="text-xs text-slate-500 mt-2">Format: MP4/WebM. Max 20MB. Direkomendasikan tanpa suara (muted), durasi pendek (5–10 detik), dan bitrate tidak besar agar tetap ringan.</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Poster Video (opsional)</label>
+                        @if(!empty($settings['home_hero_video_poster']))
+                        <div class="mb-3">
+                            <p class="text-xs text-slate-500 mb-1">Poster yang terpasang saat ini:</p>
+                            <img src="{{ \Illuminate\Support\Facades\Storage::url($settings['home_hero_video_poster']) }}" alt="Poster hero" class="h-32 w-auto rounded-lg border border-slate-200"/>
+                        </div>
+                        @endif
+                        <input type="file" name="home_hero_video_poster" accept="image/png,image/jpeg,image/webp"
+                               class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent"/>
+                        <p class="text-xs text-slate-500 mt-2">Dipakai sebagai gambar awal (supaya halaman terasa cepat). Max 4MB.</p>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Judul Besar (Hero Title)</label>
