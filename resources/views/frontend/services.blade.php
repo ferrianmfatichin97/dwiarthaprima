@@ -22,7 +22,7 @@
     <div class="max-w-7xl mx-auto px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             @forelse($services as $service)
-                <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-8 hover:shadow-md transition">
+                <div data-reveal class="reveal bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-8 hover:shadow-md transition">
                     <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
                         <span class="material-symbols-outlined text-primary text-3xl">{{ $service->icon }}</span>
                     </div>
@@ -30,7 +30,15 @@
                     <p class="mt-3 text-on-surface-variant text-sm leading-relaxed">{{ $service->description }}</p>
                 </div>
             @empty
-                <div class="col-span-4 text-center py-16 text-on-surface-variant">Belum ada layanan tersedia.</div>
+                <div class="col-span-4 text-center py-20">
+                    <span class="material-symbols-outlined text-7xl block mb-4 opacity-20 text-on-surface">build</span>
+                    <p class="text-on-surface-variant font-medium">Belum ada layanan tersedia.</p>
+                    <p class="text-on-surface-variant/80 text-sm mt-2">Tambahkan layanan dari Admin Panel agar halaman ini terisi.</p>
+                    <a href="{{ route('contact') }}" class="mt-6 inline-flex items-center gap-2 text-primary font-bold hover:underline">
+                        Konsultasi kebutuhan proyek
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
+                </div>
             @endforelse
         </div>
     </div>
@@ -53,4 +61,3 @@
     </div>
 </section>
 @endsection
-

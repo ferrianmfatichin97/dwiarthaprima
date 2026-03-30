@@ -33,6 +33,7 @@
 
     <link rel="icon" type="image/png" href="{{ asset('dap.png') }}"/>
     <link rel="apple-touch-icon" href="{{ asset('dap.png') }}"/>
+    <style>[x-cloak]{display:none!important}</style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>

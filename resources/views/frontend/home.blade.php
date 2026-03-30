@@ -97,7 +97,7 @@
     </div>
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         @forelse($services as $service)
-        <div class="group bg-white p-10 rounded-xl hover:bg-red-700 transition-all duration-500 hover:-translate-y-2 shadow-sm">
+        <div data-reveal class="reveal group bg-white p-10 rounded-xl hover:bg-red-700 transition-all duration-500 hover:-translate-y-2 shadow-sm">
             <div class="w-16 h-16 bg-surface-container flex items-center justify-center rounded-lg mb-8 group-hover:bg-white/20 transition-colors">
                 <span class="material-symbols-outlined text-red-700 text-3xl group-hover:text-white transition-colors">{{ $service->icon }}</span>
             </div>
@@ -105,8 +105,56 @@
             <p class="text-on-surface-variant group-hover:text-white/80 transition-colors text-sm leading-relaxed">{{ $service->description }}</p>
         </div>
         @empty
-        <div class="col-span-4 text-center text-on-surface-variant py-12">Belum ada layanan tersedia.</div>
+        <div class="col-span-4 text-center py-16">
+            <span class="material-symbols-outlined text-6xl block mb-4 opacity-20 text-on-surface">build</span>
+            <p class="text-on-surface-variant font-medium">Belum ada layanan tersedia.</p>
+            <p class="text-on-surface-variant/80 text-sm mt-2">Silakan tambahkan layanan dari Admin Panel agar tampil di halaman ini.</p>
+        </div>
         @endforelse
+    </div>
+</section>
+
+{{-- =========================================================
+     TRUST SECTION — K3 & QA/QC
+     ========================================================= --}}
+<section class="py-24 px-8 bg-surface" id="trust">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-5">
+            <span class="text-red-700 font-headline font-bold uppercase tracking-widest text-sm">Kepercayaan</span>
+            <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface mt-4">
+                Standar Kerja yang Terukur
+            </h2>
+            <p class="mt-5 text-on-surface-variant text-lg leading-relaxed">
+                Pendekatan kami mengutamakan perencanaan metode kerja, pengendalian mutu, dan keselamatan kerja (K3) untuk menjaga kualitas hasil dan ketepatan waktu.
+            </p>
+            <a href="{{ route('about') }}" class="mt-8 inline-flex items-center gap-3 text-red-700 font-bold hover:text-red-900 transition">
+                Pelajari profil perusahaan
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </div>
+        <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div data-reveal class="reveal bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-8 hover:shadow-md transition">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary">health_and_safety</span>
+                </div>
+                <div class="mt-5 font-headline font-extrabold text-lg text-on-surface">K3</div>
+                <div class="mt-2 text-sm text-on-surface-variant leading-relaxed">Briefing, pengawasan, dan budaya kerja aman di lapangan.</div>
+            </div>
+            <div data-reveal class="reveal bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-8 hover:shadow-md transition">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary">verified</span>
+                </div>
+                <div class="mt-5 font-headline font-extrabold text-lg text-on-surface">QA/QC</div>
+                <div class="mt-2 text-sm text-on-surface-variant leading-relaxed">Inspeksi dan dokumentasi mutu sesuai gambar dan spesifikasi.</div>
+            </div>
+            <div data-reveal class="reveal bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-8 hover:shadow-md transition">
+                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary">schedule</span>
+                </div>
+                <div class="mt-5 font-headline font-extrabold text-lg text-on-surface">Delivery</div>
+                <div class="mt-2 text-sm text-on-surface-variant leading-relaxed">Kontrol progres dan mitigasi risiko untuk menjaga timeline.</div>
+            </div>
+        </div>
     </div>
 </section>
 

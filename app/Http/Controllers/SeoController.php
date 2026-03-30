@@ -16,6 +16,11 @@ class SeoController extends Controller
             return implode("\n", [
                 'User-agent: *',
                 'Allow: /',
+                'Disallow: /admin',
+                'Disallow: /login',
+                'Disallow: /register',
+                'Disallow: /password',
+                'Disallow: /email',
                 '',
                 "Sitemap: {$sitemapUrl}",
                 '',

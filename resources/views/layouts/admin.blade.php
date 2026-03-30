@@ -5,20 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@yield('title', 'Admin Panel') | PT Dwi Artha Prima</title>
     <link rel="icon" type="image/png" href="{{ asset('dap.png') }}">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <style type="text/tailwindcss">
-        body { font-family: 'Inter', sans-serif; }
+
+    @if (file_exists(public_path('mix-manifest.json')))
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}"/>
+    @elseif (file_exists(public_path('css/app.css')))
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}"/>
+    @endif
+
+    <style>
+        body { font-family: Inter, sans-serif; }
         .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align:middle; }
-        .sidebar-link { @apply flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-700 hover:text-white transition-all duration-200; }
-        .sidebar-link.active { @apply bg-red-700 text-white shadow-lg; }
-        .sidebar-group { @apply rounded-lg; }
-        .sidebar-group-summary { @apply flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:bg-slate-800 hover:text-white transition-all duration-200 cursor-pointer select-none; }
-        .sidebar-sublink { @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-700 hover:text-white transition-all duration-200 ml-2; }
-        .sidebar-sublink.active { @apply bg-red-700 text-white shadow-lg; }
+        summary::-webkit-details-marker { display: none; }
         details[open] .group-chevron { transform: rotate(180deg); }
-        .nav-link-inner { @apply flex items-center gap-3; }
+
+        .sidebar-link, .sidebar-sublink, .sidebar-group-summary { outline: none; }
+
+        .sidebar-link {
+            display: flex; align-items: center; gap: .75rem;
+            padding: .75rem 1rem;
+            border-radius: .5rem;
+            font-size: .875rem;
+            font-weight: 500;
+            color: rgb(148 163 184);
+            transition: background-color .2s, color .2s;
+        }
+        .sidebar-link:hover { background: rgb(51 65 85); color: #fff; }
+        .sidebar-link.active { background: rgb(185 28 28); color: #fff; box-shadow: 0 8px 24px rgba(185,28,28,.25); }
+
+        .sidebar-group-summary {
+            display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+            padding: .75rem 1rem;
+            border-radius: .5rem;
+            font-size: .875rem;
+            font-weight: 600;
+            color: rgb(203 213 225);
+            cursor: pointer;
+            user-select: none;
+            transition: background-color .2s, color .2s;
+        }
+        .sidebar-group-summary:hover { background: rgb(30 41 59); color: #fff; }
+
+        .sidebar-sublink {
+            display: flex; align-items: center; gap: .75rem;
+            margin-left: .5rem;
+            padding: .625rem 1rem;
+            border-radius: .5rem;
+            font-size: .875rem;
+            font-weight: 500;
+            color: rgb(148 163 184);
+            transition: background-color .2s, color .2s;
+        }
+        .sidebar-sublink:hover { background: rgb(51 65 85); color: #fff; }
+        .sidebar-sublink.active { background: rgb(185 28 28); color: #fff; box-shadow: 0 8px 24px rgba(185,28,28,.25); }
+
         ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #1e293b; } ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
     </style>
 </head>
