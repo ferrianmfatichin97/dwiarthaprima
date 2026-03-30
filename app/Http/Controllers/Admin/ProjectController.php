@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -38,6 +39,8 @@ class ProjectController extends Controller
         }
 
         Project::create($data);
+        Cache::forget('home:projects:latest6');
+        Cache::forget('projects:categories');
         return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil ditambahkan.');
     }
 
@@ -65,6 +68,8 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+        Cache::forget('home:projects:latest6');
+        Cache::forget('projects:categories');
         return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil diperbarui.');
     }
 
@@ -72,6 +77,8 @@ class ProjectController extends Controller
     {
         if ($project->image) Storage::disk('public')->delete($project->image);
         $project->delete();
+        Cache::forget('home:projects:latest6');
+        Cache::forget('projects:categories');
         return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil dihapus.');
     }
 }

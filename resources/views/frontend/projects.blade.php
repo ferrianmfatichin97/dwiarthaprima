@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Proyek Kami | PT Dwi Artha Prima')
+@section('meta_description', 'Lihat portofolio proyek PT Dwi Artha Prima: konstruksi, infrastruktur, maintenance, dan engineering. Jelajahi kategori proyek dan konsultasikan kebutuhan Anda.')
 
 @section('head')
     <style>
@@ -12,7 +13,7 @@
 @section('content')
 <!-- Hero Banner Section -->
 <section class="relative h-[400px] overflow-hidden flex items-center justify-center">
-    <img alt="Construction Site Banner" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLSw86U1pEGtzs1uiKWM3FDCxTXUkrkcPQC6F8EtZ8i02xwEA7Bx7FqK58frHxOnKW_pflMOuArTR2buwqA8MMkhz84OHXupEyKPU8HGmilq_wgLB2x2FzOIBDVq_SY5WRMPpJIxHjtecmEvzTTIw55uaOBDPT1PzGT0BiSC_pmO0JxZ75H_j4XVOxVNjF5ahpiCPz_VXxFRSv-Pxpkojkz2MTGmhmeifKLDgJeKBmnbY-IZvspqCT0TiU_G3x8ZW7Rqw5Kp6FadBt"/>
+    <div class="absolute inset-0 bg-gradient-to-br from-inverse-surface via-on-surface-variant to-on-surface"></div>
     <div class="absolute inset-0 bg-black/60 backdrop-brightness-75"></div>
     <div class="relative z-10 text-center px-4">
         <h1 class="font-headline font-extrabold text-5xl md:text-7xl text-white tracking-tighter uppercase mb-4">

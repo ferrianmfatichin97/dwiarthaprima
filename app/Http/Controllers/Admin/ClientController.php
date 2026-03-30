@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
@@ -34,6 +35,7 @@ class ClientController extends Controller
         }
 
         Client::create($data);
+        Cache::forget('home:clients:all');
         return redirect()->route('admin.clients.index')->with('success', 'Klien berhasil ditambahkan.');
     }
 
@@ -57,6 +59,7 @@ class ClientController extends Controller
         }
 
         $client->update($data);
+        Cache::forget('home:clients:all');
         return redirect()->route('admin.clients.index')->with('success', 'Klien berhasil diperbarui.');
     }
 
@@ -64,6 +67,7 @@ class ClientController extends Controller
     {
         if ($client->logo) Storage::disk('public')->delete($client->logo);
         $client->delete();
+        Cache::forget('home:clients:all');
         return redirect()->route('admin.clients.index')->with('success', 'Klien berhasil dihapus.');
     }
 }

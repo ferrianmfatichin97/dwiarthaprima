@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SeoController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +23,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/projects', 'projects')->name('projects');
     Route::get('/contact', 'contact')->name('contact');
 });
-Route::post('/contact', [MessageController::class, 'store'])->name('contact.store');
+Route::post('/contact', [MessageController::class, 'store'])->middleware('throttle:contact')->name('contact.store');
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +37,9 @@ require __DIR__.'/auth.php';
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
 
-    Route::get('/', function () { return redirect()->route('admin.dashboard'); });
+    Route::redirect('/', '/admin/dashboard');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('projects', AdminProjectController::class)->except(['show']);
@@ -51,6 +55,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::controller(\App\Http\Controllers\Admin\PageSettingController::class)->group(function () {
         Route::get('pages/home', 'home')->name('pages.home');
         Route::get('pages/project', 'project')->name('pages.project');
-        Route::post('pages/{page}', 'store')->name('pages.store');
+        Route::post('pages/{page}', 'store')->where('page', 'home|project')->name('pages.store');
     });
 });

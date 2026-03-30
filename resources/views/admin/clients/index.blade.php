@@ -12,15 +12,15 @@
 </div>
 
 <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
         @forelse($clients as $client)
-        <div class="group relative border border-slate-100 rounded-xl p-4 flex flex-col items-center justify-center hover:border-red-200 hover:shadow-md transition-all bg-slate-50/50 h-32">
+        <div class="group relative border border-slate-100 rounded-xl p-4 flex flex-col items-center justify-center hover:border-red-200 hover:shadow-md transition-all bg-slate-50/50 h-32 overflow-hidden min-w-0">
             @if($client->logo)
                 <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" class="max-h-16 max-w-full object-contain filter grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all">
             @else
-                <div class="text-center">
+                <div class="text-center w-full min-w-0">
                     <span class="material-symbols-outlined text-slate-300 text-3xl mb-1">domain</span>
-                    <p class="font-bold text-sm text-slate-800 font-manrope whitespace-nowrap overflow-hidden text-ellipsis max-w-full px-2" title="{{ $client->name }}">{{ $client->name }}</p>
+                    <p class="font-bold text-sm text-slate-800 truncate w-full px-2" title="{{ $client->name }}">{{ $client->name }}</p>
                 </div>
             @endif
 

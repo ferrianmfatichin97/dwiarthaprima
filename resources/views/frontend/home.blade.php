@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'PT Dwi Artha Prima | Excellence in Construction & Services')
+@section('meta_description', 'PT Dwi Artha Prima adalah mitra strategis untuk proyek konstruksi, infrastruktur, dan engineering di Indonesia. Komitmen kami: kualitas, integritas, dan ketepatan waktu.')
 
 @section('content')
 
