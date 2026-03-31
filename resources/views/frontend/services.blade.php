@@ -7,12 +7,12 @@
 <section class="pt-28 pb-16 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-8">
         <div class="max-w-4xl">
-            <div class="text-xs uppercase tracking-widest font-bold text-primary">What We Do</div>
+            <div class="text-xs uppercase tracking-widest font-bold text-primary">Layanan</div>
             <h1 class="mt-4 font-headline font-extrabold text-4xl md:text-6xl text-on-surface tracking-tighter uppercase">
                 {{ setting('services', 'services_hero_title', 'Layanan Terintegrasi untuk Proyek Konstruksi') }}
             </h1>
             <p class="mt-5 text-on-surface-variant text-lg leading-relaxed">
-                {{ setting('services', 'services_hero_desc', 'Dari perencanaan hingga pelaksanaan—kami menyediakan layanan konstruksi dan engineering dengan fokus pada mutu, keselamatan, dan ketepatan waktu.') }}
+                {{ setting('services', 'services_hero_desc', 'Dari perencanaan hingga pelaksanaan — kami menyediakan layanan konstruksi dan engineering dengan fokus pada mutu, keselamatan, dan ketepatan waktu.') }}
             </p>
         </div>
     </div>
@@ -61,3 +61,4 @@
     </div>
 </section>
 @endsection
+

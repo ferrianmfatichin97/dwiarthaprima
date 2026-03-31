@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Client;
+use App\Models\Message;
+use App\Models\PageSetting;
 use App\Models\Project;
 use App\Models\Service;
-use App\Models\Client;
 use App\Models\User;
-use App\Models\PageSetting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
@@ -33,7 +34,7 @@ class DatabaseSeeder extends Seeder
 
         $admin->forceFill(['is_admin' => true])->save();
 
-        // Page settings (copy that matches the UI and business)
+        // Page settings (copywriting defaults)
         $pageSettings = [
             ['page' => 'home', 'key' => 'home_hero_title', 'value' => 'PT Dwi Artha Prima'],
             ['page' => 'home', 'key' => 'home_hero_subtitle', 'value' => 'Solusi Konstruksi, Infrastruktur, dan Engineering Terpercaya'],
@@ -41,9 +42,9 @@ class DatabaseSeeder extends Seeder
             ['page' => 'home', 'key' => 'home_about_desc', 'value' => "PT Dwi Artha Prima berfokus pada pekerjaan konstruksi dan jasa engineering dengan standar mutu yang terukur. Kami mendampingi proyek dari tahap perencanaan, pengadaan, hingga pelaksanaan dan serah terima, dengan prioritas pada keselamatan kerja, ketepatan waktu, dan transparansi biaya.\n\nKami berkomitmen menghadirkan hasil yang andal untuk proyek jalan dan jembatan, bangunan, kawasan industri, serta pekerjaan pemeliharaan (maintenance)."],
 
             ['page' => 'project', 'key' => 'project_hero_title', 'value' => 'Portofolio Proyek'],
-            ['page' => 'project', 'key' => 'project_hero_desc', 'value' => 'Contoh pekerjaan yang merepresentasikan kapabilitas kami di bidang konstruksi, infrastruktur, dan engineering—dengan fokus pada kualitas, keselamatan, dan delivery.' ],
-            ['page' => 'project', 'key' => 'project_cta_title', 'value' => 'Siap memulai proyek Anda?' ],
-            ['page' => 'project', 'key' => 'project_cta_desc', 'value' => "Diskusikan kebutuhan proyek Anda bersama tim kami. Kami siap memberikan masukan teknis, estimasi, dan rencana kerja yang realistis." ],
+            ['page' => 'project', 'key' => 'project_hero_desc', 'value' => 'Contoh pekerjaan yang merepresentasikan kapabilitas kami di bidang konstruksi, infrastruktur, dan engineering — dengan fokus pada keselamatan (K3), mutu (QA/QC), dan ketepatan waktu.'],
+            ['page' => 'project', 'key' => 'project_cta_title', 'value' => 'Siap memulai proyek Anda?'],
+            ['page' => 'project', 'key' => 'project_cta_desc', 'value' => "Sampaikan kebutuhan proyek Anda. Tim kami siap membantu menyusun rencana kerja awal, estimasi, dan pendekatan pelaksanaan yang terukur."],
 
             ['page' => 'about', 'key' => 'about_hero_title', 'value' => 'Mitra Konstruksi & Engineering yang Terukur'],
             ['page' => 'about', 'key' => 'about_hero_desc', 'value' => 'Kami membantu mewujudkan pekerjaan konstruksi dan infrastruktur dengan standar K3, QA/QC, dan manajemen proyek yang disiplin.'],
@@ -53,7 +54,7 @@ class DatabaseSeeder extends Seeder
             ['page' => 'about', 'key' => 'about_mission', 'value' => "Menerapkan K3 dan QA/QC secara konsisten di setiap pekerjaan.\nMenjaga ketepatan waktu melalui perencanaan dan kontrol progres.\nMemberikan solusi teknis yang efisien dan terukur."],
 
             ['page' => 'services', 'key' => 'services_hero_title', 'value' => 'Layanan Terintegrasi untuk Proyek Konstruksi'],
-            ['page' => 'services', 'key' => 'services_hero_desc', 'value' => 'Dari perencanaan hingga pelaksanaan—kami menyediakan layanan konstruksi dan engineering dengan fokus pada mutu, keselamatan, dan ketepatan waktu.'],
+            ['page' => 'services', 'key' => 'services_hero_desc', 'value' => 'Dari perencanaan hingga pelaksanaan — kami menyediakan layanan konstruksi dan engineering dengan fokus pada mutu, keselamatan, dan ketepatan waktu.'],
             ['page' => 'services', 'key' => 'services_cta_title', 'value' => 'Butuh estimasi dan masukan teknis?'],
             ['page' => 'services', 'key' => 'services_cta_desc', 'value' => 'Kirim kebutuhan proyek Anda, kami bantu susun rencana kerja awal dan estimasi yang realistis.'],
 
@@ -64,10 +65,10 @@ class DatabaseSeeder extends Seeder
             ['page' => 'contact', 'key' => 'contact_hours', 'value' => 'Senin–Jumat, 08:00–17:00 WIB'],
         ];
 
-        foreach ($pageSettings as $s) {
-            PageSetting::updateOrCreate(
-                ['page' => $s['page'], 'key' => $s['key']],
-                ['value' => $s['value']]
+        foreach ($pageSettings as $setting) {
+            PageSetting::firstOrCreate(
+                ['page' => $setting['page'], 'key' => $setting['key']],
+                ['value' => $setting['value']]
             );
         }
 
@@ -83,8 +84,8 @@ class DatabaseSeeder extends Seeder
             ['name' => 'K3 & QA/QC', 'description' => 'Pendampingan implementasi K3, inspeksi, dan pengujian mutu untuk memastikan pekerjaan sesuai standar dan gambar kerja.', 'icon' => 'policy'],
         ];
 
-        foreach ($services as $s) {
-            Service::firstOrCreate(['name' => $s['name']], $s);
+        foreach ($services as $service) {
+            Service::firstOrCreate(['name' => $service['name']], $service);
         }
 
         // Sample projects
@@ -101,31 +102,33 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Pekerjaan Utilitas Dasar', 'category' => 'Utilitas', 'description' => 'Pekerjaan utilitas sipil pendukung: ducting, manhole, dan pekerjaan pelengkap untuk area proyek.', 'is_featured' => false],
         ];
 
-        $hasSlug = Schema::hasColumn('projects', 'slug');
-        $usedSlugs = [];
-        if ($hasSlug) {
-            $usedSlugs = Project::query()->pluck('slug')->filter()->values()->all();
-        }
-
-        foreach ($projects as $p) {
+        if (Project::query()->count() === 0) {
+            $hasSlug = Schema::hasColumn('projects', 'slug');
+            $usedSlugs = [];
             if ($hasSlug) {
-                $base = Str::slug($p['title']);
-                if ($base === '') {
-                    $base = 'project';
-                }
-
-                $slug = $base;
-                $i = 2;
-                while (in_array($slug, $usedSlugs, true) || Project::query()->where('slug', $slug)->exists()) {
-                    $slug = "{$base}-{$i}";
-                    $i++;
-                }
-                $usedSlugs[] = $slug;
-
-                $p['slug'] = $slug;
+                $usedSlugs = Project::query()->pluck('slug')->filter()->values()->all();
             }
 
-            Project::updateOrCreate(['title' => $p['title']], $p);
+            foreach ($projects as $project) {
+                if ($hasSlug) {
+                    $base = Str::slug($project['title']);
+                    if ($base === '') {
+                        $base = 'project';
+                    }
+
+                    $slug = $base;
+                    $i = 2;
+                    while (in_array($slug, $usedSlugs, true) || Project::query()->where('slug', $slug)->exists()) {
+                        $slug = "{$base}-{$i}";
+                        $i++;
+                    }
+                    $usedSlugs[] = $slug;
+
+                    $project['slug'] = $slug;
+                }
+
+                Project::create($project);
+            }
         }
 
         // Sample clients
@@ -144,8 +147,39 @@ class DatabaseSeeder extends Seeder
             ['name' => 'BUMD Infrastruktur'],
         ];
 
-        foreach ($clients as $c) {
-            Client::firstOrCreate(['name' => $c['name']], $c);
+        foreach ($clients as $client) {
+            Client::firstOrCreate(['name' => $client['name']], $client);
+        }
+
+        // Sample inbox messages (for admin demo)
+        $messages = [
+            [
+                'name' => 'Procurement - PT Nusantara Energi',
+                'email' => 'procurement@nusantara-energi.co.id',
+                'subject' => 'Permintaan Penawaran (RAB) Pekerjaan Civil',
+                'message' => "Yth. Tim PT Dwi Artha Prima,\n\nKami membutuhkan penawaran awal untuk pekerjaan civil (perbaikan drainase dan perkerasan) di area operasional. Mohon informasi kebutuhan data/site visit dan estimasi timeline.\n\nTerima kasih.",
+                'is_read' => false,
+            ],
+            [
+                'name' => 'Project Manager - PT Kawasan Industri',
+                'email' => 'pm@kawasan-industri.id',
+                'subject' => 'Konsultasi Pembangunan Gudang & Workshop',
+                'message' => "Kami berencana membangun gudang dan workshop (±2.500 m2). Mohon arahan scope kerja, opsi material, serta estimasi biaya dan durasi pekerjaan.\n\nLokasi: Jawa Barat.",
+                'is_read' => true,
+            ],
+            [
+                'name' => 'Admin - Pemerintah Daerah',
+                'email' => 'admin@pemda.go.id',
+                'subject' => 'Permohonan Profil Perusahaan & Portofolio',
+                'message' => "Mohon kirimkan profil perusahaan, legalitas, dan portofolio proyek terkait pekerjaan jalan/jembatan untuk kebutuhan evaluasi vendor.\n\nTerima kasih.",
+                'is_read' => false,
+            ],
+        ];
+
+        if (Message::query()->count() === 0) {
+            foreach ($messages as $message) {
+                Message::create($message);
+            }
         }
     }
 }

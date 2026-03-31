@@ -61,7 +61,7 @@
             <div class="w-full lg:w-[520px]">
                 <div class="rounded-2xl overflow-hidden border border-outline-variant/20 shadow-sm bg-surface-container">
                     @if($project->image)
-                        <img src="{{ Storage::url($project->image) }}" alt="{{ $project->title }}" class="w-full h-[320px] object-cover">
+                        <img src="{{ Storage::url($project->image) }}" alt="{{ $project->title }}" loading="eager" decoding="async" fetchpriority="high" class="w-full h-[320px] object-cover">
                     @else
                         <div class="w-full h-[320px] bg-gradient-to-br from-inverse-surface via-on-surface-variant to-on-surface flex items-center justify-center">
                             <span class="material-symbols-outlined text-white/25 text-7xl">apartment</span>
@@ -104,7 +104,7 @@
                 <a href="{{ route('projects.show', $p->slug) }}" class="group block rounded-2xl overflow-hidden border border-outline-variant/20 bg-surface-container hover:shadow-md transition">
                     <div class="aspect-video overflow-hidden">
                         @if($p->image)
-                            <img src="{{ Storage::url($p->image) }}" alt="{{ $p->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <img src="{{ Storage::url($p->image) }}" alt="{{ $p->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         @else
                             <div class="w-full h-full bg-gradient-to-br from-inverse-surface via-on-surface-variant to-on-surface flex items-center justify-center">
                                 <span class="material-symbols-outlined text-white/25 text-6xl">apartment</span>
@@ -125,4 +125,3 @@
 </section>
 @endif
 @endsection
-

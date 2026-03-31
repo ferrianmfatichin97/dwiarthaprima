@@ -65,7 +65,7 @@
                      data-category="{{ Str::slug($project->category) }}" data-title="{{ strtolower($project->title) }}">
                     
                     @if($project->image)
-                        <img src="{{ Storage::url($project->image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover transition-transform duration-700 ease-out">
+                        <img src="{{ Storage::url($project->image) }}" alt="{{ $project->title }}" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 ease-out">
                     @else
                         <div class="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
                             <span class="material-symbols-outlined text-white/30 text-6xl">apartment</span>

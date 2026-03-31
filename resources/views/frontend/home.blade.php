@@ -85,10 +85,10 @@
         </div>
         {{-- Stats --}}
         <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">15+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Years Experience</div></div>
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">200+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Completed Projects</div></div>
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">50+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Corporate Clients</div></div>
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">12+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Strategic Regions</div></div>
+            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">15+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Tahun Pengalaman</div></div>
+            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">200+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Proyek Terselesaikan</div></div>
+            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">50+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Mitra Korporasi</div></div>
+            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">12+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Wilayah Operasi</div></div>
         </div>
     </div>
 </section>
@@ -188,6 +188,7 @@
                 @if($project->image)
                     <img src="{{ Storage::url($project->image) }}"
                          alt="{{ $project->title }}"
+                         loading="lazy" decoding="async"
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 @else
                     <div class="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
@@ -233,7 +234,7 @@
                         <span class="text-2xl font-black font-headline text-on-surface-variant/50 hover:text-red-700 transition-colors cursor-default inline-block">{{ $client['name'] }}</span>
                     @else
                         @if($client->logo)
-                            <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" class="h-10 object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all inline-block">
+                            <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" width="160" height="40" loading="lazy" decoding="async" class="h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all inline-block">
                         @else
                             <span class="text-2xl font-black font-headline text-on-surface-variant/50 hover:text-red-700 transition-colors cursor-default inline-block">{{ $client->name }}</span>
                         @endif
