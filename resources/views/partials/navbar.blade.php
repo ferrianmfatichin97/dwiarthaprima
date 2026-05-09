@@ -6,11 +6,11 @@
         </a>
 
         <div class="hidden md:flex items-center gap-8">
-            <a href="{{ route('home') }}#home" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('home') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">Home</a>
-            <a href="{{ route('about') }}" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('about') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">About</a>
-            <a href="{{ route('services') }}" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('services') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">Services</a>
-            <a href="{{ route('projects') }}" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('projects*') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">Projects</a>
-            <a href="{{ route('contact') }}" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('contact') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">Contact</a>
+            <a href="{{ route('home') }}#home" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('home') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">Beranda</a>
+            <a href="{{ route('about') }}" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('about') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">Profil</a>
+            <a href="{{ route('services') }}" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('services') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">Layanan</a>
+            <a href="{{ route('projects') }}" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('projects*') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">Portofolio</a>
+            <a href="{{ route('contact') }}" class="font-headline font-bold tracking-tight text-sm uppercase hover:text-red-600 transition-colors {{ request()->routeIs('contact') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-on-surface/70' }}">Kontak</a>
         </div>
 
         <div class="flex items-center gap-3">
@@ -28,11 +28,11 @@
     <div x-show="open" x-transition.opacity x-cloak @click.outside="open = false"
          class="md:hidden border-t border-outline-variant/20 bg-white/95 backdrop-blur-xl">
         <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-3">
-            <a href="{{ route('home') }}#home" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">Home</a>
-            <a href="{{ route('about') }}" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">About</a>
-            <a href="{{ route('services') }}" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">Services</a>
-            <a href="{{ route('projects') }}" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">Projects</a>
-            <a href="{{ route('contact') }}" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">Contact</a>
+            <a href="{{ route('home') }}#home" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">Beranda</a>
+            <a href="{{ route('about') }}" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">Profil</a>
+            <a href="{{ route('services') }}" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">Layanan</a>
+            <a href="{{ route('projects') }}" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">Portofolio</a>
+            <a href="{{ route('contact') }}" class="font-headline font-bold text-sm uppercase text-on-surface/80 hover:text-red-700">Kontak</a>
             <a href="{{ route('contact') }}" class="mt-2 inline-flex justify-center bg-red-700 hover:bg-red-900 text-white px-6 py-3 rounded-lg font-headline font-extrabold text-sm uppercase tracking-wide shadow-md transition">
                 Hubungi Kami
             </a>

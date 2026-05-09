@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         require_once app_path('Helpers/setting.php');
+        require_once app_path('Helpers/format.php');
     }
 
     /**
@@ -23,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if (!app()->runningInConsole()) {
+            \Illuminate\Support\Facades\View::share('socials', \App\Models\SocialMedia::where('is_active', true)->orderBy('order')->get());
+        }
     }
 }

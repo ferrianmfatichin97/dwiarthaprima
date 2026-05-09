@@ -24,9 +24,9 @@
             <tr class="hover:bg-slate-50 transition-colors {{ !$msg->is_read ? 'bg-red-50/20' : '' }}">
                 <td class="px-6 py-4">
                     @if(!$msg->is_read)
-                    <span class="inline-flex items-center gap-1.5 bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-red-600"></span> Baru</span>
+                    <span class="inline-flex items-center gap-1.5 bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-red-600"></span> Pesan Baru</span>
                     @else
-                    <span class="text-slate-400 text-xs font-medium px-2.5 py-1">Dibaca</span>
+                    <span class="text-slate-400 text-xs font-medium px-2.5 py-1">Sudah Dibaca</span>
                     @endif
                 </td>
                 <td class="px-6 py-4">
@@ -38,7 +38,7 @@
                     <p class="text-slate-500 text-xs line-clamp-1 max-w-md mt-0.5">{{ $msg->message }}</p>
                 </td>
                 <td class="px-6 py-4 text-slate-500 text-xs">
-                    {{ $msg->created_at->format('d M Y, H:i') }}<br>
+                    {{ $msg->created_at->isoFormat('D MMM YYYY, HH:mm') }} WIB<br>
                     <span class="text-slate-400">{{ $msg->created_at->diffForHumans() }}</span>
                 </td>
                 <td class="px-6 py-4">
@@ -47,7 +47,7 @@
                            class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all {{ !$msg->is_read ? 'text-blue-600' : '' }}">
                             <span class="material-symbols-outlined text-lg">visibility</span>
                         </a>
-                        <form action="{{ route('admin.messages.destroy', $msg) }}" method="POST" onsubmit="return confirm('Hapus pesan ini permanen?')">
+                        <form action="{{ route('admin.messages.destroy', $msg) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat dikembalikan.')">
                             @csrf @method('DELETE')
                             <button type="submit" class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all" title="Hapus">
                                 <span class="material-symbols-outlined text-lg">delete</span>
@@ -60,7 +60,7 @@
             <tr>
                 <td colspan="5" class="px-6 py-16 text-center text-slate-400">
                     <span class="material-symbols-outlined text-4xl block mb-2 opacity-30">inbox</span>
-                    Belum ada pesan masuk.
+                    Belum terdapat pesan masuk.
                 </td>
             </tr>
             @endforelse

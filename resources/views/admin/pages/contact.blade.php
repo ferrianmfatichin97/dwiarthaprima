@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Setting Contact Info')
+@section('title','Pengaturan Info Kontak')
 @section('page-title','Informasi Kontak')
 @section('page-subtitle','Atur email, telepon, WhatsApp, alamat, dan jam operasional')
 

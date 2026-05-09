@@ -41,7 +41,7 @@
         <!-- Search Input -->
         <div class="relative w-full md:w-80 group">
             <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
-            <input id="search-input" oninput="searchProjects(this.value)" class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-on-surface font-body transition-all outline-none shadow-sm" placeholder="Cari Proyek..." type="text"/>
+            <input id="search-input" oninput="searchProjects(this.value)" class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-on-surface font-body transition-all outline-none shadow-sm" placeholder="Cari data proyek..." type="text"/>
         </div>
     </div>
 </section>
@@ -81,7 +81,7 @@
                         </p>
                         
                         <a class="inline-flex items-center text-white font-headline font-bold {{ $index === 0 ? 'group/link' : 'text-sm' }}" href="{{ route('projects.show', $project->slug) }}">
-                            LIHAT DETAIL
+                            LIHAT DETAIL PROYEK
                             @if($index === 0)
                             <span class="material-symbols-outlined ml-2 group-hover/link:translate-x-2 transition-transform">arrow_forward</span>
                             @endif
@@ -91,7 +91,7 @@
             @empty
                 <div class="col-span-12 text-center py-24">
                     <span class="material-symbols-outlined text-6xl block mb-4 opacity-20 text-on-surface">apartment</span>
-                    <p class="text-on-surface-variant font-medium">Belum ada proyek tersedia.</p>
+                    <p class="text-on-surface-variant font-medium">Informasi proyek akan segera diperbarui.</p>
                 </div>
             @endforelse
         </div>
@@ -118,7 +118,7 @@
         </div>
         <div>
             <a href="{{ route('contact') }}" class="group inline-flex items-center gap-4 bg-primary text-on-primary px-10 py-5 rounded-md font-headline font-extrabold text-sm uppercase tracking-widest shadow-2xl shadow-primary/20 hover:bg-on-primary-fixed-variant transition-all duration-400">
-                Konsultasi Dengan Kami
+                Konsultasi Proyek Sekarang
                 <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
             </a>
         </div>

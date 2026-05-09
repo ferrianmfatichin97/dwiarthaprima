@@ -36,7 +36,7 @@
                         <a href="{{ route('admin.services.edit', $service) }}" class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
                             <span class="material-symbols-outlined text-lg">edit</span>
                         </a>
-                        <form action="{{ route('admin.services.destroy', $service) }}" method="POST" onsubmit="return confirm('Hapus layanan ini?')">
+                        <form action="{{ route('admin.services.destroy', $service) }}" method="POST" class="delete-form">
                             @csrf @method('DELETE')
                             <button type="submit" class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
                                 <span class="material-symbols-outlined text-lg">delete</span>
@@ -49,7 +49,7 @@
             <tr>
                 <td colspan="4" class="px-6 py-16 text-center text-slate-400">
                     <span class="material-symbols-outlined text-4xl block mb-2 opacity-30">build</span>
-                    Belum ada layanan. <a href="{{ route('admin.services.create') }}" class="text-red-600 font-medium">Tambah sekarang</a>
+                    Belum terdapat data layanan. <a href="{{ route('admin.services.create') }}" class="text-red-600 font-medium">Tambah Data</a>
                 </td>
             </tr>
             @endforelse

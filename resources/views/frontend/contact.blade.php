@@ -20,8 +20,8 @@
 <section class="py-16 bg-surface">
     <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div class="lg:col-span-7 bg-white rounded-2xl border border-surface-container-high shadow-sm p-8">
-            <h2 class="font-headline font-extrabold text-2xl text-on-surface tracking-tight">Kirim Pesan</h2>
-            <p class="mt-2 text-on-surface-variant">Isi form berikut agar tim kami dapat menghubungi Anda.</p>
+            <h2 class="font-headline font-extrabold text-2xl text-on-surface tracking-tight">Ajukan Konsultasi Proyek</h2>
+            <p class="mt-2 text-on-surface-variant">Lengkapi formulir berikut agar tenaga ahli kami dapat menganalisis kebutuhan Anda.</p>
 
             @if (session('success'))
                 <div class="mt-6 rounded-lg border border-green-200 bg-green-50 text-green-800 px-4 py-3 text-sm">
@@ -43,10 +43,10 @@
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-sm font-semibold text-on-surface mb-2">Nama</label>
+                        <label class="block text-sm font-semibold text-on-surface mb-2">Nama Lengkap</label>
                         <input name="name" value="{{ old('name') }}" required
                                class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                               placeholder="Nama lengkap" />
+                               placeholder="Nama lengkap Anda" />
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-on-surface mb-2">Email</label>
@@ -56,23 +56,23 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-on-surface mb-2">Subjek</label>
+                    <label class="block text-sm font-semibold text-on-surface mb-2">Cakupan Pekerjaan</label>
                     <input name="subject" value="{{ old('subject') }}" required
                            class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                           placeholder="Konsultasi proyek / penawaran / kerja sama" />
+                           placeholder="Contoh: Pekerjaan Infrastruktur / General Contractor / Pemeliharaan" />
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-on-surface mb-2">Pesan</label>
+                    <label class="block text-sm font-semibold text-on-surface mb-2">Uraian Pekerjaan / Kebutuhan Proyek</label>
                     <textarea name="message" rows="6" required
                               class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                              placeholder="Jelaskan kebutuhan proyek Anda...">{{ old('message') }}</textarea>
+                              placeholder="Jelaskan secara singkat cakupan pekerjaan atau spesifikasi teknis yang Anda butuhkan...">{{ old('message') }}</textarea>
                     <p class="mt-2 text-xs text-on-surface-variant">Maksimal 5000 karakter.</p>
                 </div>
 
                 <div class="pt-2">
                     <button type="submit"
                             class="inline-flex items-center gap-3 bg-primary text-on-primary px-8 py-3 rounded-lg font-headline font-extrabold text-sm uppercase tracking-widest shadow-lg hover:bg-on-primary-fixed-variant transition-colors">
-                        Kirim Pesan
+                        Ajukan Konsultasi
                         <span class="material-symbols-outlined">send</span>
                     </button>
                 </div>
@@ -109,7 +109,7 @@
 
             <div class="bg-surface-container-highest rounded-2xl border border-outline-variant/20 p-8">
                 <h3 class="font-headline font-extrabold text-xl text-on-surface tracking-tight">Butuh respons cepat?</h3>
-                <p class="mt-2 text-on-surface-variant">Silakan chat via WhatsApp untuk pertanyaan awal.</p>
+                <p class="mt-2 text-on-surface-variant">Silakan hubungi kami via WhatsApp untuk respon cepat.</p>
                 <a href="{{ setting('contact', 'contact_whatsapp', 'https://wa.me/6221555123') }}" target="_blank" rel="noopener"
                    class="mt-5 inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-3 rounded-lg font-headline font-extrabold text-sm uppercase tracking-widest shadow-lg hover:brightness-95 transition">
                     WhatsApp

@@ -41,7 +41,7 @@
             <p class="text-slate-400 text-sm font-medium">Pesan Masuk</p>
             <p class="text-3xl font-bold text-slate-800">{{ $totalMessages }}</p>
             @if($unreadMessages > 0)
-            <p class="text-red-500 text-xs font-medium">{{ $unreadMessages }} belum dibaca</p>
+            <p class="text-red-500 text-xs font-medium">{{ $unreadMessages }} Pesan belum dibaca</p>
             @endif
         </div>
     </div>
@@ -53,7 +53,7 @@
     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
         <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
             <h2 class="font-bold text-slate-800">Proyek Terbaru</h2>
-            <a href="{{ route('admin.projects.index') }}" class="text-red-600 text-sm font-medium hover:text-red-800">Lihat semua</a>
+            <a href="{{ route('admin.projects.index') }}" class="text-red-600 text-sm font-medium hover:text-red-800">Lihat Semua Data</a>
         </div>
         <div class="divide-y divide-slate-100">
             @forelse($recentProjects as $p)
@@ -70,7 +70,7 @@
                 </a>
             </div>
             @empty
-            <div class="px-6 py-8 text-center text-slate-400 text-sm">Belum ada proyek.</div>
+            <div class="px-6 py-8 text-center text-slate-400 text-sm">Belum terdapat data proyek.</div>
             @endforelse
         </div>
     </div>
@@ -79,7 +79,7 @@
     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
         <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
             <h2 class="font-bold text-slate-800">Pesan Terbaru</h2>
-            <a href="{{ route('admin.messages.index') }}" class="text-red-600 text-sm font-medium hover:text-red-800">Lihat semua</a>
+            <a href="{{ route('admin.messages.index') }}" class="text-red-600 text-sm font-medium hover:text-red-800">Lihat Semua Pesan</a>
         </div>
         <div class="divide-y divide-slate-100">
             @forelse($recentMessages as $m)
@@ -89,7 +89,7 @@
                 </div>
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-semibold text-slate-800 truncate">{{ $m->name }}
-                        @if(!$m->is_read)<span class="ml-2 bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded-full">Baru</span>@endif
+                        @if(!$m->is_read)<span class="ml-2 bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded-full">Pesan Baru</span>@endif
                     </p>
                     <p class="text-xs text-slate-400 truncate">{{ $m->subject }}</p>
                 </div>
@@ -98,7 +98,7 @@
                 </a>
             </div>
             @empty
-            <div class="px-6 py-8 text-center text-slate-400 text-sm">Belum ada pesan.</div>
+            <div class="px-6 py-8 text-center text-slate-400 text-sm">Belum terdapat pesan masuk.</div>
             @endforelse
         </div>
     </div>

@@ -9,10 +9,10 @@
         <div class="max-w-4xl">
             <div class="text-xs uppercase tracking-widest font-bold text-primary">Layanan</div>
             <h1 class="mt-4 font-headline font-extrabold text-4xl md:text-6xl text-on-surface tracking-tighter uppercase">
-                {{ setting('services', 'services_hero_title', 'Layanan Terintegrasi untuk Proyek Konstruksi') }}
+                {{ setting('services', 'services_hero_title', 'Layanan Konstruksi & Engineering Terintegrasi') }}
             </h1>
             <p class="mt-5 text-on-surface-variant text-lg leading-relaxed">
-                {{ setting('services', 'services_hero_desc', 'Dari perencanaan hingga pelaksanaan — kami menyediakan layanan konstruksi dan engineering dengan fokus pada mutu, keselamatan, dan ketepatan waktu.') }}
+                {{ setting('services', 'services_hero_desc', 'Dari perencanaan strategis hingga pelaksanaan lapangan — kami menyediakan solusi konstruksi yang berfokus pada standar mutu, keselamatan kerja (K3), dan ketepatan waktu pengerjaan.') }}
             </p>
         </div>
     </div>
@@ -32,10 +32,9 @@
             @empty
                 <div class="col-span-4 text-center py-20">
                     <span class="material-symbols-outlined text-7xl block mb-4 opacity-20 text-on-surface">build</span>
-                    <p class="text-on-surface-variant font-medium">Belum ada layanan tersedia.</p>
-                    <p class="text-on-surface-variant/80 text-sm mt-2">Tambahkan layanan dari Admin Panel agar halaman ini terisi.</p>
+                    <p class="text-on-surface-variant font-medium">Informasi layanan akan segera diperbarui.</p>
                     <a href="{{ route('contact') }}" class="mt-6 inline-flex items-center gap-2 text-primary font-bold hover:underline">
-                        Konsultasi kebutuhan proyek
+                        Diskusikan spesifikasi proyek
                         <span class="material-symbols-outlined">arrow_forward</span>
                     </a>
                 </div>
@@ -55,7 +54,7 @@
             </p>
         </div>
         <a href="{{ route('contact') }}" class="inline-flex items-center gap-3 bg-primary text-on-primary px-10 py-4 rounded-lg font-headline font-extrabold text-sm uppercase tracking-widest shadow-lg hover:bg-on-primary-fixed-variant transition-colors">
-            Konsultasi Sekarang
+            Hubungi Tenaga Ahli
             <span class="material-symbols-outlined">arrow_right_alt</span>
         </a>
     </div>

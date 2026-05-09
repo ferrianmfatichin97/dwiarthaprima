@@ -35,16 +35,16 @@
             {{ setting('home', 'home_hero_title', 'PT Dwi Artha Prima') }}
         </h1>
         <p class="hero-text-delay font-headline text-xl md:text-2xl text-white/90 mb-12 tracking-wide font-medium">
-            {{ setting('home', 'home_hero_subtitle', 'Solusi Konstruksi dan Jasa Terpercaya') }}
+            {{ setting('home', 'home_hero_subtitle', 'Mitra Strategis Konstruksi dan Infrastruktur Nasional') }}
         </p>
         <div class="hero-btn flex flex-col md:flex-row items-center justify-center gap-6">
             <a href="{{ route('projects') }}"
                class="w-full md:w-auto px-10 py-4 bg-red-700 text-white font-bold rounded hover:bg-red-900 transition-all duration-300 text-center shadow-xl transform hover:scale-105">
-                Lihat Proyek
+                Eksplorasi Portofolio
             </a>
             <a href="{{ route('contact') }}"
                class="w-full md:w-auto px-10 py-4 border-2 border-white text-white font-bold rounded hover:bg-white/10 transition-all duration-300 text-center backdrop-blur-sm">
-                Hubungi Kami
+                Konsultasi Proyek
             </a>
         </div>
     </div>
@@ -64,7 +64,7 @@
             <div class="space-y-8">
                 <span class="text-red-700 font-headline font-bold uppercase tracking-widest text-sm">Tentang Kami</span>
                 <h2 class="text-4xl md:text-6xl font-headline font-extrabold text-on-surface leading-tight tracking-tight">
-                    {{ setting('home', 'home_about_title', 'Membangun Masa Depan Dengan Presisi.') }}
+                    {{ setting('home', 'home_about_title', 'Mewujudkan Infrastruktur yang Tangguh melalui Integritas dan Presisi.') }}
                 </h2>
                 <p class="text-on-surface-variant text-lg leading-relaxed max-w-xl whitespace-pre-line">
                     {{ setting('home', 'home_about_desc', 'PT Dwi Artha Prima adalah mitra strategis dalam sektor konstruksi dan infrastruktur di Indonesia. Kami menghadirkan integritas, inovasi, dan kualitas kelas dunia dalam setiap proyek yang kami tangani, dari skala menengah hingga mega-proyek nasional.') }}
@@ -74,21 +74,21 @@
                 <div class="p-8 bg-surface-container-low rounded-xl">
                     <span class="material-symbols-outlined text-red-700 text-4xl mb-4">visibility</span>
                     <h3 class="font-headline font-bold text-xl mb-3">Visi</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">Menjadi perusahaan jasa konstruksi terkemuka yang diakui secara nasional atas kualitas dan komitmen terhadap keselamatan kerja.</p>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">{{ setting('home', 'home_vision', 'Menjadi perusahaan jasa konstruksi terkemuka yang diakui secara nasional atas kualitas dan komitmen terhadap keselamatan kerja.') }}</p>
                 </div>
                 <div class="p-8 bg-surface-container-low rounded-xl">
                     <span class="material-symbols-outlined text-red-700 text-4xl mb-4">rocket_launch</span>
                     <h3 class="font-headline font-bold text-xl mb-3">Misi</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">Memberikan solusi teknis yang inovatif dan efisien untuk memenuhi harapan klien melalui profesionalisme dan keunggulan operasional.</p>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">{{ setting('home', 'home_mission', 'Memberikan solusi teknis yang inovatif dan efisien untuk memenuhi harapan klien melalui profesionalisme dan keunggulan operasional.') }}</p>
                 </div>
             </div>
         </div>
         {{-- Stats --}}
         <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">15+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Tahun Pengalaman</div></div>
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">200+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Proyek Terselesaikan</div></div>
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">50+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Mitra Korporasi</div></div>
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">12+</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Wilayah Operasi</div></div>
+            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">{{ setting('home', 'home_stats_years', '15+') }}</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Tahun Pengalaman</div></div>
+            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">{{ setting('home', 'home_stats_projects', '200+') }}</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Proyek Terselesaikan</div></div>
+            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">{{ setting('home', 'home_stats_clients', '50+') }}</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Mitra Korporasi</div></div>
+            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">{{ setting('home', 'home_stats_regions', '12+') }}</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Wilayah Operasi</div></div>
         </div>
     </div>
 </section>
@@ -113,8 +113,7 @@
         @empty
         <div class="col-span-4 text-center py-16">
             <span class="material-symbols-outlined text-6xl block mb-4 opacity-20 text-on-surface">build</span>
-            <p class="text-on-surface-variant font-medium">Belum ada layanan tersedia.</p>
-            <p class="text-on-surface-variant/80 text-sm mt-2">Silakan tambahkan layanan dari Admin Panel agar tampil di halaman ini.</p>
+            <p class="text-on-surface-variant font-medium">Informasi layanan akan segera diperbarui.</p>
         </div>
         @endforelse
     </div>
@@ -134,7 +133,7 @@
                 Pendekatan kami mengutamakan perencanaan metode kerja, pengendalian mutu, dan keselamatan kerja (K3) untuk menjaga kualitas hasil dan ketepatan waktu.
             </p>
             <a href="{{ route('about') }}" class="mt-8 inline-flex items-center gap-3 text-red-700 font-bold hover:text-red-900 transition">
-                Pelajari profil perusahaan
+                Pelajari Profil Perusahaan
                 <span class="material-symbols-outlined">arrow_forward</span>
             </a>
         </div>
@@ -175,7 +174,7 @@
         </div>
         <a href="{{ route('projects') }}"
            class="text-red-700 font-bold border-b-2 border-red-700 pb-1 hover:text-red-900 hover:border-red-900 transition-all whitespace-nowrap">
-            Lihat Semua Proyek &rarr;
+            Seluruh Portofolio &rarr;
         </a>
     </div>
 
@@ -212,7 +211,7 @@
         @empty
         <div class="col-span-3 text-center text-on-surface-variant py-16">
             <span class="material-symbols-outlined text-5xl mb-4 block opacity-30">apartment</span>
-            <p>Belum ada proyek tersedia.</p>
+            <p>Informasi proyek akan segera diperbarui.</p>
         </div>
         @endforelse
     </div>
@@ -253,8 +252,8 @@
         <div class="space-y-12">
             <div>
                 <span class="text-red-700 font-headline font-bold uppercase tracking-widest text-sm">Hubungi Kami</span>
-                <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface mt-4 mb-6">Mulai Proyek Anda Bersama Kami</h2>
-                <p class="text-on-surface-variant text-lg">Konsultasikan kebutuhan konstruksi dan jasa engineering Anda dengan tim ahli kami.</p>
+                <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface mt-4 mb-6">Kemitraan Strategis untuk Proyek Anda</h2>
+                <p class="text-on-surface-variant text-lg">Diskusikan spesifikasi proyek dan kebutuhan infrastruktur Anda bersama tenaga ahli kami.</p>
             </div>
             <div class="space-y-6">
                 <div class="flex items-start gap-4">
@@ -298,7 +297,7 @@
                     </div>
                 </div>
                 <div class="space-y-2">
-                    <label class="text-sm font-bold text-on-surface-variant" for="subject">Subjek Layanan</label>
+                    <label class="text-sm font-bold text-on-surface-variant" for="subject">Cakupan Pekerjaan</label>
                     <select class="w-full bg-white border border-outline-variant/30 rounded focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all p-3" id="subject" name="subject">
                         <option>Construction Services</option>
                         <option>General Contractor</option>
@@ -307,13 +306,13 @@
                     </select>
                 </div>
                 <div class="space-y-2">
-                    <label class="text-sm font-bold text-on-surface-variant" for="message">Pesan / Detail Proyek</label>
+                    <label class="text-sm font-bold text-on-surface-variant" for="message">Uraian Pekerjaan / Kebutuhan Proyek</label>
                     <textarea class="w-full bg-white border border-outline-variant/30 rounded focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all p-3 @error('message') border-red-500 @enderror"
-                              id="message" name="message" placeholder="Ceritakan kebutuhan Anda..." rows="5">{{ old('message') }}</textarea>
+                              id="message" name="message" placeholder="Jelaskan secara singkat cakupan pekerjaan Anda..." rows="5">{{ old('message') }}</textarea>
                     @error('message')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
                 <button class="w-full py-4 bg-red-700 text-white font-bold rounded hover:bg-red-900 transition-all duration-300 shadow-md transform active:scale-[0.98] font-headline uppercase tracking-wide" type="submit">
-                    Kirim Pesan Sekarang
+                    Ajukan Konsultasi Proyek
                 </button>
             </form>
         </div>

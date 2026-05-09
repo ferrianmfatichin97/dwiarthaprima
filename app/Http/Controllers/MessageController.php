@@ -14,11 +14,17 @@ class MessageController extends Controller
             'email'   => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string|max:5000',
+        ], [
+            'name.required'    => 'Mohon masukkan nama lengkap Anda.',
+            'email.required'   => 'Mohon masukkan alamat email Anda.',
+            'email.email'      => 'Format email tidak valid.',
+            'subject.required' => 'Mohon pilih atau masukkan cakupan pekerjaan.',
+            'message.required' => 'Mohon sertakan uraian kebutuhan proyek Anda.',
         ]);
 
         Message::create($request->only('name', 'email', 'subject', 'message'));
 
-        return redirect()->back()->with('success', 'Pesan Anda telah terkirim! Kami akan segera menghubungi Anda.');
+        return redirect()->back()->with('success', 'Pesan Anda telah berhasil terkirim. Tim kami akan segera meninjau dan menghubungi Anda kembali.');
     }
 
     // Admin
@@ -37,6 +43,6 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         $message->delete();
-        return redirect()->route('admin.messages.index')->with('success', 'Pesan dihapus.');
+        return redirect()->route('admin.messages.index')->with('success', 'Data pesan berhasil dihapus.');
     }
 }

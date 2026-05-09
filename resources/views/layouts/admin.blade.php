@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if (file_exists(public_path('mix-manifest.json')))
         <link rel="stylesheet" href="{{ mix('css/app.css') }}"/>
@@ -96,7 +97,7 @@
             <summary class="sidebar-group-summary">
                 <span class="flex items-center gap-3">
                     <span class="material-symbols-outlined text-xl">home</span>
-                    <span>Home Page</span>
+                    <span>Beranda</span>
                 </span>
                 <span class="material-symbols-outlined text-xl transition-transform group-chevron">expand_more</span>
             </summary>
@@ -123,7 +124,7 @@
             <summary class="sidebar-group-summary">
                 <span class="flex items-center gap-3">
                     <span class="material-symbols-outlined text-xl">corporate_fare</span>
-                    <span>Company Page</span>
+                    <span>Halaman Profil</span>
                 </span>
                 <span class="material-symbols-outlined text-xl transition-transform group-chevron">expand_more</span>
             </summary>
@@ -145,7 +146,7 @@
             <summary class="sidebar-group-summary">
                 <span class="flex items-center gap-3">
                     <span class="material-symbols-outlined text-xl">apartment</span>
-                    <span>Project Page</span>
+                    <span>Portofolio Proyek</span>
                 </span>
                 <span class="material-symbols-outlined text-xl transition-transform group-chevron">expand_more</span>
             </summary>
@@ -168,7 +169,7 @@
             <summary class="sidebar-group-summary">
                 <span class="flex items-center gap-3">
                     <span class="material-symbols-outlined text-xl">contact_mail</span>
-                    <span>Contact Page</span>
+                    <span>Kontak & Pesan</span>
                 </span>
                 <span class="material-symbols-outlined text-xl transition-transform group-chevron">expand_more</span>
             </summary>
@@ -186,6 +187,11 @@
                    class="sidebar-sublink {{ request()->routeIs('admin.pages.contact') ? 'active' : '' }}">
                     <span class="material-symbols-outlined text-xl">contact_phone</span>
                     <span>Info Kontak</span>
+                </a>
+                <a href="{{ route('admin.socials.index') }}"
+                   class="sidebar-sublink {{ request()->routeIs('admin.socials.*') ? 'active' : '' }}">
+                    <span class="material-symbols-outlined text-xl">share</span>
+                    <span>Media Sosial</span>
                 </a>
             </div>
         </details>
@@ -228,14 +234,14 @@
             <p class="text-slate-400 text-xs mt-0.5">@yield('page-subtitle', 'PT Dwi Artha Prima Admin Panel')</p>
         </div>
         <div class="flex items-center gap-4">
-            <span class="text-slate-400 text-sm">{{ now()->format('l, d F Y') }}</span>
+            <span class="text-slate-400 text-sm">{{ now()->isoFormat('dddd, D MMMM YYYY') }}</span>
             <div class="w-9 h-9 rounded-full bg-red-700 flex items-center justify-center">
                 <span class="text-white text-sm font-bold">{{ substr(auth()->user()->name, 0, 1) }}</span>
             </div>
         </div>
     </header>
 
-    {{-- Flash Messages --}}
+
     <div class="px-8 pt-6">
         @if(session('success'))
         <div class="mb-4 flex items-center gap-3 bg-green-50 border border-green-200 text-green-800 px-5 py-4 rounded-xl" role="alert">
@@ -256,6 +262,52 @@
         @yield('content')
     </main>
 </div>
+
+@yield('scripts')
+<script>
+    // Global Delete Confirmation
+    document.addEventListener('submit', function(e) {
+        if (e.target && e.target.classList.contains('delete-form')) {
+            e.preventDefault();
+            const form = e.target;
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#b91c1c',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    });
+
+    // Success Flash Message
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: '{{ session('success') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+    @endif
+
+    // Error Flash Message
+    @if($errors->any())
+        Swal.fire({
+            icon: 'error',
+            title: 'Terjadi Kesalahan',
+            text: '{{ $errors->first() }}',
+        });
+    @endif
+</script>
 
 </body>
 </html>

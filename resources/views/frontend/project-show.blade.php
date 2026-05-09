@@ -75,8 +75,8 @@
                                 <div class="mt-1 font-bold text-on-surface">{{ $project->category }}</div>
                             </div>
                             <div class="bg-white rounded-xl border border-outline-variant/20 p-4">
-                                <div class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Update</div>
-                                <div class="mt-1 font-bold text-on-surface">{{ $project->updated_at->format('d M Y') }}</div>
+                                <div class="text-on-surface-variant text-xs font-bold uppercase tracking-widest">Pembaruan Terakhir</div>
+                                <div class="mt-1 font-bold text-on-surface">{{ formatTanggal($project->updated_at) }}</div>
                             </div>
                         </div>
                     </div>
@@ -93,10 +93,10 @@
             <div>
                 <div class="text-xs uppercase tracking-widest font-bold text-on-surface-variant">Rekomendasi</div>
                 <h2 class="mt-2 font-headline font-extrabold text-2xl md:text-3xl text-on-surface tracking-tight uppercase">
-                    Proyek Serupa
+                    Proyek Terkait
                 </h2>
             </div>
-            <a href="{{ route('projects') }}" class="text-sm font-bold text-primary hover:underline">Lihat semua</a>
+            <a href="{{ route('projects') }}" class="text-sm font-bold text-primary hover:underline">Lihat Semua Portofolio</a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

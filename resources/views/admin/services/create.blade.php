@@ -12,16 +12,16 @@
                 <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Layanan *</label>
                 <input type="text" name="name" value="{{ old('name') }}" required
                        class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent @error('name') border-red-400 @enderror"
-                       placeholder="e.g. General Contractor"/>
+                       placeholder="Contoh: General Contractor"/>
                 @error('name')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
             <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Google Material Icon Name *</label>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Ikon (Google Material) *</label>
                 <div class="flex gap-4 items-start">
                     <div class="flex-1">
                         <input type="text" name="icon" value="{{ old('icon', 'build') }}" id="icon-input" required
                                class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent @error('icon') border-red-400 @enderror"
-                               placeholder="e.g. engineering, architecture, foundation"/>
+                               placeholder="Contoh: engineering, architecture, foundation"/>
                         @error('icon')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                         <p class="text-xs text-slate-400 mt-2">Cari nama icon di <a href="https://fonts.google.com/icons" target="_blank" class="text-blue-600 hover:underline">Google Fonts</a></p>
                     </div>

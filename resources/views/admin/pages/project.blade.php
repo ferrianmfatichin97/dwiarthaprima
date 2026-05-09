@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Setting Project Page')
+@section('title','Pengaturan Halaman Portofolio')
 @section('page-title','Teks Halaman Proyek (Portfolio)')
 @section('page-subtitle','Atur teks pembuka dan ajakan pada daftar proyek')
 
@@ -14,12 +14,12 @@
                 <h3 class="text-lg font-bold text-slate-800 border-b border-slate-100 pb-2 mb-4">Area Banner Proyek (Paling Atas)</h3>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Judul Besar (Page Title)</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Judul Utama (Page Title)</label>
                         <input type="text" name="project_hero_title" value="{{ $settings['project_hero_title'] ?? 'Proyek Kami' }}"
                                class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent"/>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Motivasi Pembuka (Subtitle)</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi Pembuka (Subtitle)</label>
                         <input type="text" name="project_hero_desc" value="{{ $settings['project_hero_desc'] ?? 'Membangun masa depan Indonesia melalui infrastruktur yang berkelanjutan dan inovasi konstruksi kelas dunia.' }}"
                                class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent"/>
                     </div>
@@ -45,7 +45,7 @@
 
             <div class="pt-4 border-t border-slate-100">
                 <button type="submit" class="bg-red-700 hover:bg-red-800 text-white px-8 py-3 rounded-lg text-sm font-semibold transition-colors shadow-sm">
-                    Simpan Perubahan Teks
+                    Simpan Perubahan
                 </button>
             </div>
         </form>

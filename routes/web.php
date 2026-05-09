@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
+use App\Http\Controllers\Admin\SocialMediaController as AdminSocialMediaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
@@ -48,6 +49,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('projects', AdminProjectController::class)->except(['show']);
     Route::resource('services', AdminServiceController::class)->except(['show']);
     Route::resource('clients', AdminClientController::class)->except(['show']);
+    Route::resource('socials', AdminSocialMediaController::class)->except(['show']);
 
     Route::controller(AdminMessageController::class)->group(function () {
         Route::get('messages', 'index')->name('messages.index');

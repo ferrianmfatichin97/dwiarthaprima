@@ -37,26 +37,26 @@ class DatabaseSeeder extends Seeder
         // Page settings (copywriting defaults)
         $pageSettings = [
             ['page' => 'home', 'key' => 'home_hero_title', 'value' => 'PT Dwi Artha Prima'],
-            ['page' => 'home', 'key' => 'home_hero_subtitle', 'value' => 'Solusi Konstruksi, Infrastruktur, dan Engineering Terpercaya'],
-            ['page' => 'home', 'key' => 'home_about_title', 'value' => 'Membangun Infrastruktur yang Tangguh, Aman, dan Tepat Waktu.'],
-            ['page' => 'home', 'key' => 'home_about_desc', 'value' => "PT Dwi Artha Prima berfokus pada pekerjaan konstruksi dan jasa engineering dengan standar mutu yang terukur. Kami mendampingi proyek dari tahap perencanaan, pengadaan, hingga pelaksanaan dan serah terima, dengan prioritas pada keselamatan kerja, ketepatan waktu, dan transparansi biaya.\n\nKami berkomitmen menghadirkan hasil yang andal untuk proyek jalan dan jembatan, bangunan, kawasan industri, serta pekerjaan pemeliharaan (maintenance)."],
+            ['page' => 'home', 'key' => 'home_hero_subtitle', 'value' => 'Mitra Strategis dalam Pembangunan Konstruksi dan Infrastruktur Nasional'],
+            ['page' => 'home', 'key' => 'home_about_title', 'value' => 'Mewujudkan Infrastruktur yang Tangguh melalui Integritas dan Presisi.'],
+            ['page' => 'home', 'key' => 'home_about_desc', 'value' => "PT Dwi Artha Prima adalah mitra strategis dalam sektor konstruksi dan infrastruktur di Indonesia. Kami menghadirkan integritas, inovasi, dan kualitas dalam setiap proyek yang kami tangani.\n\nKami berkomitmen dalam menyediakan layanan pekerjaan secara profesional dan tepat waktu, didukung oleh tenaga kerja berpengalaman serta standar mutu (QA/QC) dan keselamatan kerja (K3) yang konsisten guna memberikan hasil yang andal bagi setiap stakeholder."],
 
             ['page' => 'project', 'key' => 'project_hero_title', 'value' => 'Portofolio Proyek'],
-            ['page' => 'project', 'key' => 'project_hero_desc', 'value' => 'Contoh pekerjaan yang merepresentasikan kapabilitas kami di bidang konstruksi, infrastruktur, dan engineering — dengan fokus pada keselamatan (K3), mutu (QA/QC), dan ketepatan waktu.'],
-            ['page' => 'project', 'key' => 'project_cta_title', 'value' => 'Siap memulai proyek Anda?'],
-            ['page' => 'project', 'key' => 'project_cta_desc', 'value' => "Sampaikan kebutuhan proyek Anda. Tim kami siap membantu menyusun rencana kerja awal, estimasi, dan pendekatan pelaksanaan yang terukur."],
+            ['page' => 'project', 'key' => 'project_hero_desc', 'value' => 'Representasi kapabilitas kami dalam menangani berbagai skala pekerjaan konstruksi, infrastruktur, dan engineering dengan mengedepankan standar kualitas serta ketepatan waktu.'],
+            ['page' => 'project', 'key' => 'project_cta_title', 'value' => 'Kemitraan Strategis untuk Proyek Anda'],
+            ['page' => 'project', 'key' => 'project_cta_desc', 'value' => "Sampaikan spesifikasi proyek Anda untuk mendapatkan analisis metode kerja awal serta estimasi biaya yang kompetitif dan realistis dari tim ahli kami."],
 
             ['page' => 'about', 'key' => 'about_hero_title', 'value' => 'Mitra Konstruksi & Engineering yang Terukur'],
-            ['page' => 'about', 'key' => 'about_hero_desc', 'value' => 'Kami membantu mewujudkan pekerjaan konstruksi dan infrastruktur dengan standar K3, QA/QC, dan manajemen proyek yang disiplin.'],
-            ['page' => 'about', 'key' => 'about_story_title', 'value' => 'Cerita Perusahaan'],
-            ['page' => 'about', 'key' => 'about_story_desc', 'value' => "PT Dwi Artha Prima berfokus pada pekerjaan konstruksi, infrastruktur, dan jasa engineering. Kami mengutamakan perencanaan yang rapi, kontrol mutu yang konsisten, serta komunikasi progres yang transparan.\n\nPendekatan kami menekankan keselamatan kerja, ketertelusuran material, dan dokumentasi yang baik agar pekerjaan dapat dipertanggungjawabkan."],
-            ['page' => 'about', 'key' => 'about_vision', 'value' => 'Menjadi mitra konstruksi yang dipercaya untuk proyek bernilai strategis di Indonesia.'],
-            ['page' => 'about', 'key' => 'about_mission', 'value' => "Menerapkan K3 dan QA/QC secara konsisten di setiap pekerjaan.\nMenjaga ketepatan waktu melalui perencanaan dan kontrol progres.\nMemberikan solusi teknis yang efisien dan terukur."],
+            ['page' => 'about', 'key' => 'about_hero_desc', 'value' => 'Berkomitmen menyediakan layanan konstruksi dan infrastruktur dengan standar K3, pengendalian mutu, dan manajemen proyek yang disiplin.'],
+            ['page' => 'about', 'key' => 'about_story_title', 'value' => 'Profil Perusahaan'],
+            ['page' => 'about', 'key' => 'about_story_desc', 'value' => "PT Dwi Artha Prima berfokus pada pekerjaan konstruksi, infrastruktur, dan jasa engineering. Kami memiliki pengalaman dalam menangani berbagai cakupan pekerjaan sipil, mekanikal, dan elektrikal dengan dukungan tenaga kerja yang kompeten di bidangnya.\n\nSetiap langkah operasional kami berlandaskan pada prinsip profesionalisme dan integritas, di mana aspek keselamatan kerja serta pengendalian mutu (QA/QC) menjadi standar baku yang kami terapkan secara konsisten di setiap pekerjaan."],
+            ['page' => 'about', 'key' => 'about_vision', 'value' => 'Menjadi perusahaan jasa konstruksi terpercaya yang diakui secara nasional atas kualitas pekerjaan dan integritas dalam bermitra.'],
+            ['page' => 'about', 'key' => 'about_mission', 'value' => "Mengimplementasikan standar K3 dan pengendalian mutu (QA/QC) secara ketat di setiap proyek.\nMenjamin ketepatan waktu penyelesaian melalui perencanaan dan pengawasan progres yang sistematis.\nMemberikan solusi teknis dan engineering yang efisien serta dapat dipertanggungjawabkan."],
 
-            ['page' => 'services', 'key' => 'services_hero_title', 'value' => 'Layanan Terintegrasi untuk Proyek Konstruksi'],
-            ['page' => 'services', 'key' => 'services_hero_desc', 'value' => 'Dari perencanaan hingga pelaksanaan — kami menyediakan layanan konstruksi dan engineering dengan fokus pada mutu, keselamatan, dan ketepatan waktu.'],
-            ['page' => 'services', 'key' => 'services_cta_title', 'value' => 'Butuh estimasi dan masukan teknis?'],
-            ['page' => 'services', 'key' => 'services_cta_desc', 'value' => 'Kirim kebutuhan proyek Anda, kami bantu susun rencana kerja awal dan estimasi yang realistis.'],
+            ['page' => 'services', 'key' => 'services_hero_title', 'value' => 'Layanan Konstruksi & Engineering Terintegrasi'],
+            ['page' => 'services', 'key' => 'services_hero_desc', 'value' => 'Dari tahap perencanaan hingga pelaksanaan lapangan, kami menyediakan layanan komprehensif dengan fokus pada mutu pekerjaan dan keselamatan kerja.'],
+            ['page' => 'services', 'key' => 'services_cta_title', 'value' => 'Permintaan Estimasi & Konsultasi Teknis'],
+            ['page' => 'services', 'key' => 'services_cta_desc', 'value' => 'Diskusikan spesifikasi proyek Anda bersama tenaga ahli kami untuk mendapatkan estimasi yang realistis sesuai kebutuhan anggaran dan jadwal.'],
 
             ['page' => 'contact', 'key' => 'contact_email', 'value' => 'info@dwiarthaprima.com'],
             ['page' => 'contact', 'key' => 'contact_phone', 'value' => '+62 (21) 555-0123'],
@@ -74,14 +74,14 @@ class DatabaseSeeder extends Seeder
 
         // Sample services
         $services = [
-            ['name' => 'Konstruksi Infrastruktur', 'description' => 'Pembangunan jalan, drainase, jembatan, dan pekerjaan struktur dengan standar teknis serta mutu material yang terukur.', 'icon' => 'construction'],
-            ['name' => 'Gedung & Bangunan', 'description' => 'Pekerjaan gedung perkantoran, fasilitas umum, dan bangunan penunjang dengan pengendalian kualitas dan keselamatan kerja.', 'icon' => 'apartment'],
-            ['name' => 'Engineering & Design', 'description' => 'Kajian teknis, estimasi biaya, shop drawing, dan perencanaan metode kerja yang efisien dan dapat dipertanggungjawabkan.', 'icon' => 'architecture'],
-            ['name' => 'General Contractor', 'description' => 'Manajemen proyek end-to-end: schedule, kontrol biaya, koordinasi subkontraktor, hingga commissioning dan serah terima.', 'icon' => 'engineering'],
-            ['name' => 'Maintenance & Retrofit', 'description' => 'Pemeliharaan aset, perkuatan struktur, perbaikan beton, waterproofing, dan pekerjaan remedial untuk memperpanjang umur bangunan.', 'icon' => 'handyman'],
-            ['name' => 'Kawasan Industri', 'description' => 'Pembangunan infrastruktur kawasan: jalan internal, utilitas dasar, dan pekerjaan sipil pendukung untuk area operasional industri.', 'icon' => 'factory'],
-            ['name' => 'Pengadaan Material', 'description' => 'Pengadaan material dan peralatan dengan kontrol spesifikasi, dokumentasi, dan ketertelusuran (traceability).', 'icon' => 'inventory_2'],
-            ['name' => 'K3 & QA/QC', 'description' => 'Pendampingan implementasi K3, inspeksi, dan pengujian mutu untuk memastikan pekerjaan sesuai standar dan gambar kerja.', 'icon' => 'policy'],
+            ['name' => 'Konstruksi Infrastruktur', 'description' => 'Pembangunan sarana transportasi, sistem drainase, jembatan, dan pekerjaan struktur sipil lainnya dengan kepatuhan tinggi terhadap standar teknis.', 'icon' => 'construction'],
+            ['name' => 'Gedung & Bangunan', 'description' => 'Pelaksanaan pembangunan gedung perkantoran, fasilitas publik, dan bangunan industrial dengan fokus pada aspek struktural dan keselamatan.', 'icon' => 'apartment'],
+            ['name' => 'Engineering & Design', 'description' => 'Penyusunan kajian teknis, estimasi biaya (RAB), pembuatan shop drawing, serta pengembangan metode kerja yang efektif dan efisien.', 'icon' => 'architecture'],
+            ['name' => 'General Contractor', 'description' => 'Layanan manajemen proyek menyeluruh yang mencakup pengendalian jadwal, manajemen anggaran, koordinasi teknis, hingga penyerahan akhir.', 'icon' => 'engineering'],
+            ['name' => 'Maintenance & Retrofit', 'description' => 'Layanan pemeliharaan aset, perkuatan struktur, rehabilitasi beton, dan pekerjaan remedial guna menjaga integritas bangunan jangka panjang.', 'icon' => 'handyman'],
+            ['name' => 'Kawasan Industri', 'description' => 'Pengembangan infrastruktur kawasan terpadu meliputi pembangunan jalan internal, jaringan utilitas, dan pekerjaan sipil pendukung operasional.', 'icon' => 'factory'],
+            ['name' => 'Pengadaan Material', 'description' => 'Layanan pengadaan material konstruksi dan peralatan proyek dengan sistem kendali spesifikasi dan ketertelusuran yang ketat.', 'icon' => 'inventory_2'],
+            ['name' => 'K3 & QA/QC', 'description' => 'Pengawasan implementasi K3 serta pengendalian mutu lapangan guna memastikan seluruh pekerjaan sesuai dengan spesifikasi teknis dan standar baku.', 'icon' => 'policy'],
         ];
 
         foreach ($services as $service) {
@@ -90,9 +90,9 @@ class DatabaseSeeder extends Seeder
 
         // Sample projects
         $projects = [
-            ['title' => 'Peningkatan Jalan Arteri Kota', 'category' => 'Infrastruktur Jalan', 'description' => 'Pekerjaan perbaikan perkerasan, marka, dan drainase untuk meningkatkan kapasitas dan keselamatan lalu lintas.', 'is_featured' => true],
-            ['title' => 'Rehabilitasi Jembatan Sungai', 'category' => 'Jembatan', 'description' => 'Penguatan struktur, perbaikan bearing, serta pekerjaan pendekat (approach) untuk memperpanjang umur layanan jembatan.', 'is_featured' => true],
-            ['title' => 'Gedung Operasional & Kantor', 'category' => 'Bangunan', 'description' => 'Pembangunan gedung operasional dengan ruang kerja, area meeting, dan fasilitas pendukung yang fungsional.', 'is_featured' => true],
+            ['title' => 'Peningkatan Jalan Arteri Kota', 'category' => 'Infrastruktur Jalan', 'description' => 'Pelaksanaan pekerjaan peningkatan struktur jalan arteri yang meliputi perkerasan aspal, sistem drainase, dan perlengkapan jalan sesuai spesifikasi teknis.', 'is_featured' => true],
+            ['title' => 'Rehabilitasi Jembatan Sungai', 'category' => 'Jembatan', 'description' => 'Pekerjaan rehabilitasi dan perkuatan struktur jembatan, termasuk penggantian bearing pad serta pemeliharaan elemen struktural lainnya.', 'is_featured' => true],
+            ['title' => 'Gedung Operasional & Kantor', 'category' => 'Bangunan', 'description' => 'Pembangunan gedung operasional yang mencakup pekerjaan struktur, arsitektur, dan fasilitas penunjang dengan standar keselamatan tinggi.', 'is_featured' => true],
             ['title' => 'Pembangunan Gudang & Workshop', 'category' => 'Industrial', 'description' => 'Pekerjaan bangunan gudang dan workshop termasuk lantai industri, utilitas, dan pengaturan area kerja.', 'is_featured' => false],
             ['title' => 'Drainase & Normalisasi Saluran', 'category' => 'Drainase', 'description' => 'Pembersihan, perbaikan lining, dan peningkatan kapasitas saluran untuk mengurangi genangan di area padat.', 'is_featured' => false],
             ['title' => 'Perkuatan Struktur (Retrofitting)', 'category' => 'Maintenance', 'description' => 'Pekerjaan perkuatan kolom/balok, perbaikan beton, dan proteksi korosi untuk meningkatkan keandalan struktur.', 'is_featured' => false],
@@ -181,5 +181,8 @@ class DatabaseSeeder extends Seeder
                 Message::create($message);
             }
         }
+
+        // Add real content from live updates
+        $this->call(RealContentSeeder::class);
     }
 }

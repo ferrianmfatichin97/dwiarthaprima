@@ -11,9 +11,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $projects = Cache::remember('home:projects:latest6', now()->addMinutes(10), function () {
+        $projects = Cache::remember('home:projects:latest6:v2', now()->addMinutes(10), function () {
             return Project::query()
-                ->latest()
+                ->latest('updated_at')
                 ->take(6)
                 ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at']);
         });
@@ -46,7 +46,7 @@ class HomeController extends Controller
     public function projects()
     {
         $projects = Project::query()
-            ->latest()
+            ->latest('updated_at')
             ->select(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at'])
             ->paginate(9);
 

@@ -29,7 +29,7 @@
                 <a href="{{ route('admin.clients.edit', $client) }}" class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
                     <span class="material-symbols-outlined text-[18px]">edit</span>
                 </a>
-                <form action="{{ route('admin.clients.destroy', $client) }}" method="POST" onsubmit="return confirm('Hapus klien ini?')">
+                <form action="{{ route('admin.clients.destroy', $client) }}" method="POST" class="delete-form">
                     @csrf @method('DELETE')
                     <button type="submit" class="w-8 h-8 rounded-full bg-red-50 text-red-600 flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors">
                         <span class="material-symbols-outlined text-[18px]">delete</span>
@@ -42,7 +42,7 @@
             @endif
         </div>
         @empty
-        <div class="col-span-6 text-center py-12 text-slate-400">Belum ada klien.</div>
+        <div class="col-span-6 text-center py-12 text-slate-400">Belum terdapat data klien.</div>
         @endforelse
     </div>
 

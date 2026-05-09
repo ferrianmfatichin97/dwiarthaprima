@@ -36,7 +36,7 @@ class ClientController extends Controller
 
         Client::create($data);
         Cache::forget('home:clients:all');
-        return redirect()->route('admin.clients.index')->with('success', 'Klien berhasil ditambahkan.');
+        return redirect()->route('admin.clients.index')->with('success', 'Data klien berhasil disimpan.');
     }
 
     public function edit(Client $client)
@@ -60,7 +60,7 @@ class ClientController extends Controller
 
         $client->update($data);
         Cache::forget('home:clients:all');
-        return redirect()->route('admin.clients.index')->with('success', 'Klien berhasil diperbarui.');
+        return redirect()->route('admin.clients.index')->with('success', 'Perubahan data klien berhasil diperbarui.');
     }
 
     public function destroy(Client $client)
@@ -68,6 +68,6 @@ class ClientController extends Controller
         if ($client->logo) Storage::disk('public')->delete($client->logo);
         $client->delete();
         Cache::forget('home:clients:all');
-        return redirect()->route('admin.clients.index')->with('success', 'Klien berhasil dihapus.');
+        return redirect()->route('admin.clients.index')->with('success', 'Data klien berhasil dihapus.');
     }
 }

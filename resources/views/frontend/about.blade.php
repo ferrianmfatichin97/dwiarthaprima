@@ -7,12 +7,12 @@
 <section class="pt-28 pb-16 bg-surface-container-low">
     <div class="max-w-7xl mx-auto px-8">
         <div class="max-w-4xl">
-            <div class="text-xs uppercase tracking-widest font-bold text-primary">Company Profile</div>
+            <div class="text-xs uppercase tracking-widest font-bold text-primary">Profil Perusahaan</div>
             <h1 class="mt-4 font-headline font-extrabold text-4xl md:text-6xl text-on-surface tracking-tighter uppercase">
                 {{ setting('about', 'about_hero_title', 'Mitra Konstruksi & Engineering yang Terukur') }}
             </h1>
             <p class="mt-5 text-on-surface-variant text-lg leading-relaxed">
-                {{ setting('about', 'about_hero_desc', 'Kami membantu mewujudkan pekerjaan konstruksi dan infrastruktur dengan standar K3, QA/QC, dan manajemen proyek yang disiplin—sehingga hasilnya andal dan tepat waktu.') }}
+                {{ setting('about', 'about_hero_desc', 'Berkomitmen menyediakan layanan konstruksi dan infrastruktur dengan standar K3, pengendalian mutu, dan manajemen proyek yang disiplin.') }}
             </p>
         </div>
     </div>
@@ -22,10 +22,10 @@
     <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12">
         <div class="lg:col-span-7">
             <h2 class="font-headline font-extrabold text-2xl md:text-3xl text-on-surface tracking-tight uppercase">
-                {{ setting('about', 'about_story_title', 'Cerita Perusahaan') }}
+                {{ setting('about', 'about_story_title', 'Profil Perusahaan') }}
             </h2>
             <p class="mt-4 text-on-surface-variant text-lg leading-relaxed whitespace-pre-line">
-                {{ setting('about', 'about_story_desc', "PT Dwi Artha Prima berfokus pada pekerjaan konstruksi, infrastruktur, dan jasa engineering. Kami mengutamakan perencanaan yang rapi, kontrol mutu yang konsisten, serta komunikasi progres yang transparan.\n\nPendekatan kami menekankan keselamatan kerja, ketertelusuran material, dan dokumentasi yang baik agar pekerjaan dapat dipertanggungjawabkan.") }}
+                {{ setting('about', 'about_story_desc', "PT Dwi Artha Prima berfokus pada pekerjaan konstruksi, infrastruktur, dan jasa engineering. Kami mengutamakan perencanaan yang rapi, kontrol mutu yang konsisten, serta komunikasi progres yang transparan.\n\nSetiap langkah operasional kami berlandaskan pada prinsip profesionalisme dan integritas, di mana aspek keselamatan kerja serta pengendalian mutu (QA/QC) menjadi standar baku yang kami terapkan secara konsisten di setiap pekerjaan.") }}
             </p>
         </div>
 
@@ -69,15 +69,15 @@
                     Prinsip Kerja
                 </h2>
             </div>
-            <a href="{{ route('contact') }}" class="text-sm font-bold text-primary hover:underline">Hubungi kami</a>
+            <a href="{{ route('contact') }}" class="text-sm font-bold text-primary hover:underline">Konsultasi Sekarang</a>
         </div>
 
         @php
             $defaultValues = [
-                ['title' => 'Safety First', 'desc' => 'K3 adalah fondasi utama: perencanaan, APD, dan pengawasan di lapangan.'],
-                ['title' => 'Quality Assurance', 'desc' => 'Inspeksi dan pengujian mutu untuk memastikan hasil sesuai spesifikasi.'],
-                ['title' => 'On-Time Delivery', 'desc' => 'Kontrol schedule dan progres yang disiplin untuk menjaga komitmen waktu.'],
-                ['title' => 'Transparansi', 'desc' => 'Komunikasi progres, risiko, dan dokumentasi proyek yang jelas.'],
+                ['title' => 'Standar K3', 'desc' => 'Keselamatan adalah prioritas utama melalui perencanaan metode kerja aman dan pengawasan ketat di lapangan.'],
+                ['title' => 'Pengendalian Mutu', 'desc' => 'Implementasi QA/QC yang konsisten guna memastikan hasil pekerjaan sesuai dengan spesifikasi teknis.'],
+                ['title' => 'Ketepatan Waktu', 'desc' => 'Manajemen proyek yang disiplin untuk menjamin penyelesaian pekerjaan sesuai dengan linimasa yang disepakati.'],
+                ['title' => 'Integritas', 'desc' => 'Membangun kepercayaan melalui transparansi komunikasi, dokumentasi yang akurat, dan etika bisnis profesional.'],
             ];
         @endphp
 

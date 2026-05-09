@@ -26,14 +26,14 @@
                 </div>
             </div>
             <div class="text-right text-xs text-slate-400">
-                <p class="font-medium text-slate-600">{{ $message->created_at->format('d F Y') }}</p>
-                <p class="mt-0.5">{{ $message->created_at->format('H:i') }} WIB ({{ $message->created_at->diffForHumans() }})</p>
+                <p class="font-medium text-slate-600">{{ $message->created_at->isoFormat('D MMMM YYYY') }}</p>
+                <p class="mt-0.5">{{ $message->created_at->isoFormat('HH:mm') }} WIB ({{ $message->created_at->diffForHumans() }})</p>
             </div>
         </div>
 
         {{-- Message Body --}}
         <div class="p-6 md:p-8">
-            <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">Subject:</h4>
+            <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">Subjek:</h4>
             <p class="text-xl font-bold text-slate-800 mb-6">{{ $message->subject }}</p>
 
             <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2">Pesan:</h4>
@@ -46,7 +46,7 @@
                class="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors shadow-sm">
                 <span class="material-symbols-outlined text-lg">reply</span> Balas via Email
             </a>
-            <form action="{{ route('admin.messages.destroy', $message) }}" method="POST" onsubmit="return confirm('Hapus pesan ini?')">
+            <form action="{{ route('admin.messages.destroy', $message) }}" method="POST" class="delete-form">
                 @csrf @method('DELETE')
                 <button type="submit" class="inline-flex items-center gap-2 text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
                     <span class="material-symbols-outlined text-lg">delete</span> Hapus

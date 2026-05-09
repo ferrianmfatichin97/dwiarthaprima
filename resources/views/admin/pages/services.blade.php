@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Setting Services Page')
+@section('title','Pengaturan Halaman Layanan')
 @section('page-title','Teks Halaman Services')
 @section('page-subtitle','Atur teks hero dan call-to-action halaman layanan')
 

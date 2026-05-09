@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Setting About Page')
+@section('title','Pengaturan Halaman Profil')
 @section('page-title','Teks Halaman About')
 @section('page-subtitle','Atur judul, deskripsi, visi, dan misi perusahaan')
 

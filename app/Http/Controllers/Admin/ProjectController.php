@@ -29,7 +29,7 @@ class ProjectController extends Controller
             'category'    => 'required|string|max:255',
             'description' => 'nullable|string',
             'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'is_featured' => 'nullable|boolean',
+            'is_featured' => 'nullable',
         ]);
 
         $data = $request->only('title', 'category', 'description');
@@ -41,10 +41,10 @@ class ProjectController extends Controller
         }
 
         Project::create($data);
-        Cache::forget('home:projects:latest6');
+        Cache::forget('home:projects:latest6:v2');
         Cache::forget('projects:categories');
         Cache::forget('seo:sitemap');
-        return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil ditambahkan.');
+        return redirect()->route('admin.projects.index')->with('success', 'Data proyek berhasil disimpan.');
     }
 
     public function edit(Project $project)
@@ -59,7 +59,7 @@ class ProjectController extends Controller
             'category'    => 'required|string|max:255',
             'description' => 'nullable|string',
             'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'is_featured' => 'nullable|boolean',
+            'is_featured' => 'nullable',
         ]);
 
         $data = $request->only('title', 'category', 'description');
@@ -75,22 +75,22 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
-        Cache::forget('home:projects:latest6');
+        Cache::forget('home:projects:latest6:v2');
         Cache::forget('projects:categories');
         Cache::forget('seo:sitemap');
         Cache::forget("project:related:{$project->id}");
-        return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil diperbarui.');
+        return redirect()->route('admin.projects.index')->with('success', 'Perubahan data proyek berhasil diperbarui.');
     }
 
     public function destroy(Project $project)
     {
         if ($project->image) Storage::disk('public')->delete($project->image);
         $project->delete();
-        Cache::forget('home:projects:latest6');
+        Cache::forget('home:projects:latest6:v2');
         Cache::forget('projects:categories');
         Cache::forget('seo:sitemap');
         Cache::forget("project:related:{$project->id}");
-        return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil dihapus.');
+        return redirect()->route('admin.projects.index')->with('success', 'Data proyek berhasil dihapus.');
     }
 
     private function makeUniqueSlug(string $title, ?int $ignoreId = null): string

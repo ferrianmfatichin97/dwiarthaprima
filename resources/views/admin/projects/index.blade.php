@@ -47,20 +47,20 @@
                 </td>
                 <td class="px-6 py-4">
                     @if($project->is_featured)
-                        <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">★ Featured</span>
+                        <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">★ Unggulan</span>
                     @else
                         <span class="text-slate-300 text-xs">—</span>
                     @endif
                 </td>
-                <td class="px-6 py-4 text-slate-400 text-xs">{{ $project->created_at->format('d M Y') }}</td>
+                <td class="px-6 py-4 text-slate-400 text-xs">{{ $project->created_at->isoFormat('D MMM YYYY') }}</td>
                 <td class="px-6 py-4">
                     <div class="flex items-center justify-end gap-2">
                         <a href="{{ route('admin.projects.edit', $project) }}"
                            class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
                             <span class="material-symbols-outlined text-lg">edit</span>
                         </a>
-                        <form action="{{ route('admin.projects.destroy', $project) }}" method="POST"
-                              onsubmit="return confirm('Hapus proyek ini?')">
+                        <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="delete-form">
+
                             @csrf @method('DELETE')
                             <button type="submit" class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
                                 <span class="material-symbols-outlined text-lg">delete</span>
@@ -73,7 +73,7 @@
             <tr>
                 <td colspan="6" class="px-6 py-16 text-center text-slate-400">
                     <span class="material-symbols-outlined text-4xl block mb-2 opacity-30">apartment</span>
-                    Belum ada proyek. <a href="{{ route('admin.projects.create') }}" class="text-red-600 font-medium">Tambah sekarang</a>
+                    Belum terdapat data proyek. <a href="{{ route('admin.projects.create') }}" class="text-red-600 font-medium">Tambah Data</a>
                 </td>
             </tr>
             @endforelse

@@ -30,7 +30,7 @@ class ServiceController extends Controller
 
         Service::create($request->only('name', 'description', 'icon'));
         Cache::forget('home:services:all');
-        return redirect()->route('admin.services.index')->with('success', 'Layanan berhasil ditambahkan.');
+        return redirect()->route('admin.services.index')->with('success', 'Data layanan berhasil disimpan.');
     }
 
     public function edit(Service $service)
@@ -48,13 +48,13 @@ class ServiceController extends Controller
 
         $service->update($request->only('name', 'description', 'icon'));
         Cache::forget('home:services:all');
-        return redirect()->route('admin.services.index')->with('success', 'Layanan berhasil diperbarui.');
+        return redirect()->route('admin.services.index')->with('success', 'Perubahan data layanan berhasil diperbarui.');
     }
 
     public function destroy(Service $service)
     {
         $service->delete();
         Cache::forget('home:services:all');
-        return redirect()->route('admin.services.index')->with('success', 'Layanan berhasil dihapus.');
+        return redirect()->route('admin.services.index')->with('success', 'Data layanan berhasil dihapus.');
     }
 }

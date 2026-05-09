@@ -26,6 +26,12 @@ class PageSettingController extends Controller
             'home_hero_subtitle' => 'nullable|string|max:255',
             'home_about_title' => 'nullable|string|max:255',
             'home_about_desc' => 'nullable|string|max:5000',
+            'home_vision' => 'nullable|string|max:5000',
+            'home_mission' => 'nullable|string|max:5000',
+            'home_stats_years' => 'nullable|string|max:20',
+            'home_stats_projects' => 'nullable|string|max:20',
+            'home_stats_clients' => 'nullable|string|max:20',
+            'home_stats_regions' => 'nullable|string|max:20',
         ],
         'project' => [
             'project_hero_title' => 'nullable|string|max:255',
@@ -121,10 +127,7 @@ class PageSettingController extends Controller
                 continue;
             }
 
-            $value = $validated[$key];
-            if (is_string($value) && trim($value) === '') {
-                $value = null;
-            }
+            $value = $validated[$key] ?? '';
 
             PageSetting::updateOrCreate(
                 ['page' => $page, 'key' => $key],
@@ -134,6 +137,6 @@ class PageSettingController extends Controller
             cache()->forget("pagesetting:{$page}:{$key}");
         }
 
-        return back()->with('success', 'Pengaturan Halaman berhasil diperbarui.');
+        return back()->with('success', 'Perubahan pengaturan halaman berhasil disimpan.');
     }
 }
