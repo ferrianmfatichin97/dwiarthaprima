@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'PT Dwi Artha Prima | Excellence in Construction & Services')
-@section('meta_description', 'PT Dwi Artha Prima adalah mitra strategis untuk proyek konstruksi, infrastruktur, dan engineering di Indonesia. Komitmen kami: kualitas, integritas, dan ketepatan waktu.')
+@section('title', 'PT Dwi Artha Prima | Kontraktor & Jasa Konstruksi Infrastruktur Nasional')
+@section('meta_description', 'PT Dwi Artha Prima - Perusahaan kontraktor dan general contractor terpercaya di Jakarta. Ahli dalam pembangunan infrastruktur, konstruksi rumah sakit, dan engineering services dengan standar kualitas tinggi.')
 
 @section('content')
 
@@ -18,7 +18,7 @@
             $posterUrl = $heroPoster ? Storage::url($heroPoster) : $defaultPoster;
             $heroVideoType = $heroVideo && \Illuminate\Support\Str::endsWith($heroVideo, '.webm') ? 'video/webm' : 'video/mp4';
         @endphp
-        <video autoplay loop muted playsinline preload="metadata" poster="{{ $posterUrl }}"
+        <video autoplay loop muted playsinline preload="metadata" poster="{{ $posterUrl }}" fetchpriority="high"
                class="w-full h-full object-cover" aria-hidden="true" tabindex="-1">
             @if($heroVideo)
                 <source src="{{ Storage::url($heroVideo) }}" type="{{ $heroVideoType }}" />
