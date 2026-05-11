@@ -1,0 +1,104 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.8.2
+2 info using node@v20.17.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:D:\bpr\web\dwiarthaprima\.npmrc
+5 silly config load:file:C:\Users\Admin BPR\.npmrc
+6 silly config load:file:C:\Users\Admin BPR\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install" "--cache" ".npm-cache" "--no-audit" "--no-fund"
+9 verbose logfile logs-max:10 dir:D:\bpr\web\dwiarthaprima\.npm-cache\_logs\2026-03-30T09_48_25_439Z-
+10 verbose logfile D:\bpr\web\dwiarthaprima\.npm-cache\_logs\2026-03-30T09_48_25_439Z-debug-0.log
+11 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+12 silly logfile done cleaning log files
+13 silly idealTree buildDeps
+14 silly fetch manifest @tailwindcss/forms@^0.5.2
+15 silly packumentCache full:https://registry.npmjs.org/@tailwindcss%2fforms cache-miss
+16 http fetch GET https://registry.npmjs.org/npm attempt 1 failed with EACCES
+17 http fetch GET https://registry.npmjs.org/@tailwindcss%2fforms attempt 1 failed with EACCES
+18 http fetch GET https://registry.npmjs.org/npm attempt 2 failed with EACCES
+19 http fetch GET https://registry.npmjs.org/@tailwindcss%2fforms attempt 2 failed with EACCES
+20 http fetch GET https://registry.npmjs.org/npm attempt 3 failed with EACCES
+21 http fetch GET https://registry.npmjs.org/@tailwindcss%2fforms attempt 3 failed with EACCES
+22 silly fetch manifest alpinejs@^3.4.2
+23 silly packumentCache full:https://registry.npmjs.org/alpinejs cache-miss
+24 http fetch GET https://registry.npmjs.org/alpinejs attempt 1 failed with EACCES
+25 http fetch GET https://registry.npmjs.org/alpinejs attempt 2 failed with EACCES
+26 http fetch GET https://registry.npmjs.org/alpinejs attempt 3 failed with EACCES
+27 silly fetch manifest autoprefixer@^10.4.2
+28 silly packumentCache full:https://registry.npmjs.org/autoprefixer cache-miss
+29 http fetch GET https://registry.npmjs.org/autoprefixer attempt 1 failed with EACCES
+30 http fetch GET https://registry.npmjs.org/autoprefixer attempt 2 failed with EACCES
+31 http fetch GET https://registry.npmjs.org/autoprefixer attempt 3 failed with EACCES
+32 silly fetch manifest axios@^0.21
+33 silly packumentCache full:https://registry.npmjs.org/axios cache-miss
+34 http fetch GET https://registry.npmjs.org/axios attempt 1 failed with EACCES
+35 http fetch GET https://registry.npmjs.org/axios attempt 2 failed with EACCES
+36 http fetch GET https://registry.npmjs.org/axios attempt 3 failed with EACCES
+37 silly fetch manifest laravel-mix@^6.0.6
+38 silly packumentCache full:https://registry.npmjs.org/laravel-mix cache-miss
+39 http fetch GET https://registry.npmjs.org/laravel-mix attempt 1 failed with EACCES
+40 http fetch GET https://registry.npmjs.org/laravel-mix attempt 2 failed with EACCES
+41 http fetch GET https://registry.npmjs.org/laravel-mix attempt 3 failed with EACCES
+42 silly fetch manifest lodash@^4.17.19
+43 silly packumentCache full:https://registry.npmjs.org/lodash cache-miss
+44 http fetch GET https://registry.npmjs.org/lodash attempt 1 failed with EACCES
+45 http fetch GET https://registry.npmjs.org/lodash attempt 2 failed with EACCES
+46 http fetch GET https://registry.npmjs.org/lodash attempt 3 failed with EACCES
+47 silly fetch manifest postcss@^8.4.6
+48 silly packumentCache full:https://registry.npmjs.org/postcss cache-miss
+49 http fetch GET https://registry.npmjs.org/postcss attempt 1 failed with EACCES
+50 http fetch GET https://registry.npmjs.org/postcss attempt 2 failed with EACCES
+51 http fetch GET https://registry.npmjs.org/postcss attempt 3 failed with EACCES
+52 silly fetch manifest tailwindcss@^3.1.0
+53 silly packumentCache full:https://registry.npmjs.org/tailwindcss cache-miss
+54 http fetch GET https://registry.npmjs.org/tailwindcss attempt 1 failed with EACCES
+55 http fetch GET https://registry.npmjs.org/tailwindcss attempt 2 failed with EACCES
+56 http fetch GET https://registry.npmjs.org/tailwindcss attempt 3 failed with EACCES
+57 silly placeDep ROOT @tailwindcss/forms@ OK for:  want: ^0.5.2
+58 silly placeDep ROOT alpinejs@ OK for:  want: ^3.4.2
+59 silly placeDep ROOT autoprefixer@ OK for:  want: ^10.4.2
+60 silly placeDep ROOT axios@ OK for:  want: ^0.21
+61 silly placeDep ROOT laravel-mix@ OK for:  want: ^6.0.6
+62 silly placeDep ROOT lodash@ OK for:  want: ^4.17.19
+63 silly placeDep ROOT postcss@ OK for:  want: ^8.4.6
+64 silly placeDep ROOT tailwindcss@ OK for:  want: ^3.1.0
+65 verbose type system
+66 verbose stack FetchError: request to https://registry.npmjs.org/@tailwindcss%2fforms failed, reason: 
+66 verbose stack     at ClientRequest.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\minipass-fetch\lib\index.js:130:14)
+66 verbose stack     at ClientRequest.emit (node:events:519:28)
+66 verbose stack     at emitErrorEvent (node:_http_client:108:11)
+66 verbose stack     at _destroy (node:_http_client:891:9)
+66 verbose stack     at onSocketNT (node:_http_client:911:5)
+66 verbose stack     at process.processTicksAndRejections (node:internal/process/task_queues:83:21)
+67 error code EACCES
+68 error errno EACCES
+69 error FetchError: request to https://registry.npmjs.org/@tailwindcss%2fforms failed, reason: 
+69 error     at ClientRequest.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\minipass-fetch\lib\index.js:130:14)
+69 error     at ClientRequest.emit (node:events:519:28)
+69 error     at emitErrorEvent (node:_http_client:108:11)
+69 error     at _destroy (node:_http_client:891:9)
+69 error     at onSocketNT (node:_http_client:911:5)
+69 error     at process.processTicksAndRejections (node:internal/process/task_queues:83:21) {
+69 error   code: 'EACCES',
+69 error   errno: 'EACCES',
+69 error   type: 'system',
+69 error   requiredBy: '.'
+69 error }
+70 error
+70 error The operation was rejected by your operating system.
+70 error It's possible that the file was already in use (by a text editor or antivirus),
+70 error or that you lack permissions to access it.
+70 error
+70 error If you believe this might be a permissions issue, please double-check the
+70 error permissions of the file and its containing directories, or try running
+70 error the command again as root/Administrator.
+71 silly unfinished npm timer reify 1774864105809
+72 silly unfinished npm timer reify:loadTrees 1774864105853
+73 verbose cwd D:\bpr\web\dwiarthaprima
+74 verbose os Windows_NT 10.0.26200
+75 verbose node v20.17.0
+76 verbose npm  v10.8.2
+77 verbose exit 1
+78 verbose code 1
+79 error A complete log of this run can be found in: D:\bpr\web\dwiarthaprima\.npm-cache\_logs\2026-03-30T09_48_25_439Z-debug-0.log
