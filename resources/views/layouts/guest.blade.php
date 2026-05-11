@@ -23,7 +23,6 @@
         <style>
             .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align:middle; }
         </style>
-        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="bg-surface font-body text-on-surface min-h-screen selection:bg-primary selection:text-on-primary">
         {{ $slot }}

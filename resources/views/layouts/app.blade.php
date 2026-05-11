@@ -34,8 +34,13 @@
 
     <link rel="icon" type="image/png" href="{{ asset('dap.png') }}"/>
     <link rel="apple-touch-icon" href="{{ asset('dap.png') }}"/>
+    @php
+        $heroPoster = setting('home', 'home_hero_video_poster');
+        $defaultPoster = file_exists(public_path('og.png')) ? asset('og.png') : asset('dap.png');
+        $posterUrl = $heroPoster ? Storage::url($heroPoster) : $defaultPoster;
+    @endphp
+    <link rel="preload" as="image" href="{{ $posterUrl }}" fetchpriority="high">
     <style>[x-cloak]{display:none!important}</style>
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
