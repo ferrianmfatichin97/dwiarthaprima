@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     @php
-        $metaTitle = trim($__env->yieldContent('meta_title')) ?: trim($__env->yieldContent('title')) ?: 'PT Dwi Artha Prima | Excellence in Construction & Services';
+        $metaTitle = trim($__env->yieldContent('meta_title')) ?: trim($__env->yieldContent('title')) ?: 'PT Dwi Artha Prima | Kontraktor & Jasa Konstruksi Infrastruktur';
         $metaDescription = trim($__env->yieldContent('meta_description')) ?: 'PT Dwi Artha Prima - Solusi Konstruksi dan Jasa Terpercaya di Indonesia';
         $canonicalUrl = trim($__env->yieldContent('canonical')) ?: url()->current();
     @endphp
