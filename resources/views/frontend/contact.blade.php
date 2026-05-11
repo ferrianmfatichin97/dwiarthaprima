@@ -57,9 +57,15 @@
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-on-surface mb-2">Cakupan Pekerjaan</label>
-                    <input name="subject" value="{{ old('subject') }}" required
-                           class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                           placeholder="Contoh: Pekerjaan Infrastruktur / General Contractor / Pemeliharaan" />
+                    <select name="subject" required
+                            class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none">
+                        @foreach($services as $service)
+                            <option value="{{ $service->name }}" {{ old('subject') == $service->name ? 'selected' : '' }}>
+                                {{ $service->name }}
+                            </option>
+                        @endforeach
+                        <option value="Lainnya" {{ old('subject') == 'Lainnya' ? 'selected' : '' }}>Lainnya / General Inquiry</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-on-surface mb-2">Uraian Pekerjaan / Kebutuhan Proyek</label>

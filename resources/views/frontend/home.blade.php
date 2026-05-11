@@ -299,10 +299,10 @@
                 <div class="space-y-2">
                     <label class="text-sm font-bold text-on-surface-variant" for="subject">Cakupan Pekerjaan</label>
                     <select class="w-full bg-white border border-outline-variant/30 rounded focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all p-3" id="subject" name="subject">
-                        <option>Construction Services</option>
-                        <option>General Contractor</option>
-                        <option>Maintenance Services</option>
-                        <option>Engineering Services</option>
+                        @foreach($services as $service)
+                            <option value="{{ $service->name }}">{{ $service->name }}</option>
+                        @endforeach
+                        <option value="Lainnya">Lainnya / General Inquiry</option>
                     </select>
                 </div>
                 <div class="space-y-2">

@@ -63,7 +63,11 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('frontend.contact');
+        $services = Cache::remember('home:services:all', now()->addMinutes(30), function () {
+            return Service::query()->orderBy('name')->get(['id', 'name', 'description', 'icon']);
+        });
+
+        return view('frontend.contact', compact('services'));
     }
 
     public function projectShow(Project $project)
