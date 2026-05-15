@@ -462,7 +462,5 @@
         </div>
     </div>
 </section>
-v>
-</section>
 
 @endsection

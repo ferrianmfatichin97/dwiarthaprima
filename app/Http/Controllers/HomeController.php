@@ -12,18 +12,19 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // Disable cache for debugging 500 error
         $projects = Project::query()
             ->latest('updated_at')
             ->take(6)
             ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at', 'location', 'year', 'client_name']);
 
-        $services = Cache::remember('global:services:list', now()->addMinutes(30), function () {
-            return Service::query()->orderBy('name')->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
-        });
+        $services = Service::query()
+            ->orderBy('name')
+            ->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
 
-        $clients = Cache::remember('home:clients:all', now()->addMinutes(30), function () {
-            return Client::query()->orderBy('name')->get(['id', 'name', 'logo']);
-        });
+        $clients = Client::query()
+            ->orderBy('name')
+            ->get(['id', 'name', 'logo']);
 
         return view('frontend.home', compact('projects', 'services', 'clients'));
     }
@@ -35,9 +36,9 @@ class HomeController extends Controller
 
     public function services()
     {
-        $services = Cache::remember('global:services:list', now()->addMinutes(30), function () {
-            return Service::query()->orderBy('name')->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
-        });
+        $services = Service::query()
+            ->orderBy('name')
+            ->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
 
         return view('frontend.services', compact('services'));
     }
@@ -56,22 +57,20 @@ class HomeController extends Controller
             ->select(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at', 'location', 'year', 'client_name'])
             ->paginate(9);
 
-        $categories = Cache::remember('projects:categories', now()->addHours(6), function () {
-            return Project::query()
-                ->select('category')
-                ->distinct()
-                ->orderBy('category')
-                ->pluck('category');
-        });
+        $categories = Project::query()
+            ->select('category')
+            ->distinct()
+            ->orderBy('category')
+            ->pluck('category');
 
         return view('frontend.projects', compact('projects', 'categories'));
     }
 
     public function contact()
     {
-        $services = Cache::remember('global:services:list', now()->addMinutes(30), function () {
-            return Service::query()->orderBy('name')->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
-        });
+        $services = Service::query()
+            ->orderBy('name')
+            ->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
 
         return view('frontend.contact', compact('services'));
     }
@@ -84,7 +83,6 @@ class HomeController extends Controller
             ->latest()
             ->take(6)
             ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'created_at', 'location', 'year', 'client_name']);
-        
 
         return view('frontend.project-show', compact('project', 'related'));
     }
