@@ -302,7 +302,7 @@
             <div class="p-8 space-y-4">
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-px bg-primary"></div>
-                    <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">{{ $project->client ?: 'Industrial Client' }}</span>
+                    <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">{{ $project->client_name ?: 'Industrial Client' }}</span>
                 </div>
                 
                 <h3 class="text-xl font-headline font-extrabold text-white uppercase tracking-tight leading-tight group-hover:text-primary transition-industrial">

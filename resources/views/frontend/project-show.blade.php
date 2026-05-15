@@ -55,7 +55,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-outline-variant border border-outline-variant shadow-xl">
                     <div class="bg-white p-8">
                         <div class="text-[9px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 opacity-50">Klien</div>
-                        <div class="text-sm font-black text-on-background uppercase tracking-tight">{{ $project->client ?: 'Industrial Partner' }}</div>
+                        <div class="text-sm font-black text-on-background uppercase tracking-tight">{{ $project->client_name ?: 'Industrial Partner' }}</div>
                     </div>
                     <div class="bg-white p-8">
                         <div class="text-[9px] font-bold text-on-surface-variant uppercase tracking-widest mb-2 opacity-50">Lokasi</div>

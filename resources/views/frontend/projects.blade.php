@@ -66,7 +66,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="projects-grid">
             @forelse($projects as $project)
                 <div class="project-card group bg-white border border-outline-variant overflow-hidden transition-industrial"
-                     data-category="{{ Str::slug($project->category) }}" data-title="{{ strtolower($project->title) }} {{ strtolower($project->client) }}">
+                     data-category="{{ Str::slug($project->category) }}" data-title="{{ strtolower($project->title) }} {{ strtolower($project->client_name) }}">
                     
                     {{-- Visual documentation --}}
                     <div class="aspect-video relative overflow-hidden bg-surface border-b border-outline-variant">
@@ -90,7 +90,7 @@
                         <div class="space-y-2">
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-px bg-primary/30"></div>
-                                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em]">{{ $project->client ?: 'General Contractor' }}</span>
+                                <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.2em]">{{ $project->client_name ?: 'General Contractor' }}</span>
                             </div>
                             <h3 class="text-xl font-headline font-extrabold text-on-background uppercase leading-tight tracking-tighter group-hover:text-primary transition-industrial">
                                 {{ $project->title }}

@@ -12,12 +12,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $projects = Cache::remember('home:projects:latest6:v2', now()->addMinutes(10), function () {
-            return Project::query()
-                ->latest('updated_at')
-                ->take(6)
-                ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at']);
-        });
+        $projects = Project::query()
+            ->latest('updated_at')
+            ->take(6)
+            ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at', 'location', 'year', 'client_name']);
 
         $services = Cache::remember('global:services:list', now()->addMinutes(30), function () {
             return Service::query()->orderBy('name')->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
@@ -55,7 +53,7 @@ class HomeController extends Controller
     {
         $projects = Project::query()
             ->latest('updated_at')
-            ->select(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at'])
+            ->select(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at', 'location', 'year', 'client_name'])
             ->paginate(9);
 
         $categories = Cache::remember('projects:categories', now()->addHours(6), function () {
@@ -80,14 +78,13 @@ class HomeController extends Controller
 
     public function projectShow(Project $project)
     {
-        $related = Cache::remember("project:related:{$project->id}", now()->addMinutes(10), function () use ($project) {
-            return Project::query()
-                ->where('id', '!=', $project->id)
-                ->where('category', $project->category)
-                ->latest()
-                ->take(6)
-                ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'created_at']);
-        });
+        $related = Project::query()
+            ->where('id', '!=', $project->id)
+            ->where('category', $project->category)
+            ->latest()
+            ->take(6)
+            ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'created_at', 'location', 'year', 'client_name']);
+        
 
         return view('frontend.project-show', compact('project', 'related'));
     }
