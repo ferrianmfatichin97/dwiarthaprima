@@ -15,7 +15,7 @@
 {{-- =========================================================
      SERVICE HEADER — Industrial Detail
      ========================================================= --}}
-<section class="pt-32 pb-20 bg-surface relative overflow-hidden">
+<section class="pt-32 pb-20 bg-[#0F172A] relative overflow-hidden">
     <div class="absolute inset-0 industrial-grid opacity-10"></div>
     <div class="max-w-7xl mx-auto px-8 relative z-10">
         {{-- Breadcrumb — Technical Style --}}
@@ -112,7 +112,7 @@
 
             {{-- Sidebar — Operational Contact --}}
             <div class="w-full lg:w-96 space-y-10">
-                <div class="bg-surface p-10 relative overflow-hidden border border-white/5 shadow-2xl">
+                <div class="bg-[#0F172A] p-10 relative overflow-hidden border border-white/5 shadow-2xl">
                     <div class="absolute top-0 right-0 p-4 border-b border-l border-white/10">
                         <span class="text-[9px] font-bold text-white/30 uppercase tracking-widest">DAP-INQ-01</span>
                     </div>

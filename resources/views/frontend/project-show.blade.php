@@ -14,7 +14,7 @@
 {{-- =========================================================
      PROJECT HEADER — Industrial Detail
      ========================================================= --}}
-<section class="pt-32 pb-16 bg-surface relative overflow-hidden">
+<section class="pt-32 pb-16 bg-[#0F172A] relative overflow-hidden">
     <div class="absolute inset-0 industrial-grid opacity-10"></div>
     <div class="max-w-7xl mx-auto px-8 relative z-10">
         <a href="{{ route('projects') }}" class="inline-flex items-center gap-3 text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-12 group">
@@ -127,7 +127,7 @@
                     <img src="{{ asset('storage/' . $project->image) }}" class="w-full h-auto grayscale-[0.3]" alt="{{ $project->title }}">
                 </div>
                 
-                <div class="bg-surface p-10 relative overflow-hidden border border-white/5 shadow-2xl">
+                <div class="bg-[#0F172A] p-10 relative overflow-hidden border border-white/5 shadow-2xl">
                     <div class="absolute top-0 right-0 p-4 border-b border-l border-white/10">
                         <span class="text-[9px] font-bold text-white/30 uppercase tracking-widest">DAP-ENG-04</span>
                     </div>
@@ -180,7 +180,7 @@
 @endif
 
 {{-- Lightbox — Engineering View --}}
-<div id="lightbox" class="fixed inset-0 z-[100] bg-surface/95 hidden items-center justify-center p-8 backdrop-blur-sm transition-industrial" onclick="closeLightbox()">
+<div id="lightbox" class="fixed inset-0 z-[100] bg-[#0F172A]/95 hidden items-center justify-center p-8 backdrop-blur-sm transition-industrial" onclick="closeLightbox()">
     <button class="absolute top-8 right-8 text-white/50 hover:text-white transition-industrial">
         <span class="material-symbols-outlined text-5xl">close</span>
     </button>
