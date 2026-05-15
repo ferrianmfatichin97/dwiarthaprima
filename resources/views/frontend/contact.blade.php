@@ -59,7 +59,7 @@
                 <span class="material-symbols-outlined text-primary text-4xl group-hover:text-white transition-industrial">location_on</span>
                 <div>
                     <h4 class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest mb-1 group-hover:text-white/40">Lokasi Operasional</h4>
-                    <p class="text-[11px] font-black text-on-background uppercase tracking-tight group-hover:text-white leading-tight">Jakarta, Indonesia</p>
+                    <p class="text-[11px] font-black text-on-background uppercase tracking-tight group-hover:text-white leading-tight">Depok, Indonesia</p>
                 </div>
             </div>
         </div>

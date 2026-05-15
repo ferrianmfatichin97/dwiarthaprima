@@ -38,6 +38,7 @@ class SeoController extends Controller
                 ['loc' => url('/about'), 'priority' => '0.8', 'changefreq' => 'monthly'],
                 ['loc' => url('/services'), 'priority' => '0.8', 'changefreq' => 'monthly'],
                 ['loc' => url('/projects'), 'priority' => '0.9', 'changefreq' => 'weekly'],
+                ['loc' => url('/career'), 'priority' => '0.8', 'changefreq' => 'monthly'],
                 ['loc' => url('/contact'), 'priority' => '0.8', 'changefreq' => 'monthly'],
             ];
 
@@ -53,6 +54,33 @@ class SeoController extends Controller
                     ];
                 });
 
+            $serviceUrls = \App\Models\Service::query()
+                ->latest('updated_at')
+                ->get(['slug', 'updated_at'])
+                ->map(function ($s) {
+                    return [
+                        'loc' => url('/services/' . $s->slug),
+                        'lastmod' => $s->updated_at ? $s->updated_at->toAtomString() : now()->toAtomString(),
+                        'priority' => '0.7',
+                        'changefreq' => 'monthly',
+                    ];
+                });
+
+            $careerUrls = \App\Models\Career::query()
+                ->where('is_active', true)
+                ->latest('updated_at')
+                ->get(['slug', 'updated_at'])
+                ->map(function ($c) {
+                    return [
+                        'loc' => url('/career/' . $c->slug),
+                        'lastmod' => $c->updated_at ? $c->updated_at->toAtomString() : now()->toAtomString(),
+                        'priority' => '0.6',
+                        'changefreq' => 'monthly',
+                    ];
+                });
+
+            $dynamicUrls = $projectUrls->merge($serviceUrls)->merge($careerUrls);
+
             $items = collect($static)->map(function (array $row) {
                 $loc = e($row['loc']);
                 $lastmod = now()->toAtomString();
@@ -65,7 +93,7 @@ class SeoController extends Controller
                     "<priority>{$row['priority']}</priority>",
                     '</url>',
                 ]);
-            })->merge($projectUrls->map(function (array $row) {
+            })->merge($dynamicUrls->map(function (array $row) {
                 $loc = e($row['loc']);
                 $lastmod = e($row['lastmod']);
 
