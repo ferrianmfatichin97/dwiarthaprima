@@ -7,7 +7,7 @@
 {{-- =========================================================
      SERVICES HERO — Industrial Header
      ========================================================= --}}
-<section class="relative min-h-[50vh] flex items-center justify-start bg-surface overflow-hidden pt-20">
+<section class="relative min-h-[50vh] flex items-center justify-start bg-[#0F172A] overflow-hidden pt-20">
     <div class="absolute inset-0 industrial-grid opacity-10"></div>
     <div class="relative z-10 w-full max-w-7xl mx-auto px-8 py-20">
         <div class="max-w-3xl space-y-6">
@@ -31,7 +31,7 @@
     <div class="max-w-7xl mx-auto px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-outline-variant border border-outline-variant shadow-2xl">
             @forelse($services as $service)
-                <a href="{{ route('services.show', $service->slug) }}" class="group bg-white p-10 hover:bg-surface transition-industrial relative overflow-hidden">
+                <a href="{{ route('services.show', $service->slug) }}" class="group bg-white p-10 hover:bg-[#0F172A] transition-industrial relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-industrial">
                         <span class="text-4xl font-headline font-black text-on-background group-hover:text-white">{{ $loop->iteration }}</span>
                     </div>
@@ -66,7 +66,7 @@
 {{-- =========================================================
      INDUSTRIAL CTA
      ========================================================= --}}
-<section class="py-32 bg-surface relative overflow-hidden">
+<section class="py-32 bg-[#0F172A] relative overflow-hidden">
     <div class="absolute inset-0 industrial-grid opacity-5"></div>
     <div class="max-w-7xl mx-auto px-8 relative z-10">
         <div class="flex flex-col lg:flex-row items-center justify-between gap-16">

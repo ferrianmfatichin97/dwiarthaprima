@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="fixed top-0 w-full z-50 bg-surface border-b border-white/10 transition-industrial" id="navbar">
+<nav x-data="{ open: false }" class="fixed top-0 w-full z-50 bg-[#0F172A] border-b border-white/10 transition-industrial" id="navbar">
     <div class="flex justify-between items-center px-6 md:px-8 py-5 max-w-7xl mx-auto">
         <a href="{{ route('home') }}" class="flex items-center gap-3 group">
             <div class="bg-white p-1.5 rounded-sm group-hover:scale-105 transition-industrial">

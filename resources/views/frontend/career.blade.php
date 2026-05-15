@@ -7,7 +7,7 @@
 {{-- =========================================================
      CAREER HERO — Industrial Employer
      ========================================================= --}}
-<section class="relative min-h-[50vh] flex items-center justify-start bg-surface overflow-hidden pt-20">
+<section class="relative min-h-[50vh] flex items-center justify-start bg-[#0F172A] overflow-hidden pt-20">
     <div class="absolute inset-0 industrial-grid opacity-10"></div>
     @php
         $heroImg = setting('career', 'career_hero_image');
@@ -115,7 +115,7 @@
 {{-- =========================================================
      TALENT DATABASE CTA
      ========================================================= --}}
-<section class="py-32 bg-surface relative overflow-hidden">
+<section class="py-32 bg-[#0F172A] relative overflow-hidden">
     <div class="absolute inset-0 industrial-grid opacity-5"></div>
     <div class="max-w-4xl mx-auto px-8 text-center relative z-10 space-y-10">
         <h2 class="text-3xl md:text-5xl font-headline font-extrabold text-white uppercase tracking-tighter leading-none italic">Belum Menemukan Posisi Yang Relevan?</h2>

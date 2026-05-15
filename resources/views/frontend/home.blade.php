@@ -8,7 +8,7 @@
 {{-- =========================================================
      HERO SECTION — Industrial Focus
      ========================================================= --}}
-<section class="relative min-h-[90vh] w-full flex items-center justify-start overflow-hidden bg-surface" id="home">
+<section class="relative min-h-[90vh] w-full flex items-center justify-start overflow-hidden bg-[#0F172A]" id="home">
     {{-- Hero Background --}}
     <div class="absolute inset-0 w-full h-full">
         @php

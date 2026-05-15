@@ -1,4 +1,4 @@
-<footer class="bg-surface w-full py-24 px-8 mt-32 border-t border-white/5">
+<footer class="bg-[#0F172A] w-full py-24 px-8 mt-32 border-t border-white/5">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-16 max-w-7xl mx-auto">
         {{-- Branding & About --}}
         <div class="md:col-span-4 space-y-8">

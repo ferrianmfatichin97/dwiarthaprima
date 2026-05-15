@@ -7,7 +7,7 @@
 {{-- =========================================================
      ABOUT HERO — Industrial Identity
      ========================================================= --}}
-<section class="relative min-h-[50vh] flex items-center justify-start bg-surface overflow-hidden pt-20">
+<section class="relative min-h-[50vh] flex items-center justify-start bg-[#0F172A] overflow-hidden pt-20">
     <div class="absolute inset-0 industrial-grid opacity-10"></div>
     @php
         $heroBg = setting('about', 'about_hero_image') ? asset('storage/' . setting('about', 'about_hero_image')) : null;
@@ -62,7 +62,7 @@
 
             <div class="lg:col-span-5 space-y-8 sticky top-32">
                 {{-- Vision & Mission — Industrial Style --}}
-                <div class="bg-surface p-10 border border-white/5 shadow-2xl relative overflow-hidden">
+                <div class="bg-[#0F172A] p-10 border border-white/5 shadow-2xl relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 border-b border-l border-white/10">
                         <span class="text-[9px] font-bold text-white/30 uppercase tracking-widest">DAP-VMS</span>
                     </div>
@@ -166,7 +166,7 @@
 {{-- =========================================================
      CORE VALUES — Industrial Standards
      ========================================================= --}}
-<section class="py-24 bg-surface relative overflow-hidden">
+<section class="py-24 bg-[#0F172A] relative overflow-hidden">
     <div class="absolute inset-0 industrial-grid opacity-5"></div>
     <div class="max-w-7xl mx-auto px-8 relative z-10">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">

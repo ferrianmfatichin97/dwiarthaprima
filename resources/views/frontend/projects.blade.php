@@ -16,7 +16,7 @@
 {{-- =========================================================
      PROJECTS HERO — Industrial Header
      ========================================================= --}}
-<section class="relative min-h-[40vh] flex items-center justify-start bg-surface overflow-hidden pt-20">
+<section class="relative min-h-[40vh] flex items-center justify-start bg-[#0F172A] overflow-hidden pt-20">
     <div class="absolute inset-0 industrial-grid opacity-10"></div>
     <div class="relative z-10 w-full max-w-7xl mx-auto px-8 py-20">
         <div class="max-w-3xl space-y-6">
