@@ -178,7 +178,7 @@
             <p class="text-on-surface-variant text-sm leading-relaxed">{{ $service->description }}</p>
             
             <div class="mt-8 pt-6 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-industrial">
-                <a href="{{ route('services.show', $service->slug) }}" class="text-[10px] font-bold text-primary uppercase tracking-widest flex items-center gap-2">
+                <a href="{{ $service->slug ? route('services.show', $service->slug) : route('services') }}" class="text-[10px] font-bold text-primary uppercase tracking-widest flex items-center gap-2">
                     Detail Teknis <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
             </div>
@@ -277,7 +277,7 @@
 
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         @forelse($projects as $project)
-        <a href="{{ route('projects.show', $project->slug) }}" class="group block relative bg-surface-container border border-white/5 overflow-hidden transition-industrial">
+        <a href="{{ $project->slug ? route('projects.show', $project->slug) : route('projects') }}" class="group block relative bg-surface-container border border-white/5 overflow-hidden transition-industrial">
             {{-- Technical Image Container --}}
             <div class="aspect-video overflow-hidden border-b border-white/5 relative">
                 @if($project->image)

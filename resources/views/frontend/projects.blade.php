@@ -108,7 +108,7 @@
                             </div>
                         </div>
 
-                        <a href="{{ route('projects.show', $project->slug) }}" 
+                        <a href="{{ $project->slug ? route('projects.show', $project->slug) : route('projects') }}" 
                            class="flex items-center justify-between w-full pt-4 border-t border-outline-variant/30 group/link">
                             <span class="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Detail Rekam Jejak</span>
                             <span class="material-symbols-outlined text-sm text-primary group-hover/link:translate-x-2 transition-industrial">arrow_forward</span>
