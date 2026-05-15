@@ -6,236 +6,357 @@
 @section('content')
 
 {{-- =========================================================
-     HERO SECTION — Video Background
+     HERO SECTION — Industrial Focus
      ========================================================= --}}
-<section class="relative h-screen w-full flex items-center justify-center overflow-hidden" id="home">
-    {{-- Hero Background Video/Image --}}
-    <div class="absolute inset-0 w-full h-full overflow-hidden">
+<section class="relative min-h-[90vh] w-full flex items-center justify-start overflow-hidden bg-surface" id="home">
+    {{-- Hero Background --}}
+    <div class="absolute inset-0 w-full h-full">
         @php
             $heroVideo = setting('home', 'home_hero_video');
             $heroPoster = setting('home', 'home_hero_video_poster');
-            $defaultPoster = file_exists(public_path('og.png')) ? asset('og.png') : asset('dap.png');
-            $posterUrl = $heroPoster ? Storage::url($heroPoster) : $defaultPoster;
+            $defaultPoster = asset('dap.png');
+            $posterUrl = $heroPoster ? asset('storage/' . $heroPoster) : $defaultPoster;
             $heroVideoType = $heroVideo && \Illuminate\Support\Str::endsWith($heroVideo, '.webm') ? 'video/webm' : 'video/mp4';
         @endphp
-        <video autoplay loop muted playsinline preload="metadata" poster="{{ $posterUrl }}" fetchpriority="high"
-               class="w-full h-full object-cover" aria-hidden="true" tabindex="-1">
+        <video autoplay loop muted playsinline preload="metadata" poster="{{ $posterUrl }}" 
+               class="w-full h-full object-cover opacity-40 grayscale-[0.5]" aria-hidden="true">
             @if($heroVideo)
-                <source src="{{ Storage::url($heroVideo) }}" type="{{ $heroVideoType }}" />
+                <source src="{{ asset('storage/' . $heroVideo) }}" type="{{ $heroVideoType }}" />
             @else
                 <source src="{{ asset('video/hero.mp4') }}" type="video/mp4" />
             @endif
         </video>
-        <div class="absolute inset-0 bg-black/60 backdrop-brightness-75 mix-blend-multiply"></div>
+        {{-- Industrial Overlay --}}
+        <div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent"></div>
+        <div class="absolute inset-0 industrial-grid opacity-10"></div>
     </div>
 
-    {{-- Hero Content --}}
-    <div class="relative z-10 text-center px-6 max-w-5xl">
-        <h1 class="hero-text font-headline font-extrabold text-5xl md:text-7xl lg:text-8xl text-white tracking-tighter mb-6 leading-tight text-shadow-hero">
-            {{ setting('home', 'home_hero_title', 'PT Dwi Artha Prima') }}
-        </h1>
-        <p class="hero-text-delay font-headline text-xl md:text-2xl text-white/90 mb-12 tracking-wide font-medium">
-            {{ setting('home', 'home_hero_subtitle', 'Mitra Strategis Konstruksi dan Infrastruktur Nasional') }}
-        </p>
-        <div class="hero-btn flex flex-col md:flex-row items-center justify-center gap-6">
-            <a href="{{ route('projects') }}"
-               class="w-full md:w-auto px-10 py-4 bg-red-700 text-white font-bold rounded hover:bg-red-900 transition-all duration-300 text-center shadow-xl transform hover:scale-105">
-                Eksplorasi Portofolio
-            </a>
-            <a href="{{ route('contact') }}"
-               class="w-full md:w-auto px-10 py-4 border-2 border-white text-white font-bold rounded hover:bg-white/10 transition-all duration-300 text-center backdrop-blur-sm">
-                Konsultasi Proyek
-            </a>
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-8 py-20">
+        <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-3 px-4 py-2 bg-primary/10 border-l-4 border-primary mb-8">
+                <span class="text-primary font-headline font-extrabold text-[10px] uppercase tracking-[0.3em]">Operational Excellence</span>
+            </div>
+            
+            <h1 class="font-headline font-extrabold text-5xl md:text-7xl lg:text-8xl text-white leading-[0.9] tracking-tighter uppercase mb-8">
+                {{ setting('home', 'home_hero_title', 'Engineering & Construction') }}
+            </h1>
+            
+            <p class="text-white/60 text-lg md:text-xl leading-relaxed font-medium mb-12 max-w-2xl border-l border-white/20 pl-6">
+                {{ setting('home', 'home_hero_subtitle', 'Penyedia jasa konstruksi infrastruktur, mekanikal, dan elektrikal dengan spesialisasi pada akurasi teknis dan ketepatan eksekusi.') }}
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <a href="{{ route('projects') }}"
+                   class="w-full sm:w-auto px-10 py-5 bg-primary text-white font-headline font-extrabold text-xs uppercase tracking-widest hover:bg-primary-dark transition-industrial shadow-xl shadow-primary/20">
+                    Lihat Portofolio Proyek
+                </a>
+                <a href="{{ route('contact') }}"
+                   class="w-full sm:w-auto px-10 py-5 border border-white/20 text-white font-headline font-extrabold text-xs uppercase tracking-widest hover:bg-white/5 transition-industrial">
+                    Konsultasi Teknis
+                </a>
+            </div>
         </div>
-    </div>
-
-    {{-- Scroll Indicator --}}
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-        <span class="material-symbols-outlined text-white/60 text-3xl">keyboard_arrow_down</span>
     </div>
 </section>
 
 {{-- =========================================================
-     ABOUT SECTION
+     OPERATIONAL STATS — Grounded
      ========================================================= --}}
-<section class="py-32 px-8 bg-surface" id="about">
+<div class="relative z-20 -mt-16 max-w-7xl mx-auto px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 bg-white border border-outline-variant shadow-2xl">
+        <div class="p-8 border-r border-outline-variant">
+            <div class="text-3xl font-black text-on-background font-headline">{{ setting('home', 'home_stats_years', '15+') }}</div>
+            <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mt-2">Tahun Pengalaman</div>
+        </div>
+        <div class="p-8 md:border-r border-outline-variant">
+            <div class="text-3xl font-black text-on-background font-headline">{{ setting('home', 'home_stats_projects', '200+') }}</div>
+            <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mt-2">Proyek Selesai</div>
+        </div>
+        <div class="p-8 border-r border-outline-variant">
+            <div class="text-3xl font-black text-on-background font-headline">{{ setting('home', 'home_stats_clients', '50+') }}</div>
+            <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mt-2">Mitra Strategis</div>
+        </div>
+        <div class="p-8">
+            <div class="text-3xl font-black text-on-background font-headline">{{ setting('home', 'home_stats_regions', '12+') }}</div>
+            <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mt-2">Wilayah Operasi</div>
+        </div>
+    </div>
+</div>
+
+{{-- =========================================================
+     ABOUT SECTION — Professional & Industrial
+     ========================================================= --}}
+<section class="py-32 px-8 bg-background" id="about">
     <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-            <div class="space-y-8">
-                <span class="text-red-700 font-headline font-bold uppercase tracking-widest text-sm">Tentang Kami</span>
-                <h2 class="text-4xl md:text-6xl font-headline font-extrabold text-on-surface leading-tight tracking-tight">
-                    {{ setting('home', 'home_about_title', 'Mewujudkan Infrastruktur yang Tangguh melalui Integritas dan Presisi.') }}
-                </h2>
-                <p class="text-on-surface-variant text-lg leading-relaxed max-w-xl whitespace-pre-line">
-                    {{ setting('home', 'home_about_desc', 'PT Dwi Artha Prima adalah mitra strategis dalam sektor konstruksi dan infrastruktur di Indonesia. Kami menghadirkan integritas, inovasi, dan kualitas kelas dunia dalam setiap proyek yang kami tangani, dari skala menengah hingga mega-proyek nasional.') }}
-                </p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="p-8 bg-surface-container-low rounded-xl">
-                    <span class="material-symbols-outlined text-red-700 text-4xl mb-4">visibility</span>
-                    <h3 class="font-headline font-bold text-xl mb-3">Visi</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">{{ setting('home', 'home_vision', 'Menjadi perusahaan jasa konstruksi terkemuka yang diakui secara nasional atas kualitas dan komitmen terhadap keselamatan kerja.') }}</p>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            <div class="lg:col-span-7 space-y-10">
+                <div class="space-y-4">
+                    <span class="text-primary font-headline font-extrabold text-[11px] uppercase tracking-[0.4em]">Profil Perusahaan</span>
+                    <h2 class="text-4xl md:text-6xl font-headline font-extrabold text-on-background leading-[0.95] tracking-tighter uppercase">
+                        {{ setting('home', 'home_about_title', 'Komitmen Pada Presisi & Integritas Konstruksi.') }}
+                    </h2>
                 </div>
-                <div class="p-8 bg-surface-container-low rounded-xl">
-                    <span class="material-symbols-outlined text-red-700 text-4xl mb-4">rocket_launch</span>
-                    <h3 class="font-headline font-bold text-xl mb-3">Misi</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed">{{ setting('home', 'home_mission', 'Memberikan solusi teknis yang inovatif dan efisien untuk memenuhi harapan klien melalui profesionalisme dan keunggulan operasional.') }}</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="space-y-4">
+                        <div class="w-10 h-1 bg-primary"></div>
+                        <p class="text-on-background/70 text-base leading-relaxed">
+                            {{ setting('home', 'home_about_desc', 'PT Dwi Artha Prima hadir sebagai solusi konstruksi terintegrasi yang mengedepankan standar engineering tinggi. Kami percaya bahwa setiap detail dalam pembangunan adalah fondasi bagi kepercayaan klien.') }}
+                        </p>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                            <div>
+                                <h4 class="font-headline font-extrabold text-sm text-on-background uppercase tracking-tight">Visi Terukur</h4>
+                                <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">{{ setting('home', 'home_vision', 'Menjadi standar utama dalam industri EPC nasional yang diakui atas kualitas dan keselamatan.') }}</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="material-symbols-outlined text-primary">engineering</span>
+                            <div>
+                                <h4 class="font-headline font-extrabold text-sm text-on-background uppercase tracking-tight">Misi Eksekusi</h4>
+                                <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">{{ setting('home', 'home_mission', 'Menyelesaikan setiap tantangan teknis dengan solusi yang efisien, aman, dan tepat waktu.') }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        {{-- Stats --}}
-        <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">{{ setting('home', 'home_stats_years', '15+') }}</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Tahun Pengalaman</div></div>
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">{{ setting('home', 'home_stats_projects', '200+') }}</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Proyek Terselesaikan</div></div>
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">{{ setting('home', 'home_stats_clients', '50+') }}</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Mitra Korporasi</div></div>
-            <div class="text-center"><div class="text-4xl font-black text-on-surface mb-2">{{ setting('home', 'home_stats_regions', '12+') }}</div><div class="text-red-700 font-bold uppercase text-xs tracking-tighter">Wilayah Operasi</div></div>
+            
+            <div class="lg:col-span-5">
+                <div class="relative group">
+                    <div class="absolute -inset-4 border border-outline-variant translate-x-4 translate-y-4 -z-10 group-hover:translate-x-2 group-hover:translate-y-2 transition-industrial"></div>
+                    <div class="aspect-[4/5] bg-surface overflow-hidden border border-outline-variant">
+                        {{-- Replace with real workshop/office image --}}
+                        @php $aboutImg = setting('about', 'about_hero_image'); @endphp
+                        <img src="{{ $aboutImg ? asset('storage/' . $aboutImg) : asset('dap.png') }}" 
+                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-industrial duration-700" 
+                             alt="Workshop DAP">
+                        
+                        <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-surface to-transparent">
+                            <div class="flex items-center gap-4">
+                                <div class="h-10 w-px bg-primary"></div>
+                                <div class="text-[10px] font-bold text-white uppercase tracking-[0.2em] leading-tight">
+                                    Established Facility<br>Depok, Indonesia
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+>
 
 {{-- =========================================================
-     SERVICES SECTION — Dynamic
+     SERVICES SECTION — Industrial Capabilities
      ========================================================= --}}
-<section class="py-32 px-8 bg-surface-container-low" id="services">
-    <div class="max-w-7xl mx-auto text-center mb-20">
-        <span class="text-red-700 font-headline font-bold uppercase tracking-widest text-sm">Layanan Kami</span>
-        <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface mt-4">Solusi Terintegrasi</h2>
+<section class="py-32 px-8 bg-surface border-y border-white/5" id="services">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+        <div class="max-w-2xl">
+            <span class="text-primary font-headline font-extrabold text-[11px] uppercase tracking-[0.4em]">Solusi & Kapabilitas</span>
+            <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-white mt-4 uppercase tracking-tighter">Layanan Engineering</h2>
+        </div>
+        <p class="text-on-surface-variant max-w-sm text-sm leading-relaxed border-l border-primary pl-6">
+            Menyediakan keahlian teknis menyeluruh mulai dari perencanaan hingga pemeliharaan infrastruktur industri.
+        </p>
     </div>
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/10">
         @forelse($services as $service)
-        <div data-reveal class="reveal group bg-white p-10 rounded-xl hover:bg-red-700 transition-all duration-500 hover:-translate-y-2 shadow-sm">
-            <div class="w-16 h-16 bg-surface-container flex items-center justify-center rounded-lg mb-8 group-hover:bg-white/20 transition-colors">
-                <span class="material-symbols-outlined text-red-700 text-3xl group-hover:text-white transition-colors">{{ $service->icon }}</span>
+        <div class="group bg-surface p-10 border-r border-b border-white/10 hover:bg-white/5 transition-industrial relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-industrial">
+                <span class="text-4xl font-headline font-black text-white">0{{ $loop->iteration }}</span>
             </div>
-            <h3 class="text-xl font-bold mb-4 group-hover:text-white transition-colors font-headline">{{ $service->name }}</h3>
-            <p class="text-on-surface-variant group-hover:text-white/80 transition-colors text-sm leading-relaxed">{{ $service->description }}</p>
+            
+            <div class="w-14 h-14 bg-white/5 flex items-center justify-center mb-10 border border-white/10 group-hover:border-primary transition-industrial">
+                <span class="material-symbols-outlined text-primary text-3xl transition-industrial">{{ $service->icon }}</span>
+            </div>
+            
+            <h3 class="text-xl font-headline font-extrabold text-white mb-4 uppercase tracking-tight group-hover:text-primary transition-industrial">{{ $service->name }}</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">{{ $service->description }}</p>
+            
+            <div class="mt-8 pt-6 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-industrial">
+                <a href="{{ route('services.show', $service->slug) }}" class="text-[10px] font-bold text-primary uppercase tracking-widest flex items-center gap-2">
+                    Detail Teknis <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+            </div>
         </div>
         @empty
-        <div class="col-span-4 text-center py-16">
-            <span class="material-symbols-outlined text-6xl block mb-4 opacity-20 text-on-surface">build</span>
-            <p class="text-on-surface-variant font-medium">Informasi layanan akan segera diperbarui.</p>
+        <div class="col-span-4 text-center py-20 border-r border-b border-white/10">
+            <span class="material-symbols-outlined text-6xl block mb-4 opacity-10 text-white">engineering</span>
+            <p class="text-on-surface-variant font-bold uppercase tracking-widest text-xs">Informasi Kapabilitas Sedang Diperbarui</p>
         </div>
         @endforelse
     </div>
 </section>
 
 {{-- =========================================================
-     TRUST SECTION — K3 & QA/QC
+     TRUST & COMPLIANCE — Safety First
      ========================================================= --}}
-<section class="py-24 px-8 bg-surface" id="trust">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div class="lg:col-span-5">
-            <span class="text-red-700 font-headline font-bold uppercase tracking-widest text-sm">Kepercayaan</span>
-            <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface mt-4">
-                Standar Kerja yang Terukur
-            </h2>
-            <p class="mt-5 text-on-surface-variant text-lg leading-relaxed">
-                Pendekatan kami mengutamakan perencanaan metode kerja, pengendalian mutu, dan keselamatan kerja (K3) untuk menjaga kualitas hasil dan ketepatan waktu.
-            </p>
-            <a href="{{ route('about') }}" class="mt-8 inline-flex items-center gap-3 text-red-700 font-bold hover:text-red-900 transition">
-                Pelajari Profil Perusahaan
-                <span class="material-symbols-outlined">arrow_forward</span>
-            </a>
-        </div>
-        <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div data-reveal class="reveal bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-8 hover:shadow-md transition">
-                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-primary">health_and_safety</span>
+<section class="py-32 px-8 bg-background border-b border-outline-variant" id="trust">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <div class="lg:col-span-5 space-y-8">
+                <div class="space-y-4">
+                    <span class="text-primary font-headline font-extrabold text-[11px] uppercase tracking-[0.4em]">Standar Operasional</span>
+                    <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-background leading-[0.95] tracking-tighter uppercase">
+                        Keamanan & Mutu Tanpa Kompromi.
+                    </h2>
                 </div>
-                <div class="mt-5 font-headline font-extrabold text-lg text-on-surface">K3</div>
-                <div class="mt-2 text-sm text-on-surface-variant leading-relaxed">Briefing, pengawasan, dan budaya kerja aman di lapangan.</div>
+                <p class="text-on-background/70 text-lg leading-relaxed">
+                    Setiap proyek dikelola dengan sistem kontrol yang ketat, memastikan kepatuhan terhadap standar K3 dan spesifikasi teknis yang berlaku.
+                </p>
+                <div class="pt-4">
+                    <a href="{{ route('about') }}" class="inline-flex items-center gap-4 group">
+                        <div class="w-12 h-12 bg-on-background flex items-center justify-center text-background group-hover:bg-primary transition-industrial">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <span class="font-headline font-extrabold text-xs uppercase tracking-widest text-on-background group-hover:text-primary transition-industrial">Lihat Sertifikasi & Profil</span>
+                    </a>
+                </div>
             </div>
-            <div data-reveal class="reveal bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-8 hover:shadow-md transition">
-                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-primary">verified</span>
+            
+            <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-px bg-outline-variant border border-outline-variant">
+                <div class="bg-white p-10 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">health_and_safety</span>
+                        </div>
+                        <h3 class="font-headline font-extrabold text-lg text-on-background uppercase tracking-tight">Budaya K3</h3>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Implementasi sistem manajemen keselamatan kerja yang ketat untuk mencapai target *zero accident* di setiap area proyek.</p>
                 </div>
-                <div class="mt-5 font-headline font-extrabold text-lg text-on-surface">QA/QC</div>
-                <div class="mt-2 text-sm text-on-surface-variant leading-relaxed">Inspeksi dan dokumentasi mutu sesuai gambar dan spesifikasi.</div>
-            </div>
-            <div data-reveal class="reveal bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-8 hover:shadow-md transition">
-                <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-primary">schedule</span>
+                <div class="bg-white p-10 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">verified_user</span>
+                        </div>
+                        <h3 class="font-headline font-extrabold text-lg text-on-background uppercase tracking-tight">QA/QC Kontrol</h3>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Pengawasan berlapis pada setiap fase konstruksi untuk menjamin hasil kerja sesuai dengan standar kualitas yang telah ditetapkan.</p>
                 </div>
-                <div class="mt-5 font-headline font-extrabold text-lg text-on-surface">Delivery</div>
-                <div class="mt-2 text-sm text-on-surface-variant leading-relaxed">Kontrol progres dan mitigasi risiko untuk menjaga timeline.</div>
+                <div class="bg-white p-10 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">architecture</span>
+                        </div>
+                        <h3 class="font-headline font-extrabold text-lg text-on-background uppercase tracking-tight">Metode Tepat</h3>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Penggunaan metode kerja yang telah divalidasi secara teknis untuk memastikan efisiensi biaya dan ketepatan waktu eksekusi.</p>
+                </div>
+                <div class="bg-white p-10 space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">precision_manufacturing</span>
+                        </div>
+                        <h3 class="font-headline font-extrabold text-lg text-on-background uppercase tracking-tight">Fasilitas Workshop</h3>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">Dukungan fasilitas fabrikasi internal untuk kontrol penuh pada kualitas material dan komponen sebelum instalasi di lapangan.</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 {{-- =========================================================
-     PROJECTS SECTION — Dynamic, 16:9 Consistent Grid
+     PROJECTS SECTION — Portfolio Log
      ========================================================= --}}
 <section class="py-32 px-8 bg-surface" id="projects">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
         <div class="max-w-2xl">
-            <span class="text-red-700 font-headline font-bold uppercase tracking-widest text-sm">Portfolio</span>
-            <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface mt-4">Proyek Unggulan</h2>
+            <span class="text-primary font-headline font-extrabold text-[11px] uppercase tracking-[0.4em]">Dokumentasi Proyek</span>
+            <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-white mt-4 uppercase tracking-tighter">Rekam Jejak Engineering</h2>
         </div>
         <a href="{{ route('projects') }}"
-           class="text-red-700 font-bold border-b-2 border-red-700 pb-1 hover:text-red-900 hover:border-red-900 transition-all whitespace-nowrap">
-            Seluruh Portofolio &rarr;
+           class="font-headline font-extrabold text-[11px] uppercase tracking-[0.2em] text-white border-b-2 border-primary pb-2 hover:text-primary transition-industrial">
+            Lihat Semua Proyek &rarr;
         </a>
     </div>
 
-    {{-- Consistent 3-col grid with 16:9 images --}}
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         @forelse($projects as $project)
-        <a href="{{ route('projects.show', $project->slug) }}" class="group relative overflow-hidden rounded-xl shadow-sm bg-surface-container cursor-pointer block">
-            {{-- 16:9 container --}}
-            <div class="aspect-video overflow-hidden">
+        <a href="{{ route('projects.show', $project->slug) }}" class="group block relative bg-surface-container border border-white/5 overflow-hidden transition-industrial">
+            {{-- Technical Image Container --}}
+            <div class="aspect-video overflow-hidden border-b border-white/5 relative">
                 @if($project->image)
-                    <img src="{{ Storage::url($project->image) }}"
+                    <img src="{{ asset('storage/' . $project->image) }}"
                          alt="{{ $project->title }}"
                          loading="lazy" decoding="async"
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-industrial duration-700">
                 @else
-                    <div class="w-full h-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white/30 text-6xl">apartment</span>
+                    <div class="w-full h-full bg-surface-container flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white/10 text-6xl">construction</span>
                     </div>
                 @endif
+                
+                {{-- Project ID / Category Badge --}}
+                <div class="absolute top-0 right-0 p-4">
+                    <span class="bg-primary text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
+                        {{ $project->category }}
+                    </span>
+                </div>
             </div>
-            {{-- Hover overlay --}}
-            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <span class="text-red-400 font-bold text-xs uppercase mb-2 tracking-widest">{{ $project->category }}</span>
-                <h3 class="text-white text-xl font-headline font-bold mb-2">{{ $project->title }}</h3>
-                @if($project->description)
-                <p class="text-white/70 text-sm line-clamp-2">{{ $project->description }}</p>
-                @endif
+
+            <div class="p-8 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-px bg-primary"></div>
+                    <span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">{{ $project->client ?: 'Industrial Client' }}</span>
+                </div>
+                
+                <h3 class="text-xl font-headline font-extrabold text-white uppercase tracking-tight leading-tight group-hover:text-primary transition-industrial">
+                    {{ $project->title }}
+                </h3>
+                
+                <div class="flex items-center gap-6 pt-4 border-t border-white/5">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm text-primary">location_on</span>
+                        <span class="text-[10px] font-bold text-white/50 uppercase tracking-wide">{{ $project->location ?: 'Indonesia' }}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm text-primary">calendar_today</span>
+                        <span class="text-[10px] font-bold text-white/50 uppercase tracking-wide">{{ $project->year ?: '2024' }}</span>
+                    </div>
+                </div>
             </div>
-            {{-- Category badge (always visible) --}}
-            <div class="absolute top-4 left-4">
-                <span class="bg-red-700 text-white text-xs font-bold px-3 py-1 rounded uppercase tracking-wide">{{ $project->category }}</span>
-            </div>
+            
+            {{-- Technical Overlay on Hover --}}
+            <div class="absolute inset-0 border-2 border-primary opacity-0 group-hover:opacity-100 transition-industrial pointer-events-none"></div>
         </a>
         @empty
-        <div class="col-span-3 text-center text-on-surface-variant py-16">
-            <span class="material-symbols-outlined text-5xl mb-4 block opacity-30">apartment</span>
-            <p>Informasi proyek akan segera diperbarui.</p>
+        <div class="col-span-3 text-center py-24 border border-white/5 bg-white/5">
+            <span class="material-symbols-outlined text-5xl mb-4 block opacity-10 text-white">inventory</span>
+            <p class="text-on-surface-variant font-bold uppercase tracking-widest text-[10px]">Basis Data Proyek Belum Tersedia</p>
         </div>
         @endforelse
     </div>
-</section>
-
 {{-- =========================================================
-     CLIENTS SLIDER — Dynamic
+     CLIENTS & PARTNERS — Professional Grayscale
      ========================================================= --}}
-<section class="py-20 bg-surface-container-low overflow-hidden">
-    <div class="max-w-7xl mx-auto px-8 mb-12 text-center">
-        <p class="text-on-surface-variant font-headline font-bold uppercase tracking-widest text-xs opacity-60">Dipercaya Oleh Mitra Strategis</p>
+<section class="py-24 bg-background border-y border-outline-variant overflow-hidden">
+    <div class="max-w-7xl mx-auto px-8 mb-16">
+        <div class="flex items-center gap-6">
+            <div class="h-px bg-outline-variant flex-grow"></div>
+            <p class="text-on-surface-variant font-headline font-extrabold uppercase tracking-[0.4em] text-[10px] whitespace-nowrap">Trusted by Industrial Leaders</p>
+            <div class="h-px bg-outline-variant flex-grow"></div>
+        </div>
     </div>
+    
     <div class="relative overflow-hidden">
-        <div class="flex space-x-20 animate-[scroll_30s_linear_infinite] whitespace-nowrap w-max">
-            @php $clientList = $clients->count() ? $clients : collect([['name'=>'PERTAMINA'],['name'=>'WIKA'],['name'=>'ADHI KARYA'],['name'=>'PLN'],['name'=>'PUPR'],['name'=>'TELKOM']]); @endphp
+        <div class="flex space-x-24 animate-[scroll_40s_linear_infinite] whitespace-nowrap w-max px-12">
+            @php 
+                $clientList = $clients->count() ? $clients : collect([['name'=>'PERTAMINA'],['name'=>'WIKA'],['name'=>'ADHI KARYA'],['name'=>'PLN'],['name'=>'PUPR'],['name'=>'TELKOM'],['name'=>'FREEPORT'],['name'=>'ANTAM']]); 
+            @endphp
             @foreach([$clientList, $clientList] as $list)
                 @foreach($list as $client)
                     @if(is_array($client))
-                        <span class="text-2xl font-black font-headline text-on-surface-variant/50 hover:text-red-700 transition-colors cursor-default inline-block">{{ $client['name'] }}</span>
+                        <span class="text-3xl font-black font-headline text-on-surface-variant/20 tracking-tighter uppercase inline-block">{{ $client['name'] }}</span>
                     @else
                         @if($client->logo)
-                            <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" width="160" height="40" loading="lazy" decoding="async" class="h-10 w-auto object-contain opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all inline-block">
+                            <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}" class="h-12 w-auto object-contain grayscale opacity-30 hover:opacity-100 hover:grayscale-0 transition-industrial inline-block">
                         @else
-                            <span class="text-2xl font-black font-headline text-on-surface-variant/50 hover:text-red-700 transition-colors cursor-default inline-block">{{ $client->name }}</span>
+                            <span class="text-3xl font-black font-headline text-on-surface-variant/20 tracking-tighter uppercase inline-block">{{ $client->name }}</span>
                         @endif
                     @endif
                 @endforeach
@@ -245,78 +366,103 @@
 </section>
 
 {{-- =========================================================
-     CONTACT SECTION
+     CONTACT SECTION — Direct & Operational
      ========================================================= --}}
-<section class="py-32 px-8 bg-surface" id="contact">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
-        <div class="space-y-12">
-            <div>
-                <span class="text-red-700 font-headline font-bold uppercase tracking-widest text-sm">Hubungi Kami</span>
-                <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-on-surface mt-4 mb-6">Kemitraan Strategis untuk Proyek Anda</h2>
-                <p class="text-on-surface-variant text-lg">Diskusikan spesifikasi proyek dan kebutuhan infrastruktur Anda bersama tenaga ahli kami.</p>
-            </div>
+<section class="py-32 px-8 bg-surface border-b border-white/5" id="contact">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
+        <div class="lg:col-span-5 space-y-12">
             <div class="space-y-6">
-                <div class="flex items-start gap-4">
-                    <span class="material-symbols-outlined text-red-700">location_on</span>
-                    <div><h4 class="font-bold text-on-surface">Alamat Kantor</h4><p class="text-on-surface-variant text-sm">{{ setting('contact', 'contact_address', 'Gedung Artha Prima Lt. 5, Jl. Gatot Subroto No. 12, Jakarta Selatan, 12190') }}</p></div>
+                <span class="text-primary font-headline font-extrabold text-[11px] uppercase tracking-[0.4em]">Hubungan Kemitraan</span>
+                <h2 class="text-4xl md:text-6xl font-headline font-extrabold text-white leading-[0.95] tracking-tighter uppercase">Mulai Kolaborasi Teknis.</h2>
+                <p class="text-on-surface-variant text-lg leading-relaxed">Ajukan kebutuhan proyek Anda kepada tim engineering kami untuk mendapatkan solusi teknis dan estimasi yang akurat.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-8 pt-8">
+                <div class="flex items-start gap-6 group">
+                    <div class="w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-industrial">
+                        <span class="material-symbols-outlined">location_on</span>
+                    </div>
+                    <div>
+                        <h4 class="font-headline font-extrabold text-xs text-white uppercase tracking-widest mb-1">Kantor Pusat</h4>
+                        <p class="text-on-surface-variant text-sm leading-relaxed max-w-xs">{{ setting('contact', 'contact_address', 'Jakarta, Indonesia') }}</p>
+                    </div>
                 </div>
-                <div class="flex items-start gap-4">
-                    <span class="material-symbols-outlined text-red-700">call</span>
-                    <div><h4 class="font-bold text-on-surface">Telepon</h4><p class="text-on-surface-variant text-sm">{{ setting('contact', 'contact_phone', '+62 (21) 555-0123') }}</p></div>
+                <div class="flex items-start gap-6 group">
+                    <div class="w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-industrial">
+                        <span class="material-symbols-outlined">mail</span>
+                    </div>
+                    <div>
+                        <h4 class="font-headline font-extrabold text-xs text-white uppercase tracking-widest mb-1">Email Korespondensi</h4>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">{{ setting('contact', 'contact_email', 'info@dwiarthaprima.com') }}</p>
+                    </div>
                 </div>
-                <div class="flex items-start gap-4">
-                    <span class="material-symbols-outlined text-red-700">mail</span>
-                    <div><h4 class="font-bold text-on-surface">Email</h4><p class="text-on-surface-variant text-sm">{{ setting('contact', 'contact_email', 'info@dwiarthaprima.com') }}</p></div>
+                <div class="flex items-start gap-6 group">
+                    <div class="w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-industrial">
+                        <span class="material-symbols-outlined">call</span>
+                    </div>
+                    <div>
+                        <h4 class="font-headline font-extrabold text-xs text-white uppercase tracking-widest mb-1">Layanan Telepon</h4>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">{{ setting('contact', 'contact_phone', '+62 (21) 555-0123') }}</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        {{-- Contact Form --}}
-        <div class="bg-surface-container-low p-8 md:p-12 rounded-2xl shadow-sm border border-outline-variant/10">
+        {{-- Contact Form — Technical Style --}}
+        <div class="lg:col-span-7 bg-white/5 border border-white/10 p-10 md:p-16 relative">
+            <div class="absolute top-0 right-0 p-4 border-b border-l border-white/10">
+                <span class="text-[9px] font-bold text-white/30 uppercase tracking-[0.2em]">FORM-DAP-01</span>
+            </div>
+
             @if(session('success'))
-                <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg flex items-center gap-3">
-                    <span class="material-symbols-outlined">check_circle</span>
+                <div class="mb-10 p-5 bg-primary/10 border-l-4 border-primary text-primary text-sm font-bold flex items-center gap-4">
+                    <span class="material-symbols-outlined">verified</span>
                     {{ session('success') }}
                 </div>
             @endif
 
-            <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">
+            <form action="{{ route('contact.store') }}" method="POST" class="space-y-8">
                 @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-2">
-                        <label class="text-sm font-bold text-on-surface-variant" for="name">Nama Lengkap</label>
-                        <input class="w-full bg-white border border-outline-variant/30 rounded focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all p-3 @error('name') border-red-500 @enderror"
-                               id="name" name="name" placeholder="Masukkan nama Anda" type="text" value="{{ old('name') }}"/>
-                        @error('name')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-extrabold text-white/40 uppercase tracking-[0.2em]" for="name">Nama Penanggung Jawab</label>
+                        <input class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white transition-industrial py-3 outline-none @error('name') border-primary @enderror"
+                               id="name" name="name" placeholder="Full Name" type="text" value="{{ old('name') }}"/>
+                        @error('name')<p class="text-primary text-[10px] mt-1 font-bold">{{ $message }}</p>@enderror
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-sm font-bold text-on-surface-variant" for="email">Email Bisnis</label>
-                        <input class="w-full bg-white border border-outline-variant/30 rounded focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all p-3 @error('email') border-red-500 @enderror"
-                               id="email" name="email" placeholder="email@perusahaan.com" type="email" value="{{ old('email') }}"/>
-                        @error('email')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-extrabold text-white/40 uppercase tracking-[0.2em]" for="email">Email Perusahaan</label>
+                        <input class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white transition-industrial py-3 outline-none @error('email') border-primary @enderror"
+                               id="email" name="email" placeholder="corporate@mail.com" type="email" value="{{ old('email') }}"/>
+                        @error('email')<p class="text-primary text-[10px] mt-1 font-bold">{{ $message }}</p>@enderror
                     </div>
                 </div>
-                <div class="space-y-2">
-                    <label class="text-sm font-bold text-on-surface-variant" for="subject">Cakupan Pekerjaan</label>
-                    <select class="w-full bg-white border border-outline-variant/30 rounded focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all p-3" id="subject" name="subject">
+                
+                <div class="space-y-3">
+                    <label class="text-[10px] font-extrabold text-white/40 uppercase tracking-[0.2em]" for="subject">Kategori Pekerjaan</label>
+                    <select class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white/70 transition-industrial py-3 outline-none appearance-none" id="subject" name="subject">
                         @foreach($services as $service)
-                            <option value="{{ $service->name }}">{{ $service->name }}</option>
+                            <option value="{{ $service->name }}" class="bg-surface">{{ $service->name }}</option>
                         @endforeach
-                        <option value="Lainnya">Lainnya / General Inquiry</option>
+                        <option value="Lainnya" class="bg-surface">General / Engineering Support</option>
                     </select>
                 </div>
-                <div class="space-y-2">
-                    <label class="text-sm font-bold text-on-surface-variant" for="message">Uraian Pekerjaan / Kebutuhan Proyek</label>
-                    <textarea class="w-full bg-white border border-outline-variant/30 rounded focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all p-3 @error('message') border-red-500 @enderror"
-                              id="message" name="message" placeholder="Jelaskan secara singkat cakupan pekerjaan Anda..." rows="5">{{ old('message') }}</textarea>
-                    @error('message')<p class="text-red-600 text-xs mt-1">{{ $message }}</p>@enderror
+
+                <div class="space-y-3">
+                    <label class="text-[10px] font-extrabold text-white/40 uppercase tracking-[0.2em]" for="message">Ringkasan Kebutuhan Proyek</label>
+                    <textarea class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white transition-industrial py-3 outline-none @error('message') border-primary @enderror"
+                              id="message" name="message" placeholder="Describe the scope of work..." rows="4">{{ old('message') }}</textarea>
+                    @error('message')<p class="text-primary text-[10px] mt-1 font-bold">{{ $message }}</p>@enderror
                 </div>
-                <button class="w-full py-4 bg-red-700 text-white font-bold rounded hover:bg-red-900 transition-all duration-300 shadow-md transform active:scale-[0.98] font-headline uppercase tracking-wide" type="submit">
-                    Ajukan Konsultasi Proyek
+
+                <button class="w-full py-5 bg-primary text-white font-headline font-extrabold text-xs uppercase tracking-[0.3em] hover:bg-primary-dark transition-industrial shadow-2xl shadow-primary/20" type="submit">
+                    Kirim Permintaan Konsultasi
                 </button>
             </form>
         </div>
     </div>
+</section>
+v>
 </section>
 
 @endsection

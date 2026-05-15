@@ -47,7 +47,30 @@
     </div>
 </div>
 
-{{-- Tables Row --}}
+{{-- Weekly Trend --}}
+<div class="mt-8 bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+    <div class="flex items-center justify-between mb-8">
+        <h2 class="font-bold text-slate-800">Tren Pesan Masuk (7 Hari Terakhir)</h2>
+        <span class="text-xs text-slate-400 font-medium uppercase tracking-widest">Update Real-time</span>
+    </div>
+    <div class="flex items-end justify-between gap-2 h-40">
+        @foreach($messageTrend as $trend)
+        <div class="flex-1 flex flex-col items-center gap-3 h-full justify-end group">
+            <div class="w-full bg-slate-50 rounded-t-lg relative h-full flex flex-col justify-end overflow-hidden">
+                @php
+                    $max = collect($messageTrend)->max('count') ?: 1;
+                    $height = ($trend['count'] / $max) * 100;
+                @endphp
+                <div class="bg-red-600/20 group-hover:bg-red-600/40 transition-all rounded-t-lg w-full flex items-center justify-center text-[10px] font-bold text-red-700" 
+                     style="height: {{ $height }}%">
+                    @if($trend['count'] > 0) {{ $trend['count'] }} @endif
+                </div>
+            </div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{{ $trend['day'] }}</span>
+        </div>
+        @endforeach
+    </div>
+</div>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
     {{-- Recent Projects --}}
     <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">

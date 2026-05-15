@@ -17,6 +17,24 @@
                     @error('title')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Klien / Instansi</label>
+                    <input type="text" name="client_name" value="{{ old('client_name', $project->client_name) }}"
+                           class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                           placeholder="Nama Pemilik Proyek"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Lokasi Proyek</label>
+                    <input type="text" name="location" value="{{ old('location', $project->location) }}"
+                           class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                           placeholder="Contoh: Depok, Jawa Barat"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Tahun Pelaksanaan / Durasi</label>
+                    <input type="text" name="year" value="{{ old('year', $project->year) }}"
+                           class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                           placeholder="Contoh: 2023 atau 2023 - 2024"/>
+                </div>
+                <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori *</label>
                     <input type="text" name="category" value="{{ old('category', $project->category) }}"
                            class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent @error('category') border-red-400 @enderror"
@@ -24,10 +42,19 @@
                     @error('category')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
             </div>
+
             <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi</label>
-                <textarea name="description" rows="4"
-                          class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent">{{ old('description', $project->description) }}</textarea>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi Ringkas (Summary)</label>
+                <textarea name="description" rows="2"
+                          class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all">{{ old('description', $project->description) }}</textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Cakupan Pekerjaan (Technical Scope)</label>
+                <textarea name="project_scope" rows="5"
+                          class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                          placeholder="Rincian teknis cakupan pekerjaan (Scope of Work)...">{{ old('project_scope', $project->project_scope) }}</textarea>
+                <p class="text-xs text-slate-400 mt-2 italic">Gunakan baris baru untuk memisahkan poin pekerjaan.</p>
             </div>
             <div>
                 <label class="block text-sm font-semibold text-slate-700 mb-2">Gambar Proyek</label>
@@ -35,7 +62,7 @@
                 <div class="mb-4">
                     <p class="text-xs text-slate-400 mb-2">Lampiran gambar saat ini:</p>
                     <div class="aspect-video w-64 rounded-xl overflow-hidden">
-                        <img src="{{ Storage::url($project->image) }}" class="w-full h-full object-cover" alt="{{ $project->title }}">
+                        <img src="{{ asset('storage/' . $project->image) }}" class="w-full h-full object-cover" alt="{{ $project->title }}">
                     </div>
                 </div>
                 @endif
@@ -57,6 +84,35 @@
                 </div>
                 @error('image')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
+            <div class="pt-6 border-t border-slate-100">
+                <label class="block text-sm font-semibold text-slate-700 mb-4">Galeri Foto Proyek</label>
+                
+                {{-- List Gambar yang Sudah Ada --}}
+                @if($project->images->count() > 0)
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    @foreach($project->images as $img)
+                    <div class="relative group aspect-square rounded-lg overflow-hidden border border-slate-200">
+                        <img src="{{ asset('storage/' . $img->image_path) }}" class="w-full h-full object-cover" alt="Gallery">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button type="button" onclick="confirmDeleteGallery('{{ route('admin.projects.gallery.destroy', $img) }}')" 
+                                    class="bg-red-600 text-white p-2 rounded-full hover:bg-red-700 shadow-lg">
+                                <span class="material-symbols-outlined text-sm">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
+
+                {{-- Input Upload Baru --}}
+                <div class="space-y-2">
+                    <p class="text-xs text-slate-400">Unggah foto tambahan (Bisa banyak sekaligus):</p>
+                    <input type="file" name="gallery[]" class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 transition-all"
+                           multiple accept="image/jpeg,image/png,image/webp"/>
+                    @error('gallery.*')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
+            </div>
+
             <div class="flex items-center gap-3">
                 <input type="checkbox" name="is_featured" id="is_featured" class="w-4 h-4 text-red-600 rounded" {{ $project->is_featured ? 'checked' : '' }}>
                 <label for="is_featured" class="text-sm font-medium text-slate-700">Tampilkan sebagai Proyek Unggulan</label>
@@ -80,5 +136,16 @@ function previewImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+function confirmDeleteGallery(url) {
+    if (confirm('Apakah Anda yakin ingin menghapus foto galeri ini?')) {
+        const form = document.getElementById('delete-gallery-form');
+        form.action = url;
+        form.submit();
+    }
+}
 </script>
+
+<form id="delete-gallery-form" method="POST" class="hidden">
+    @csrf @method('DELETE')
+</form>
 @endsection

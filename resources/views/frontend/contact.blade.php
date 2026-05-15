@@ -1,128 +1,217 @@
 @extends('layouts.app')
 
-@section('title', 'Kontak | PT Dwi Artha Prima')
-@section('meta_description', 'Hubungi PT Dwi Artha Prima untuk konsultasi proyek konstruksi, infrastruktur, dan engineering. Tim kami siap membantu kebutuhan proyek Anda.')
+@section('title', 'Hubungi Kami | PT Dwi Artha Prima')
+@section('meta_description', 'Hubungi PT Dwi Artha Prima untuk konsultasi proyek konstruksi, infrastruktur, dan engineering. Tim kami siap memberikan solusi teknis terbaik.')
 
 @section('content')
-<section class="pt-28 pb-16 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-8">
-        <div class="max-w-3xl">
-            <h1 class="font-headline font-extrabold text-4xl md:text-6xl text-on-surface tracking-tighter uppercase">
-                Kontak Kami
+{{-- =========================================================
+     CONTACT HERO — Industrial Hub
+     ========================================================= --}}
+<section class="relative min-h-[40vh] flex items-center justify-start bg-surface overflow-hidden pt-20">
+    <div class="absolute inset-0 industrial-grid opacity-10"></div>
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-8 py-20">
+        <div class="max-w-3xl space-y-6">
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 border-l-4 border-primary">
+                <span class="text-primary font-headline font-extrabold text-[10px] uppercase tracking-[0.3em]">Saluran Komunikasi</span>
+            </div>
+            <h1 class="text-4xl md:text-7xl font-headline font-extrabold text-white leading-[0.9] tracking-tighter uppercase">
+                Hubungi Tim <br><span class="text-primary">Engineering</span>
             </h1>
-            <p class="mt-4 text-on-surface-variant text-lg leading-relaxed">
-                Sampaikan kebutuhan proyek Anda. Kami akan merespons secepatnya untuk membantu perencanaan dan eksekusi yang tepat.
+            <p class="text-white/50 text-lg md:text-xl font-medium max-w-xl border-l border-white/20 pl-6">
+                Kami siap merespons kebutuhan teknis dan operasional proyek strategis Anda dengan standar profesional tinggi.
             </p>
         </div>
     </div>
 </section>
 
-<section class="py-16 bg-surface">
-    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-10">
-        <div class="lg:col-span-7 bg-white rounded-2xl border border-surface-container-high shadow-sm p-8">
-            <h2 class="font-headline font-extrabold text-2xl text-on-surface tracking-tight">Ajukan Konsultasi Proyek</h2>
-            <p class="mt-2 text-on-surface-variant">Lengkapi formulir berikut agar tenaga ahli kami dapat menganalisis kebutuhan Anda.</p>
-
-            @if (session('success'))
-                <div class="mt-6 rounded-lg border border-green-200 bg-green-50 text-green-800 px-4 py-3 text-sm">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="mt-6 rounded-lg border border-red-200 bg-red-50 text-red-800 px-4 py-3 text-sm">
-                    <ul class="list-disc pl-5 space-y-1">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form action="{{ route('contact.store') }}" method="POST" class="mt-8 space-y-5">
-                @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                        <label class="block text-sm font-semibold text-on-surface mb-2">Nama Lengkap</label>
-                        <input name="name" value="{{ old('name') }}" required
-                               class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                               placeholder="Nama lengkap Anda" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-on-surface mb-2">Email</label>
-                        <input type="email" name="email" value="{{ old('email') }}" required
-                               class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                               placeholder="nama@perusahaan.com" />
-                    </div>
-                </div>
+{{-- =========================================================
+     CONTACT CHANNELS — High Contrast
+     ========================================================= --}}
+<section class="py-12 bg-background relative z-20">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-outline-variant border border-outline-variant -mt-24 shadow-2xl">
+            {{-- Email --}}
+            <div class="bg-white p-10 space-y-6 group hover:bg-surface transition-industrial">
+                <span class="material-symbols-outlined text-primary text-4xl group-hover:text-white transition-industrial">mail</span>
                 <div>
-                    <label class="block text-sm font-semibold text-on-surface mb-2">Cakupan Pekerjaan</label>
-                    <select name="subject" required
-                            class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none">
-                        @foreach($services as $service)
-                            <option value="{{ $service->name }}" {{ old('subject') == $service->name ? 'selected' : '' }}>
-                                {{ $service->name }}
-                            </option>
-                        @endforeach
-                        <option value="Lainnya" {{ old('subject') == 'Lainnya' ? 'selected' : '' }}>Lainnya / General Inquiry</option>
-                    </select>
+                    <h4 class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest mb-1 group-hover:text-white/40">Email Korespondensi</h4>
+                    <p class="text-sm font-black text-on-background uppercase tracking-tight group-hover:text-white truncate">{{ setting('contact', 'contact_email', 'info@dwiarthaprima.com') }}</p>
                 </div>
+            </div>
+            {{-- Phone --}}
+            <div class="bg-white p-10 space-y-6 group hover:bg-surface transition-industrial">
+                <span class="material-symbols-outlined text-primary text-4xl group-hover:text-white transition-industrial">call</span>
                 <div>
-                    <label class="block text-sm font-semibold text-on-surface mb-2">Uraian Pekerjaan / Kebutuhan Proyek</label>
-                    <textarea name="message" rows="6" required
-                              class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/30 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                              placeholder="Jelaskan secara singkat cakupan pekerjaan atau spesifikasi teknis yang Anda butuhkan...">{{ old('message') }}</textarea>
-                    <p class="mt-2 text-xs text-on-surface-variant">Maksimal 5000 karakter.</p>
+                    <h4 class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest mb-1 group-hover:text-white/40">Layanan Telepon</h4>
+                    <p class="text-sm font-black text-on-background uppercase tracking-tight group-hover:text-white">{{ setting('contact', 'contact_phone', '(021) 555-0123') }}</p>
                 </div>
-
-                <div class="pt-2">
-                    <button type="submit"
-                            class="inline-flex items-center gap-3 bg-primary text-on-primary px-8 py-3 rounded-lg font-headline font-extrabold text-sm uppercase tracking-widest shadow-lg hover:bg-on-primary-fixed-variant transition-colors">
-                        Ajukan Konsultasi
-                        <span class="material-symbols-outlined">send</span>
-                    </button>
+            </div>
+            {{-- WhatsApp --}}
+            <div class="bg-white p-10 space-y-6 group hover:bg-surface transition-industrial">
+                <span class="material-symbols-outlined text-green-600 text-4xl group-hover:text-white transition-industrial">chat_bubble</span>
+                <div>
+                    <h4 class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest mb-1 group-hover:text-white/40">Quick Response</h4>
+                    <p class="text-sm font-black text-green-600 uppercase tracking-tight group-hover:text-white italic">WhatsApp Inquiry &rarr;</p>
                 </div>
-            </form>
+            </div>
+            {{-- Office --}}
+            <div class="bg-white p-10 space-y-6 group hover:bg-surface transition-industrial">
+                <span class="material-symbols-outlined text-primary text-4xl group-hover:text-white transition-industrial">location_on</span>
+                <div>
+                    <h4 class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest mb-1 group-hover:text-white/40">Lokasi Operasional</h4>
+                    <p class="text-[11px] font-black text-on-background uppercase tracking-tight group-hover:text-white leading-tight">Jakarta, Indonesia</p>
+                </div>
+            </div>
         </div>
-
-        <aside class="lg:col-span-5 space-y-6">
-            <div class="bg-white rounded-2xl border border-surface-container-high shadow-sm p-8">
-                <h2 class="font-headline font-extrabold text-2xl text-on-surface tracking-tight">Informasi</h2>
-                <div class="mt-6 space-y-4 text-on-surface-variant">
-                    <div class="flex gap-3">
-                        <span class="material-symbols-outlined text-primary">mail</span>
-                        <div>
-                            <div class="text-sm font-semibold text-on-surface">Email</div>
-                            <div class="text-sm">{{ setting('contact', 'contact_email', 'info@dwiarthaprima.com') }}</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <span class="material-symbols-outlined text-primary">call</span>
-                        <div>
-                            <div class="text-sm font-semibold text-on-surface">Telepon</div>
-                            <div class="text-sm">{{ setting('contact', 'contact_phone', '+62 (21) 555-0123') }}</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <span class="material-symbols-outlined text-primary">schedule</span>
-                        <div>
-                            <div class="text-sm font-semibold text-on-surface">Jam Operasional</div>
-                            <div class="text-sm">{{ setting('contact', 'contact_hours', 'Senin–Jumat, 08:00–17:00 WIB') }}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-surface-container-highest rounded-2xl border border-outline-variant/20 p-8">
-                <h3 class="font-headline font-extrabold text-xl text-on-surface tracking-tight">Butuh respons cepat?</h3>
-                <p class="mt-2 text-on-surface-variant">Silakan hubungi kami via WhatsApp untuk respon cepat.</p>
-                <a href="{{ setting('contact', 'contact_whatsapp', 'https://wa.me/6221555123') }}" target="_blank" rel="noopener"
-                   class="mt-5 inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-3 rounded-lg font-headline font-extrabold text-sm uppercase tracking-widest shadow-lg hover:brightness-95 transition">
-                    WhatsApp
-                    <span class="material-symbols-outlined">chat</span>
-                </a>
-            </div>
-        </aside>
     </div>
 </section>
+
+{{-- =========================================================
+     CONSULTATION FORM — Industrial Style
+     ========================================================= --}}
+<section class="py-24 bg-background">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+            {{-- Text Info --}}
+            <div class="lg:col-span-5 space-y-12">
+                <div class="space-y-6">
+                    <span class="text-primary font-headline font-extrabold text-[11px] uppercase tracking-[0.4em]">Form-DAP-01</span>
+                    <h2 class="text-4xl md:text-6xl font-headline font-extrabold text-on-background leading-[0.95] tracking-tighter uppercase">Mulai Kolaborasi.</h2>
+                    <p class="text-on-surface-variant text-lg leading-relaxed max-w-md">Ajukan spesifikasi proyek Anda untuk mendapatkan solusi engineering dan estimasi biaya yang presisi.</p>
+                </div>
+                
+                <div class="space-y-8 pt-8 border-t border-outline-variant/30">
+                    <div class="flex gap-6 group">
+                        <div class="w-12 h-12 bg-background border border-outline-variant flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-industrial">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <div>
+                            <h4 class="text-[11px] font-black text-on-background uppercase tracking-widest mb-1">Evaluasi Teknis</h4>
+                            <p class="text-on-surface-variant text-xs leading-relaxed">Tim ahli kami akan meninjau setiap detail permintaan Anda secara menyeluruh.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 group">
+                        <div class="w-12 h-12 bg-background border border-outline-variant flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-industrial">
+                            <span class="material-symbols-outlined">verified</span>
+                        </div>
+                        <div>
+                            <h4 class="text-[11px] font-black text-on-background uppercase tracking-widest mb-1">Standar Kualitas</h4>
+                            <p class="text-on-surface-variant text-xs leading-relaxed">Seluruh proses layanan kami mengacu pada standar mutu ISO dan regulasi K3.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Technical Form --}}
+            <div class="lg:col-span-7 bg-surface p-10 md:p-16 border border-white/5 relative shadow-2xl">
+                <div class="absolute top-0 right-0 p-4 border-b border-l border-white/10">
+                    <span class="text-[9px] font-bold text-white/30 uppercase tracking-[0.2em]">INQUIRY SYSTEM</span>
+                </div>
+
+                @if(session('success'))
+                    <div class="mb-10 p-5 bg-primary/10 border-l-4 border-primary text-primary text-xs font-black uppercase tracking-widest flex items-center gap-4">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form action="{{ route('contact.store') }}" method="POST" class="space-y-10">
+                    @csrf
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Penanggung Jawab</label>
+                            <input type="text" name="name" required value="{{ old('name') }}"
+                                   class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white py-3 outline-none transition-industrial @error('name') border-primary @enderror"
+                                   placeholder="NAMA LENGKAP">
+                            @error('name')<p class="text-primary text-[9px] font-bold mt-1 uppercase">{{ $message }}</p>@enderror
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Email Perusahaan</label>
+                            <input type="email" name="email" required value="{{ old('email') }}"
+                                   class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white py-3 outline-none transition-industrial @error('email') border-primary @enderror"
+                                   placeholder="CORP@MAIL.COM">
+                            @error('email')<p class="text-primary text-[9px] font-bold mt-1 uppercase">{{ $message }}</p>@enderror
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Kategori Pekerjaan</label>
+                        <select name="subject" class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white/60 py-3 outline-none transition-industrial appearance-none">
+                            <option value="Civil Construction" class="bg-surface">CIVIL CONSTRUCTION</option>
+                            <option value="Steel Structure" class="bg-surface">STEEL STRUCTURE</option>
+                            <option value="Tank Fabrication" class="bg-surface">TANK FABRICATION</option>
+                            <option value="Mechanical Works" class="bg-surface">MECHANICAL WORKS</option>
+                            <option value="Electrical Works" class="bg-surface">ELECTRICAL WORKS</option>
+                            <option value="Maintenance" class="bg-surface">INDUSTRIAL MAINTENANCE</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Deskripsi Kebutuhan Teknis</label>
+                        <textarea name="message" rows="5" required
+                                  class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white py-3 outline-none transition-industrial @error('message') border-primary @enderror"
+                                  placeholder="JELASKAN CAKUPAN PEKERJAAN ANDA...">{{ old('message') }}</textarea>
+                        @error('message')<p class="text-primary text-[9px] font-bold mt-1 uppercase">{{ $message }}</p>@enderror
+                    </div>
+                    
+                    <button type="submit" class="w-full py-6 bg-primary text-white font-headline font-extrabold text-xs uppercase tracking-[0.4em] hover:bg-primary-dark transition-industrial shadow-2xl shadow-primary/20 group">
+                        Kirim Permintaan Konsultasi <span class="material-symbols-outlined ml-4 text-sm group-hover:translate-x-2 transition-industrial">send</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- =========================================================
+     FACILITY & LOGISTICS
+     ========================================================= --}}
+<section class="py-24 bg-white border-y border-outline-variant">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="max-w-2xl mb-16 space-y-4">
+            <span class="text-primary font-headline font-extrabold text-[11px] uppercase tracking-[0.4em]">Infrastruktur Pendukung</span>
+            <h2 class="text-4xl font-headline font-extrabold text-on-background leading-none tracking-tighter uppercase">Fasilitas & Workshop</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @php 
+                $facImages = json_decode(setting('contact', 'contact_facility_images', '[]'), true);
+            @endphp
+            @forelse($facImages as $img)
+                <div class="aspect-video bg-background border border-outline-variant overflow-hidden group relative">
+                    <img src="{{ asset('storage/' . $img) }}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-industrial duration-1000" alt="Operational Facility">
+                    <div class="absolute inset-0 bg-surface/60 opacity-0 group-hover:opacity-100 transition-industrial flex items-end p-6">
+                        <span class="text-white text-[9px] font-black uppercase tracking-widest border-l-2 border-primary pl-4">Aset Internal PT DAP</span>
+                    </div>
+                </div>
+            @empty
+                <div class="col-span-3 py-32 text-center border-2 border-dashed border-outline-variant flex flex-col items-center gap-6">
+                    <span class="material-symbols-outlined text-6xl text-primary opacity-10">photo_library</span>
+                    <p class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest">Dokumentasi Fasilitas Sedang Diperbarui</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+{{-- =========================================================
+     MAP — Operational Location
+     ========================================================= --}}
+@php $mapEmbed = setting('contact', 'contact_map'); @endphp
+@if($mapEmbed)
+<section class="py-24 bg-background overflow-hidden">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="relative border-8 border-surface shadow-2xl h-[600px] w-full overflow-hidden grayscale contrast-125 brightness-50 hover:grayscale-0 hover:contrast-100 hover:brightness-100 transition-industrial duration-1000">
+            {!! str_replace(['width="600"', 'height="450"', 'style="border:0;"'], ['width="100%"', 'height="100%"', 'style="border:0; display:block;"'], $mapEmbed) !!}
+            <div class="absolute bottom-10 left-10 z-10 hidden md:block">
+                <div class="bg-surface text-white p-10 border-l-4 border-primary shadow-2xl">
+                    <h3 class="font-headline font-extrabold text-xl uppercase tracking-tighter mb-2">Pusat Operasi</h3>
+                    <p class="text-white/40 text-[10px] font-bold uppercase tracking-widest leading-relaxed">PT DWI ARTHA PRIMA <br> KOTA DEPOK, JAWA BARAT</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
 @endsection

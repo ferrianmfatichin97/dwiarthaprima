@@ -13,9 +13,10 @@ class PageSettingController extends Controller
     private const FILE_KEYS = [
         'home' => ['home_hero_video', 'home_hero_video_poster'],
         'project' => [],
-        'about' => [],
+        'about' => ['about_org_structure', 'about_hero_image', 'about_facility_office', 'about_facility_workshop', 'about_facility_activity'],
         'services' => [],
-        'contact' => [],
+        'contact' => ['contact_image', 'contact_hero_image', 'contact_hero_video', 'contact_facility_images'],
+        'career' => ['career_hero_image'],
     ];
 
     private const RULES = [
@@ -46,6 +47,12 @@ class PageSettingController extends Controller
             'about_story_desc' => 'nullable|string|max:8000',
             'about_vision' => 'nullable|string|max:5000',
             'about_mission' => 'nullable|string|max:8000',
+            'about_journey' => 'nullable|string|max:8000',
+            'about_org_structure' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'about_hero_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:8192',
+            'about_facility_office' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'about_facility_workshop' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'about_facility_activity' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ],
         'services' => [
             'services_hero_title' => 'nullable|string|max:255',
@@ -58,7 +65,16 @@ class PageSettingController extends Controller
             'contact_phone' => 'nullable|string|max:255',
             'contact_whatsapp' => 'nullable|string|max:255',
             'contact_address' => 'nullable|string|max:5000',
-            'contact_hours' => 'nullable|string|max:255',
+            'contact_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'contact_map' => 'nullable|string|max:5000',
+            'contact_hero_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:8192',
+            'contact_hero_video' => 'nullable|file|mimes:mp4,webm|max:20480',
+            'contact_facility_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+        ],
+        'career' => [
+            'career_hero_title' => 'nullable|string|max:255',
+            'career_hero_desc' => 'nullable|string|max:1000',
+            'career_hero_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ],
     ];
 
@@ -90,6 +106,12 @@ class PageSettingController extends Controller
     {
         $settings = PageSetting::where('page', 'contact')->pluck('value', 'key')->toArray();
         return view('admin.pages.contact', compact('settings'));
+    }
+
+    public function career()
+    {
+        $settings = PageSetting::where('page', 'career')->pluck('value', 'key')->toArray();
+        return view('admin.pages.career', compact('settings'));
     }
 
     public function store(Request $request, $page)
@@ -137,6 +159,57 @@ class PageSettingController extends Controller
             cache()->forget("pagesetting:{$page}:{$key}");
         }
 
+        // Handle Multi-Image for Facility Showcase (Contact Page)
+        if ($page === 'contact' && $request->hasFile('contact_facility_images')) {
+            $existingImagesSetting = PageSetting::where('page', $page)->where('key', 'contact_facility_images')->first();
+            $images = $existingImagesSetting ? json_decode($existingImagesSetting->value, true) : [];
+            if (!is_array($images)) $images = [];
+            
+            foreach ($request->file('contact_facility_images') as $file) {
+                $path = $file->store("settings/contact/facilities", 'public');
+                $images[] = $path;
+            }
+            
+            PageSetting::updateOrCreate(
+                ['page' => $page, 'key' => 'contact_facility_images'],
+                ['value' => json_encode($images)]
+            );
+            cache()->forget("pagesetting:{$page}:contact_facility_images");
+        }
+
         return back()->with('success', 'Perubahan pengaturan halaman berhasil disimpan.');
+    }
+
+    public function destroySetting(Request $request, $page, $key)
+    {
+        if (!array_key_exists($page, self::RULES)) {
+            abort(404);
+        }
+
+        $existing = PageSetting::where('page', $page)->where('key', $key)->first();
+        
+        if ($existing) {
+            // Special handling for Facility Images (JSON array)
+            if ($key === 'contact_facility_images' && $request->has('image_path')) {
+                $images = json_decode($existing->value, true) ?: [];
+                $target = $request->image_path;
+                
+                if (($index = array_search($target, $images)) !== false) {
+                    Storage::disk('public')->delete($target);
+                    unset($images[$index]);
+                    $existing->update(['value' => json_encode(array_values($images))]);
+                }
+            } else {
+                // Single file deletion
+                if (is_string($existing->value) && Storage::disk('public')->exists($existing->value)) {
+                    Storage::disk('public')->delete($existing->value);
+                }
+                $existing->update(['value' => '']);
+            }
+            
+            cache()->forget("pagesetting:{$page}:{$key}");
+        }
+
+        return back()->with('success', 'Aset berhasil dihapus.');
     }
 }

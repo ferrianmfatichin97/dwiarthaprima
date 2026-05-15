@@ -16,7 +16,7 @@
         @forelse($clients as $client)
         <div class="group relative border border-slate-100 rounded-xl p-4 flex flex-col items-center justify-center hover:border-red-200 hover:shadow-md transition-all bg-slate-50/50 h-32 overflow-hidden min-w-0">
             @if($client->logo)
-                <img src="{{ Storage::url($client->logo) }}" alt="{{ $client->name }}" class="max-h-16 max-w-full object-contain filter grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all">
+                <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}" class="max-h-16 max-w-full object-contain filter grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all">
             @else
                 <div class="text-center w-full min-w-0">
                     <span class="material-symbols-outlined text-slate-300 text-3xl mb-1">domain</span>

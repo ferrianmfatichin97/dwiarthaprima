@@ -6,6 +6,7 @@ use App\Http\Controllers\SeoController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\CareerController as AdminCareerController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Admin\SocialMediaController as AdminSocialMediaController;
@@ -23,8 +24,11 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/about', 'about')->name('about');
     Route::get('/services', 'services')->name('services');
+    Route::get('/services/{slug}', 'serviceShow')->name('services.show');
     Route::get('/projects', 'projects')->name('projects');
     Route::get('/projects/{project:slug}', 'projectShow')->name('projects.show');
+    Route::get('/career', 'career')->name('career');
+    Route::get('/career/{slug}', 'careerShow')->name('career.show');
     Route::get('/contact', 'contact')->name('contact');
 });
 Route::post('/contact', [MessageController::class, 'store'])->middleware('throttle:contact')->name('contact.store');
@@ -47,9 +51,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('projects', AdminProjectController::class)->except(['show']);
+    Route::delete('projects/gallery/{image}', [AdminProjectController::class, 'deleteGalleryImage'])->name('projects.gallery.destroy');
     Route::resource('services', AdminServiceController::class)->except(['show']);
+    Route::get('backup-db', [DashboardController::class, 'backupDb'])->name('backup.db');
     Route::resource('clients', AdminClientController::class)->except(['show']);
     Route::resource('socials', AdminSocialMediaController::class)->except(['show']);
+    Route::resource('careers', AdminCareerController::class)->except(['show']);
+    Route::patch('careers/{career}/toggle', [AdminCareerController::class, 'toggle'])->name('careers.toggle');
 
     Route::controller(AdminMessageController::class)->group(function () {
         Route::get('messages', 'index')->name('messages.index');
@@ -63,6 +71,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('pages/about', 'about')->name('pages.about');
         Route::get('pages/services', 'services')->name('pages.services');
         Route::get('pages/contact', 'contact')->name('pages.contact');
-        Route::post('pages/{page}', 'store')->where('page', 'home|project|about|services|contact')->name('pages.store');
+        Route::get('pages/career', 'career')->name('pages.career');
+        Route::post('pages/{page}', 'store')->where('page', 'home|project|about|services|contact|career')->name('pages.store');
+        Route::delete('pages/{page}/{key}', 'destroySetting')->name('pages.destroy');
     });
 });

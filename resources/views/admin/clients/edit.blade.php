@@ -20,7 +20,7 @@
                 <div class="mb-4">
                     <p class="text-xs text-slate-400 mb-2">Logo saat ini:</p>
                     <div class="h-20 w-32 bg-slate-50 border border-slate-100 rounded-lg p-2 flex items-center justify-center">
-                        <img src="{{ Storage::url($client->logo) }}" class="max-h-full max-w-full object-contain" alt="{{ $client->name }}">
+                        <img src="{{ asset('storage/' . $client->logo) }}" class="max-h-full max-w-full object-contain" alt="{{ $client->name }}">
                     </div>
                 </div>
                 @endif

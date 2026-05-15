@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
@@ -25,10 +27,19 @@ class ServiceController extends Controller
         $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'nullable|string',
+            'content'     => 'nullable|string',
             'icon'        => 'nullable|string|max:100',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        Service::create($request->only('name', 'description', 'icon'));
+        $data = $request->only('name', 'description', 'content', 'icon');
+        $data['slug'] = Str::slug($request->name);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('services', 'public');
+        }
+
+        Service::create($data);
         Cache::forget('home:services:all');
         return redirect()->route('admin.services.index')->with('success', 'Data layanan berhasil disimpan.');
     }
@@ -43,16 +54,31 @@ class ServiceController extends Controller
         $request->validate([
             'name'        => 'required|string|max:255',
             'description' => 'nullable|string',
+            'content'     => 'nullable|string',
             'icon'        => 'nullable|string|max:100',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $service->update($request->only('name', 'description', 'icon'));
+        $data = $request->only('name', 'description', 'content', 'icon');
+        $data['slug'] = Str::slug($request->name);
+
+        if ($request->hasFile('image')) {
+            if ($service->image) {
+                Storage::disk('public')->delete($service->image);
+            }
+            $data['image'] = $request->file('image')->store('services', 'public');
+        }
+
+        $service->update($data);
         Cache::forget('home:services:all');
         return redirect()->route('admin.services.index')->with('success', 'Perubahan data layanan berhasil diperbarui.');
     }
 
     public function destroy(Service $service)
     {
+        if ($service->image) {
+            Storage::disk('public')->delete($service->image);
+        }
         $service->delete();
         Cache::forget('home:services:all');
         return redirect()->route('admin.services.index')->with('success', 'Data layanan berhasil dihapus.');

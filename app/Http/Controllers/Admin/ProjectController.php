@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\ProjectImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -25,14 +26,20 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'       => 'required|string|max:255',
-            'category'    => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'is_featured' => 'nullable',
+            'title'         => 'required|string|max:255',
+            'client_name'   => 'nullable|string|max:255',
+            'location'      => 'nullable|string|max:255',
+            'year'          => 'nullable|string|max:20',
+            'category'      => 'required|string|max:255',
+            'description'   => 'nullable|string',
+            'project_scope' => 'nullable|string',
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'gallery'       => 'nullable|array',
+            'gallery.*'     => 'image|mimes:jpg,jpeg,png,webp|max:2048',
+            'is_featured'   => 'nullable',
         ]);
 
-        $data = $request->only('title', 'category', 'description');
+        $data = $request->only('title', 'client_name', 'location', 'year', 'category', 'description', 'project_scope');
         $data['is_featured'] = $request->has('is_featured');
         $data['slug'] = $this->makeUniqueSlug((string) $data['title']);
 
@@ -40,7 +47,14 @@ class ProjectController extends Controller
             $data['image'] = $request->file('image')->store('projects', 'public');
         }
 
-        Project::create($data);
+        $project = Project::create($data);
+
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $image) {
+                $path = $image->store('projects/gallery', 'public');
+                $project->images()->create(['image_path' => $path]);
+            }
+        }
         Cache::forget('home:projects:latest6:v2');
         Cache::forget('projects:categories');
         Cache::forget('seo:sitemap');
@@ -55,14 +69,20 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $request->validate([
-            'title'       => 'required|string|max:255',
-            'category'    => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'is_featured' => 'nullable',
+            'title'         => 'required|string|max:255',
+            'client_name'   => 'nullable|string|max:255',
+            'location'      => 'nullable|string|max:255',
+            'year'          => 'nullable|string|max:20',
+            'category'      => 'required|string|max:255',
+            'description'   => 'nullable|string',
+            'project_scope' => 'nullable|string',
+            'image'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'gallery'       => 'nullable|array',
+            'gallery.*'     => 'image|mimes:jpg,jpeg,png,webp|max:2048',
+            'is_featured'   => 'nullable',
         ]);
 
-        $data = $request->only('title', 'category', 'description');
+        $data = $request->only('title', 'client_name', 'location', 'year', 'category', 'description', 'project_scope');
         $data['is_featured'] = $request->has('is_featured');
 
         if ((string) $project->title !== (string) $data['title']) {
@@ -75,6 +95,13 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $image) {
+                $path = $image->store('projects/gallery', 'public');
+                $project->images()->create(['image_path' => $path]);
+            }
+        }
         Cache::forget('home:projects:latest6:v2');
         Cache::forget('projects:categories');
         Cache::forget('seo:sitemap');
@@ -85,12 +112,24 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         if ($project->image) Storage::disk('public')->delete($project->image);
+        
+        foreach ($project->images as $img) {
+            Storage::disk('public')->delete($img->image_path);
+        }
+        
         $project->delete();
         Cache::forget('home:projects:latest6:v2');
         Cache::forget('projects:categories');
         Cache::forget('seo:sitemap');
         Cache::forget("project:related:{$project->id}");
         return redirect()->route('admin.projects.index')->with('success', 'Data proyek berhasil dihapus.');
+    }
+
+    public function deleteGalleryImage(ProjectImage $image)
+    {
+        Storage::disk('public')->delete($image->image_path);
+        $image->delete();
+        return back()->with('success', 'Gambar galeri berhasil dihapus.');
     }
 
     private function makeUniqueSlug(string $title, ?int $ignoreId = null): string

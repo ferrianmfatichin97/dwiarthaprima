@@ -1,63 +1,96 @@
 @extends('layouts.app')
 
-@section('title', 'Layanan | PT Dwi Artha Prima')
-@section('meta_description', 'Layanan PT Dwi Artha Prima: konstruksi infrastruktur, gedung, engineering, general contractor, maintenance, pengadaan, dan QA/QC. Konsultasikan kebutuhan proyek Anda.')
+@section('title', 'Layanan Engineering | PT Dwi Artha Prima')
+@section('meta_description', 'Layanan PT Dwi Artha Prima: konstruksi infrastruktur, gedung, engineering, general contractor, maintenance, pengadaan, dan QA/QC. Solusi konstruksi profesional dan terpercaya.')
 
 @section('content')
-<section class="pt-28 pb-16 bg-surface-container-low">
-    <div class="max-w-7xl mx-auto px-8">
-        <div class="max-w-4xl">
-            <div class="text-xs uppercase tracking-widest font-bold text-primary">Layanan</div>
-            <h1 class="mt-4 font-headline font-extrabold text-4xl md:text-6xl text-on-surface tracking-tighter uppercase">
-                {{ setting('services', 'services_hero_title', 'Layanan Konstruksi & Engineering Terintegrasi') }}
+{{-- =========================================================
+     SERVICES HERO — Industrial Header
+     ========================================================= --}}
+<section class="relative min-h-[50vh] flex items-center justify-start bg-surface overflow-hidden pt-20">
+    <div class="absolute inset-0 industrial-grid opacity-10"></div>
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-8 py-20">
+        <div class="max-w-3xl space-y-6">
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 bg-primary/10 border-l-4 border-primary">
+                <span class="text-primary font-headline font-extrabold text-[10px] uppercase tracking-[0.3em]">Kapabilitas Operasional</span>
+            </div>
+            <h1 class="text-4xl md:text-7xl font-headline font-extrabold text-white leading-[0.9] tracking-tighter uppercase">
+                {{ setting('services', 'services_hero_title', 'Konstruksi & Engineering') }}
             </h1>
-            <p class="mt-5 text-on-surface-variant text-lg leading-relaxed">
-                {{ setting('services', 'services_hero_desc', 'Dari perencanaan strategis hingga pelaksanaan lapangan — kami menyediakan solusi konstruksi yang berfokus pada standar mutu, keselamatan kerja (K3), dan ketepatan waktu pengerjaan.') }}
+            <p class="text-white/50 text-lg md:text-xl font-medium max-w-xl border-l border-white/20 pl-6">
+                {{ setting('services', 'services_hero_desc', 'Solusi konstruksi terintegrasi yang mengedepankan presisi teknis, standar keselamatan K3, dan efisiensi operasional.') }}
             </p>
         </div>
     </div>
 </section>
 
-<section class="py-16 bg-surface">
+{{-- =========================================================
+     SERVICES GRID — Structured Capabilities
+     ========================================================= --}}
+<section class="py-24 bg-background">
     <div class="max-w-7xl mx-auto px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-outline-variant border border-outline-variant shadow-2xl">
             @forelse($services as $service)
-                <div data-reveal class="reveal bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-8 hover:shadow-md transition">
-                    <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-primary text-3xl">{{ $service->icon }}</span>
+                <a href="{{ route('services.show', $service->slug) }}" class="group bg-white p-10 hover:bg-surface transition-industrial relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-industrial">
+                        <span class="text-4xl font-headline font-black text-on-background group-hover:text-white">{{ $loop->iteration }}</span>
                     </div>
-                    <h2 class="mt-6 font-headline font-extrabold text-xl text-on-surface">{{ $service->name }}</h2>
-                    <p class="mt-3 text-on-surface-variant text-sm leading-relaxed">{{ $service->description }}</p>
-                </div>
+                    
+                    <div class="w-14 h-14 bg-background flex items-center justify-center mb-10 border border-outline-variant group-hover:bg-primary group-hover:border-primary transition-industrial">
+                        <span class="material-symbols-outlined text-primary text-3xl group-hover:text-white transition-industrial">{{ $service->icon }}</span>
+                    </div>
+                    
+                    <h2 class="text-xl font-headline font-extrabold text-on-background uppercase leading-tight tracking-tighter group-hover:text-white transition-industrial mb-6">
+                        {{ $service->name }}
+                    </h2>
+                    
+                    <p class="text-on-surface-variant text-sm leading-relaxed group-hover:text-white/60 transition-industrial mb-10">
+                        {{ $service->description }}
+                    </p>
+
+                    <div class="flex items-center justify-between pt-6 border-t border-outline-variant group-hover:border-white/10 transition-industrial">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-primary group-hover:text-white">Detail Kapabilitas</span>
+                        <span class="material-symbols-outlined text-primary text-xl group-hover:text-white transition-industrial">arrow_forward</span>
+                    </div>
+                </a>
             @empty
-                <div class="col-span-4 text-center py-20">
-                    <span class="material-symbols-outlined text-7xl block mb-4 opacity-20 text-on-surface">build</span>
-                    <p class="text-on-surface-variant font-medium">Informasi layanan akan segera diperbarui.</p>
-                    <a href="{{ route('contact') }}" class="mt-6 inline-flex items-center gap-2 text-primary font-bold hover:underline">
-                        Diskusikan spesifikasi proyek
-                        <span class="material-symbols-outlined">arrow_forward</span>
-                    </a>
+                <div class="col-span-full py-32 text-center bg-white border border-outline-variant">
+                    <span class="material-symbols-outlined text-7xl text-primary opacity-10 mb-6">precision_manufacturing</span>
+                    <h3 class="text-xs font-headline font-extrabold uppercase tracking-widest text-on-surface-variant">Basis Data Layanan Sedang Diperbarui</h3>
                 </div>
             @endforelse
         </div>
     </div>
 </section>
 
-<section class="py-16 bg-surface-container-highest">
-    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-10">
-        <div class="max-w-2xl">
-            <h2 class="font-headline font-extrabold text-2xl md:text-4xl text-on-surface tracking-tight uppercase">
-                {{ setting('services', 'services_cta_title', 'Butuh estimasi dan masukan teknis?') }}
-            </h2>
-            <p class="mt-4 text-on-surface-variant text-lg leading-relaxed">
-                {{ setting('services', 'services_cta_desc', 'Kirim kebutuhan proyek Anda, kami bantu susun rencana kerja awal dan estimasi yang realistis.') }}
-            </p>
+{{-- =========================================================
+     INDUSTRIAL CTA
+     ========================================================= --}}
+<section class="py-32 bg-surface relative overflow-hidden">
+    <div class="absolute inset-0 industrial-grid opacity-5"></div>
+    <div class="max-w-7xl mx-auto px-8 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+            <div class="max-w-2xl space-y-6 text-center lg:text-left">
+                <span class="text-primary font-headline font-extrabold text-[11px] uppercase tracking-[0.4em]">Mulai Konsultasi</span>
+                <h2 class="text-4xl md:text-6xl font-headline font-extrabold text-white leading-[0.9] tracking-tighter uppercase mb-6">
+                    {{ setting('services', 'services_cta_title', 'Butuh Solusi Konstruksi Strategis?') }}
+                </h2>
+                <p class="text-white/50 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                    {{ setting('services', 'services_cta_desc', 'Diskusikan rencana kerja Anda bersama tenaga ahli kami untuk mendapatkan evaluasi teknis yang komprehensif.') }}
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <a href="{{ route('contact') }}" class="group relative px-12 py-6 bg-primary text-white font-headline font-extrabold text-xs uppercase tracking-[0.3em] transition-industrial overflow-hidden text-center w-full sm:w-auto shadow-2xl shadow-primary/20">
+                    <span class="relative z-10 flex items-center justify-center gap-4">
+                        Hubungi Tim Kami <span class="material-symbols-outlined">send</span>
+                    </span>
+                    <div class="absolute inset-0 bg-primary-dark translate-y-full group-hover:translate-y-0 transition-industrial duration-500"></div>
+                </a>
+                <a href="{{ route('projects') }}" class="px-12 py-6 border border-white/20 text-white font-headline font-extrabold text-xs uppercase tracking-[0.3em] hover:bg-white/5 transition-industrial text-center w-full sm:w-auto">
+                    Lihat Portofolio
+                </a>
+            </div>
         </div>
-        <a href="{{ route('contact') }}" class="inline-flex items-center gap-3 bg-primary text-on-primary px-10 py-4 rounded-lg font-headline font-extrabold text-sm uppercase tracking-widest shadow-lg hover:bg-on-primary-fixed-variant transition-colors">
-            Hubungi Tenaga Ahli
-            <span class="material-symbols-outlined">arrow_right_alt</span>
-        </a>
     </div>
 </section>
 @endsection
-

@@ -22,21 +22,7 @@
                 @error('name')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Ikon (Google Material / Brand) *</label>
-                <div class="flex gap-4 items-start">
-                    <div class="flex-1">
-                        <input type="text" name="icon" value="{{ old('icon', $social->icon) }}" id="icon-input" required
-                               class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent @error('icon') border-red-400 @enderror"
-                               placeholder="Contoh: hub, language, share, groups"/>
-                        @error('icon')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
-                        <p class="text-xs text-slate-400 mt-2">Gunakan nama ikon dari <a href="https://fonts.google.com/icons" target="_blank" class="text-blue-600 hover:underline">Google Material Icons</a>.</p>
-                    </div>
-                    <div class="w-16 h-12 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-center">
-                        <span id="icon-preview" class="material-symbols-outlined text-slate-600 text-2xl">{{ $social->icon }}</span>
-                    </div>
-                </div>
-            </div>
+            @include('admin.partials.icon-picker', ['fieldName' => 'icon', 'currentIcon' => old('icon', $social->icon), 'label' => 'Ikon Media Sosial *'])
 
             <div>
                 <label class="block text-sm font-semibold text-slate-700 mb-2">URL Profil Media Sosial *</label>
@@ -69,12 +55,4 @@
         </form>
     </div>
 </div>
-@endsection
-
-@section('scripts')
-<script>
-document.getElementById('icon-input').addEventListener('input', function(e) {
-    document.getElementById('icon-preview').textContent = e.target.value.trim() || 'share';
-});
-</script>
 @endsection

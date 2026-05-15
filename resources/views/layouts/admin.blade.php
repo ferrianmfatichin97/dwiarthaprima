@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if (file_exists(public_path('mix-manifest.json')))
@@ -160,7 +161,28 @@
                    class="sidebar-sublink {{ request()->routeIs('admin.projects.*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined text-xl">list_alt</span>
                     <span>Daftar Proyek</span>
-                    <span class="ml-auto bg-slate-700 text-slate-300 text-xs px-2 py-0.5 rounded-full">{{ \App\Models\Project::count() }}</span>
+                </a>
+            </div>
+        </details>
+
+        <details class="sidebar-group" {{ request()->routeIs('admin.careers.*') || request()->routeIs('admin.pages.career') ? 'open' : '' }}>
+            <summary class="sidebar-group-summary">
+                <span class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-xl">person_search</span>
+                    <span>Karir & Talenta</span>
+                </span>
+                <span class="material-symbols-outlined text-xl transition-transform group-chevron">expand_more</span>
+            </summary>
+            <div class="mt-1 space-y-1">
+                <a href="{{ route('admin.careers.index') }}"
+                   class="sidebar-sublink {{ request()->routeIs('admin.careers.*') ? 'active' : '' }}">
+                    <span class="material-symbols-outlined text-xl">list_alt</span>
+                    <span>Daftar Lowongan</span>
+                </a>
+                <a href="{{ route('admin.pages.career') }}"
+                   class="sidebar-sublink {{ request()->routeIs('admin.pages.career') ? 'active' : '' }}">
+                    <span class="material-symbols-outlined text-xl">settings</span>
+                    <span>Teks Halaman</span>
                 </a>
             </div>
         </details>
@@ -197,6 +219,10 @@
         </details>
 
         <div class="pt-3 border-t border-slate-700/50 mt-2">
+            <a href="{{ route('admin.backup.db') }}" class="sidebar-link hover:text-green-400">
+                <span class="material-symbols-outlined text-xl">database</span>
+                <span>Backup Database</span>
+            </a>
             <a href="{{ route('home') }}" target="_blank" class="sidebar-link">
                 <span class="material-symbols-outlined text-xl">open_in_new</span>
                 <span>Lihat Website</span>

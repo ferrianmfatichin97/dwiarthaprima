@@ -47,7 +47,7 @@
                            class="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all {{ !$msg->is_read ? 'text-blue-600' : '' }}">
                             <span class="material-symbols-outlined text-lg">visibility</span>
                         </a>
-                        <form action="{{ route('admin.messages.destroy', $msg) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini? Data yang telah dihapus tidak dapat dikembalikan.')">
+                        <form action="{{ route('admin.messages.destroy', $msg) }}" method="POST" class="delete-form">
                             @csrf @method('DELETE')
                             <button type="submit" class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all" title="Hapus">
                                 <span class="material-symbols-outlined text-lg">delete</span>

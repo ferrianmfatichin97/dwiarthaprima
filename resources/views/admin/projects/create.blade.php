@@ -13,23 +13,49 @@
                     <label class="block text-sm font-semibold text-slate-700 mb-2">Judul Proyek *</label>
                     <input type="text" name="title" value="{{ old('title') }}"
                            class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all @error('title') border-red-400 @enderror"
-                           placeholder="Masukkan nama proyek (contoh: Pembangunan Gedung Artha)" required/>
+                           placeholder="Masukkan nama proyek" required/>
                     @error('title')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Klien / Instansi</label>
+                    <input type="text" name="client_name" value="{{ old('client_name') }}"
+                           class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                           placeholder="Nama Pemilik Proyek"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Lokasi Proyek</label>
+                    <input type="text" name="location" value="{{ old('location') }}"
+                           class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                           placeholder="Contoh: Depok, Jawa Barat"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Tahun Pelaksanaan / Durasi</label>
+                    <input type="text" name="year" value="{{ old('year') }}"
+                           class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                           placeholder="Contoh: 2023 atau 2023 - 2024"/>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori *</label>
                     <input type="text" name="category" value="{{ old('category') }}"
                            class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all @error('category') border-red-400 @enderror"
-                           placeholder="Masukkan kategori (contoh: Infrastruktur, Gedung)" required/>
+                           placeholder="Contoh: Infrastruktur, Gedung" required/>
                     @error('category')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
             </div>
 
             <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi</label>
-                <textarea name="description" rows="4"
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi Ringkas (Summary)</label>
+                <textarea name="description" rows="2"
                           class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
-                          placeholder="Masukkan uraian singkat cakupan pekerjaan proyek...">{{ old('description') }}</textarea>
+                          placeholder="Masukkan uraian singkat proyek...">{{ old('description') }}</textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Cakupan Pekerjaan (Technical Scope)</label>
+                <textarea name="project_scope" rows="5"
+                          class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                          placeholder="Rincian teknis cakupan pekerjaan (Scope of Work)...">{{ old('project_scope') }}</textarea>
+                <p class="text-xs text-slate-400 mt-2 italic">Gunakan baris baru untuk memisahkan poin pekerjaan.</p>
             </div>
 
             <div>
@@ -54,6 +80,13 @@
                 @error('image')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
             </div>
 
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Galeri Foto Tambahan (Banyak Foto)</label>
+                <input type="file" name="gallery[]" class="w-full border border-slate-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                       multiple accept="image/jpeg,image/png,image/webp"/>
+                <p class="text-xs text-slate-400 mt-1 italic">Anda dapat memilih lebih dari satu foto sekaligus.</p>
+                @error('gallery.*')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
+            </div>
             <div class="flex items-center gap-3">
                 <input type="checkbox" name="is_featured" id="is_featured" class="w-4 h-4 text-red-600 rounded" {{ old('is_featured') ? 'checked': '' }}>
                 <label for="is_featured" class="text-sm font-medium text-slate-700">Tampilkan sebagai Proyek Unggulan</label>

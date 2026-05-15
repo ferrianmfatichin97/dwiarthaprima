@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\Client;
+use App\Models\Career;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
@@ -18,8 +19,8 @@ class HomeController extends Controller
                 ->get(['id', 'title', 'slug', 'category', 'description', 'image', 'is_featured', 'created_at']);
         });
 
-        $services = Cache::remember('home:services:all', now()->addMinutes(30), function () {
-            return Service::query()->orderBy('name')->get(['id', 'name', 'description', 'icon']);
+        $services = Cache::remember('global:services:list', now()->addMinutes(30), function () {
+            return Service::query()->orderBy('name')->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
         });
 
         $clients = Cache::remember('home:clients:all', now()->addMinutes(30), function () {
@@ -36,11 +37,18 @@ class HomeController extends Controller
 
     public function services()
     {
-        $services = Cache::remember('home:services:all', now()->addMinutes(30), function () {
-            return Service::query()->orderBy('name')->get(['id', 'name', 'description', 'icon']);
+        $services = Cache::remember('global:services:list', now()->addMinutes(30), function () {
+            return Service::query()->orderBy('name')->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
         });
 
         return view('frontend.services', compact('services'));
+    }
+
+    public function serviceShow($slug)
+    {
+        $service = Service::where('slug', $slug)->firstOrFail();
+        $related = Service::where('id', '!=', $service->id)->take(3)->get(['id', 'name', 'slug', 'icon']);
+        return view('frontend.service-show', compact('service', 'related'));
     }
 
     public function projects()
@@ -63,8 +71,8 @@ class HomeController extends Controller
 
     public function contact()
     {
-        $services = Cache::remember('home:services:all', now()->addMinutes(30), function () {
-            return Service::query()->orderBy('name')->get(['id', 'name', 'description', 'icon']);
+        $services = Cache::remember('global:services:list', now()->addMinutes(30), function () {
+            return Service::query()->orderBy('name')->get(['id', 'name', 'slug', 'description', 'icon', 'image']);
         });
 
         return view('frontend.contact', compact('services'));
@@ -82,5 +90,17 @@ class HomeController extends Controller
         });
 
         return view('frontend.project-show', compact('project', 'related'));
+    }
+
+    public function career()
+    {
+        $careers = Career::where('is_active', true)->latest()->get();
+        return view('frontend.career', compact('careers'));
+    }
+
+    public function careerShow($slug)
+    {
+        $career = Career::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        return view('frontend.career-show', compact('career'));
     }
 }

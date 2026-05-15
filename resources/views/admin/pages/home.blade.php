@@ -16,9 +16,12 @@
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Video Latar Belakang (Background Video)</label>
                         @if(!empty($settings['home_hero_video']))
-                        <div class="mb-3">
+                        <div class="mb-3 relative group inline-block">
                             <p class="text-xs text-slate-500 mb-1">Video lampiran saat ini:</p>
-                            <video src="{{ \Illuminate\Support\Facades\Storage::url($settings['home_hero_video']) }}" class="h-32 rounded-lg border border-slate-200" muted playsinline></video>
+                            <video src="{{ asset('storage/' . $settings['home_hero_video']) }}" class="h-32 rounded-lg border border-slate-200" muted playsinline></video>
+                            <button type="button" onclick="confirmDeleteSetting('home', 'home_hero_video')" class="absolute top-6 right-2 bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg" title="Hapus Video">
+                                <span class="material-symbols-outlined text-sm">delete</span>
+                            </button>
                         </div>
                         @endif
                         <input type="file" name="home_hero_video" accept="video/mp4,video/webm"
@@ -28,9 +31,12 @@
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Poster Video (opsional)</label>
                         @if(!empty($settings['home_hero_video_poster']))
-                        <div class="mb-3">
+                        <div class="mb-3 relative group inline-block">
                             <p class="text-xs text-slate-500 mb-1">Poster lampiran saat ini:</p>
-                            <img src="{{ \Illuminate\Support\Facades\Storage::url($settings['home_hero_video_poster']) }}" alt="Poster hero" class="h-32 w-auto rounded-lg border border-slate-200"/>
+                            <img src="{{ asset('storage/' . $settings['home_hero_video_poster']) }}" alt="Poster hero" class="h-32 w-auto rounded-lg border border-slate-200"/>
+                            <button type="button" onclick="confirmDeleteSetting('home', 'home_hero_video_poster')" class="absolute top-6 right-2 bg-red-600 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg" title="Hapus Poster">
+                                <span class="material-symbols-outlined text-sm">delete</span>
+                            </button>
                         </div>
                         @endif
                         <input type="file" name="home_hero_video_poster" accept="image/png,image/jpeg,image/webp"
@@ -109,4 +115,21 @@
         </form>
     </div>
 </div>
+@endsection
+
+<form id="delete-setting-form" method="POST" class="hidden">
+    @csrf
+    @method('DELETE')
+</form>
+
+@section('scripts')
+<script>
+function confirmDeleteSetting(page, key) {
+    if(confirm('Apakah Anda yakin ingin menghapus aset ini?')) {
+        const form = document.getElementById('delete-setting-form');
+        form.action = '{{ url("admin/pages") }}/' + page + '/' + key;
+        form.submit();
+    }
+}
+</script>
 @endsection

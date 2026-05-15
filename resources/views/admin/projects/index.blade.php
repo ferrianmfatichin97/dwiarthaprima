@@ -30,7 +30,7 @@
                 <td class="px-6 py-4">
                     <div class="w-20 h-12 rounded-lg overflow-hidden bg-slate-100">
                         @if($project->image)
-                            <img src="{{ Storage::url($project->image) }}" class="w-full h-full object-cover" alt="{{ $project->title }}">
+                            <img src="{{ asset('storage/' . $project->image) }}" class="w-full h-full object-cover" alt="{{ $project->title }}">
                         @else
                             <div class="w-full h-full flex items-center justify-center">
                                 <span class="material-symbols-outlined text-slate-300">image</span>

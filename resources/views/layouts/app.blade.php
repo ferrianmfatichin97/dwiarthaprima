@@ -9,7 +9,7 @@
         $canonicalUrl = trim($__env->yieldContent('canonical')) ?: url()->current();
     @endphp
 
-    <title>{{ $metaTitle }}</title>
+    <title>{{ $metaTitle }} | Industrial EPC & Engineering</title>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <meta name="description" content="{{ $metaDescription }}"/>
     <meta name="robots" content="@yield('meta_robots', 'index,follow')"/>
@@ -37,7 +37,7 @@
     @php
         $heroPoster = setting('home', 'home_hero_video_poster');
         $defaultPoster = file_exists(public_path('og.png')) ? asset('og.png') : asset('dap.png');
-        $posterUrl = $heroPoster ? Storage::url($heroPoster) : $defaultPoster;
+        $posterUrl = $heroPoster ? asset('storage/' . $heroPoster) : $defaultPoster;
     @endphp
     <link rel="preload" as="image" href="{{ $posterUrl }}" fetchpriority="high">
     <style>[x-cloak]{display:none!important}</style>
@@ -74,12 +74,20 @@
 
     <style>
         .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align:middle; }
-        .text-shadow-hero { text-shadow:0 4px 12px rgba(0,0,0,0.6); }
+        
+        .industrial-grid {
+            background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .transition-industrial {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .prose-industrial {
+            color: rgba(15, 23, 42, 0.75);
+            line-height: 1.8;
+        }
+        
         @keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-        @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-        .hero-text { animation:fadeInUp 0.8s ease forwards; }
-        .hero-text-delay { animation:fadeInUp 0.8s ease 0.2s both; }
-        .hero-btn { animation:fadeInUp 0.8s ease 0.4s both; }
     </style>
     @yield('head')
 </head>
