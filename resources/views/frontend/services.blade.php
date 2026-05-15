@@ -31,7 +31,7 @@
     <div class="max-w-7xl mx-auto px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-px bg-outline-variant border border-outline-variant shadow-2xl">
             @forelse($services as $service)
-                <a href="{{ route('services.show', $service->slug) }}" class="group bg-white p-10 hover:bg-[#0F172A] transition-industrial relative overflow-hidden">
+                <a href="{{ $service->slug ? route('services.show', $service->slug) : route('services') }}" class="group bg-white p-10 hover:bg-[#0F172A] transition-industrial relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-industrial">
                         <span class="text-4xl font-headline font-black text-on-background group-hover:text-white">{{ $loop->iteration }}</span>
                     </div>
