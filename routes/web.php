@@ -15,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
 
+Route::get('/fix-slugs', function () {
+    $services = \App\Models\Service::whereNull('slug')->orWhere('slug', '')->get();
+    $count = 0;
+    foreach ($services as $s) {
+        $s->slug = \Illuminate\Support\Str::slug($s->name);
+        $s->save();
+        $count++;
+    }
+    return "Berhasil memperbarui slug untuk {$count} layanan.";
+});
+
 /*
 |--------------------------------------------------------------------------
 | Frontend Routes

@@ -50,8 +50,8 @@
             <div class="bg-white p-10 space-y-6 group hover:bg-surface transition-industrial">
                 <span class="material-symbols-outlined text-green-600 text-4xl group-hover:text-white transition-industrial">chat_bubble</span>
                 <div>
-                    <h4 class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest mb-1 group-hover:text-white/40">Quick Response</h4>
-                    <p class="text-sm font-black text-green-600 uppercase tracking-tight group-hover:text-white italic">WhatsApp Inquiry &rarr;</p>
+                    <h4 class="text-[10px] font-black text-on-surface-variant uppercase tracking-widest mb-1 group-hover:text-white/40">Respon Cepat</h4>
+                    <p class="text-sm font-black text-green-600 uppercase tracking-tight group-hover:text-white italic">Tanya via WhatsApp &rarr;</p>
                 </div>
             </div>
             {{-- Office --}}
@@ -136,13 +136,11 @@
 
                     <div class="space-y-2">
                         <label class="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Kategori Pekerjaan</label>
-                        <select name="subject" class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white/60 py-3 outline-none transition-industrial appearance-none">
-                            <option value="Civil Construction" class="bg-surface">CIVIL CONSTRUCTION</option>
-                            <option value="Steel Structure" class="bg-surface">STEEL STRUCTURE</option>
-                            <option value="Tank Fabrication" class="bg-surface">TANK FABRICATION</option>
-                            <option value="Mechanical Works" class="bg-surface">MECHANICAL WORKS</option>
-                            <option value="Electrical Works" class="bg-surface">ELECTRICAL WORKS</option>
-                            <option value="Maintenance" class="bg-surface">INDUSTRIAL MAINTENANCE</option>
+                        <select name="subject" class="w-full bg-transparent border-b border-white/20 focus:border-primary text-white/60 py-3 outline-none transition-industrial appearance-none uppercase">
+                            @foreach($services as $service)
+                                <option value="{{ $service->name }}" class="bg-surface uppercase">{{ strtoupper($service->name) }}</option>
+                            @endforeach
+                            <option value="Lainnya" class="bg-surface uppercase">GENERAL / ENGINEERING SUPPORT</option>
                         </select>
                     </div>
 
